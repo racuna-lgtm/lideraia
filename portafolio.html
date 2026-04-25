@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lo que he construido con IA — LideraIA</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--carbon:#2A2D35;--carbon-light:#3A3D45;--coral:#C4705A;--coral-light:#D4917E;--coral-soft:#F5E6E0;--coral-bg:#FDF5F2;--bg:#F7F6F3;--surface:#FFF;--text:#2A2D35;--text-mid:#5A5D65;--text-light:#8A8D95;--border:#E0DEDA;--green:#5A8A6A;--green-bg:#E8F0EB}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(247,246,243,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:.85rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'DM Serif Display',serif;font-size:1.45rem;color:var(--carbon);text-decoration:none;letter-spacing:-.5px}.logo span{color:var(--coral)}
+.nav-links{display:flex;gap:1.8rem;align-items:center}.nav-links a{color:var(--text-mid);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s}.nav-links a:hover{color:var(--carbon)}
+.nav-links a.active{color:var(--coral);font-weight:600}
+.nav-links a.cta-nav{background:var(--carbon);color:#fff;padding:.5rem 1.2rem;border-radius:8px;font-weight:600}.nav-links a.cta-nav:hover{background:var(--coral)}
+
+.port-hero{padding:8rem 2rem 3rem;text-align:center;position:relative;overflow:hidden}
+.port-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;border:40px solid var(--coral-soft);opacity:.3;pointer-events:none}
+.port-hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;border-radius:50%;background:var(--coral-bg);opacity:.4;pointer-events:none}
+.port-hero>*{position:relative;z-index:1}
+.port-badge{display:inline-block;background:var(--coral-bg);border:1px solid var(--coral-light);color:var(--coral);font-size:.76rem;font-weight:600;padding:.35rem 1rem;border-radius:100px;margin-bottom:1.5rem;letter-spacing:.5px}
+.port-hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4.5vw,3rem);line-height:1.15;color:var(--carbon);margin-bottom:1rem;letter-spacing:-1px}
+.port-hero h1 em{font-style:italic;color:var(--coral)}
+.port-hero p{font-size:1.02rem;color:var(--text-mid);max-width:620px;margin:0 auto;line-height:1.8}
+
+.port-counter{background:var(--carbon);padding:2.2rem 2rem;text-align:center}
+.port-counter-inner{max-width:900px;margin:0 auto;display:flex;justify-content:center;gap:3rem;flex-wrap:wrap}
+.pc-item{display:flex;flex-direction:column;align-items:center;gap:.2rem}
+.pc-num{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--coral);line-height:1}
+.pc-txt{font-size:.75rem;color:rgba(255,255,255,.5);max-width:120px;text-align:center}
+
+.s-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--coral);margin-bottom:.8rem}
+.s-title{font-family:'DM Serif Display',serif;font-size:clamp(1.7rem,3.5vw,2.2rem);color:var(--carbon);line-height:1.2;margin-bottom:.5rem;letter-spacing:-.5px}
+.s-sub{font-size:.92rem;color:var(--text-mid);max-width:560px;line-height:1.7;margin-bottom:2.5rem}
+
+.port-section{padding:4rem 2rem;max-width:1100px;margin:0 auto}
+.port-section.alt{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);max-width:100%;padding:4rem 2rem}
+.port-section.alt .port-inner{max-width:1100px;margin:0 auto}
+
+.project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .4s ease;position:relative;display:flex;flex-direction:column}
+.project-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--coral);transform:scaleX(0);transform-origin:left;transition:transform .4s ease;z-index:2}
+.project-card:hover{border-color:var(--coral-light);transform:translateY(-4px);box-shadow:0 12px 32px rgba(42,45,53,.08)}
+.project-card:hover::before{transform:scaleX(1)}
+
+/* Image gallery with scroll */
+.card-gallery{position:relative;width:100%;height:240px;background:var(--carbon);border-bottom:1px solid var(--border);overflow:hidden}
+.gallery-scroll{display:flex;width:100%;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.gallery-scroll::-webkit-scrollbar{display:none}
+.gallery-slide{flex:0 0 100%;height:100%;scroll-snap-align:start;display:flex;align-items:center;justify-content:center}
+.gallery-slide img{width:100%;height:100%;object-fit:cover;object-position:top}
+.gallery-ph{display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--text-light);font-size:.8rem}
+.gallery-ph .ph-icon{width:52px;height:52px;background:var(--coral-bg);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.gallery-ph small{font-size:.68rem;color:var(--border)}
+.gallery-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:2}
+.gallery-dots span{width:6px;height:6px;border-radius:50%;background:rgba(42,45,53,.2);transition:all .3s}
+.gallery-dots span.active{background:var(--coral);width:16px;border-radius:3px}
+.card-type{position:absolute;top:.75rem;right:.75rem;background:var(--carbon);color:#fff;font-size:.62rem;font-weight:700;padding:.2rem .55rem;border-radius:5px;letter-spacing:.5px;text-transform:uppercase;z-index:2}
+
+.card-body{padding:1.4rem 1.5rem;flex:1;display:flex;flex-direction:column}
+.card-body h3{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--carbon);margin-bottom:.1rem;line-height:1.3}
+.card-tagline{font-size:.8rem;color:var(--coral);font-weight:500;font-style:italic;margin-bottom:.8rem}
+.card-desc{font-size:.84rem;color:var(--text-mid);line-height:1.7;margin-bottom:1rem;text-align:left}
+.card-features{margin-bottom:1rem;flex:1}
+.card-features-title{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+.feature-item{display:flex;gap:.5rem;font-size:.82rem;line-height:1.55;margin-bottom:.65rem;align-items:flex-start}
+.feature-dot{flex-shrink:0;width:6px;height:6px;background:var(--coral);border-radius:50%;margin-top:7px}
+.feature-content{display:flex;flex-direction:column;gap:.05rem}
+.feature-content strong{color:var(--text);font-weight:700;font-size:.82rem}
+.feature-content span{color:var(--text-mid);font-size:.8rem;line-height:1.55}
+.card-tools{display:flex;flex-wrap:wrap;gap:.35rem;padding-top:.6rem;border-top:1px solid var(--border)}
+.tool-tag{background:var(--bg);border:1px solid var(--border);padding:.18rem .55rem;border-radius:5px;font-size:.68rem;font-weight:600;color:var(--text-mid);letter-spacing:.3px}
+
+.port-cta{background:var(--coral-bg);border-top:1px solid var(--coral-soft);padding:3.5rem 2rem;text-align:center}
+.port-cta h2{font-family:'DM Serif Display',serif;font-size:clamp(1.5rem,3vw,2rem);color:var(--carbon);margin-bottom:.8rem}
+.port-cta p{font-size:.95rem;color:var(--text-mid);max-width:520px;margin:0 auto 1.5rem;line-height:1.7}
+.port-cta-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--coral);color:#fff;padding:.95rem 2rem;border-radius:10px;text-decoration:none;font-weight:600;font-size:.95rem;transition:all .3s;box-shadow:0 4px 16px rgba(196,112,90,.25)}.port-cta-btn:hover{background:var(--carbon);transform:translateY(-2px)}
+
+footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;text-align:center;font-size:.78rem}footer a{color:rgba(255,255,255,.45)}.fb{font-family:'DM Serif Display',serif;font-size:1.15rem;color:#fff;margin-bottom:.4rem}.fb span{color:var(--coral)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.port-badge,.port-hero h1,.port-hero p{animation:fadeUp .6s ease-out both}
+.port-hero h1{animation-delay:.1s}.port-hero p{animation-delay:.2s}
+
+@media(max-width:768px){
+  nav{padding:.7rem 1rem}.nav-links a:not(.cta-nav):not(.active){display:none}
+  .port-hero{padding:7rem 1.5rem 2rem}
+  .port-section{padding:3rem 1.5rem}.port-section.alt{padding:3rem 1.5rem}
+  .project-grid{grid-template-columns:1fr}
+  .card-gallery{height:190px}
+  .port-counter-inner{gap:1.2rem}
+  .port-cta{padding:2.5rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Lidera<span>IA</span></a>
+  <div class="nav-links">
+    <a href="index.html#datos">Datos</a>
+    <a href="index.html#ejemplos">Ejemplos</a>
+    <a href="portafolio.html" class="active">Portafolio</a>
+    <a href="index.html#programa">Programa</a>
+    <a href="index.html#contacto" class="cta-nav">Conversemos →</a>
+  </div>
+</nav>
+
+<section class="port-hero">
+  <div class="port-badge">Portafolio de proyectos reales</div>
+  <h1>Lo que he construido <em>con IA</em></h1>
+  <p>Cada uno de estos proyectos nació de un problema concreto. Ninguno requirió saber programar. Todos los construí conversando con inteligencia artificial. Este es el tipo de camino que empiezas a recorrer en el programa de LideraIA.</p>
+</section>
+
+<div class="port-counter">
+  <div class="port-counter-inner">
+    <div class="pc-item"><div class="pc-num" id="cnt1">0</div><div class="pc-txt">proyectos construidos</div></div>
+    <div class="pc-item"><div class="pc-num" id="cnt2">0</div><div class="pc-txt">herramientas de gestión</div></div>
+    <div class="pc-item"><div class="pc-num" id="cnt3">0</div><div class="pc-txt">apps funcionando</div></div>
+    <div class="pc-item"><div class="pc-num">0</div><div class="pc-txt">líneas de código escritas a mano</div></div>
+  </div>
+</div>
+
+<!-- ═══════════ LABORALES ═══════════ -->
+<section class="port-section">
+  <p class="s-label">Proyectos laborales</p>
+  <h2 class="s-title">Herramientas reales para el trabajo diario</h2>
+  <p class="s-sub">Soluciones que resuelven problemas reales de gestión profesional — algunas para mi propio trabajo, otras diseñadas para equipos y organizaciones con las que colaboro.</p>
+  <div class="project-grid">
+
+    <!-- Kit Hackea -->
+    <div class="project-card">
+      <div class="card-gallery">
+        <div class="gallery-scroll">
+          <div class="gallery-slide"><img src="img/hackea-portal.jpg" alt="Portal calculadora"></div>
+          <div class="gallery-slide"><img src="img/hackea-equipo.jpg" alt="Configuración de equipo"></div>
+          <div class="gallery-slide"><img src="img/hackea-recursos.jpg" alt="Biblioteca de recursos"></div>
+          <div class="gallery-slide"><img src="img/hackea-modulos.jpg" alt="Proyecto y módulos"></div>
+          <div class="gallery-slide"><img src="img/hackea-gantt.jpg" alt="Gantt de producción"></div>
+          <div class="gallery-slide"><img src="img/hackea-resumen.jpg" alt="Resumen para cliente"></div>
+        </div>
+        <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span></div>
+        <span class="card-type">Web app</span>
+      </div>
+      <div class="card-body">
+        <h3>Kit de Herramientas Hackea</h3>
+        <div class="card-tagline">Costear, planificar y coordinar proyectos e-learning</div>
+        <div class="card-desc">Desarrollé un sistema de herramientas digitales internas para mi empresa de producción e-learning, que resuelve uno de los problemas más comunes en este rubro: no saber con precisión cuánto cuesta producir un curso ni cuándo va a estar listo.</div>
+        <div class="card-features">
+          <div class="card-features-title">Qué hace</div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Calculadora de costos</strong><span>calcula horas de equipo y costo de producción según tipo de curso, módulos y recursos, y sugiere precio de venta según el margen deseado.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Planificador con feriados reales</strong><span>considera los feriados de 6 países donde trabaja mi equipo para entregar fechas de entrega realistas.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Gantt visual automático</strong><span>muestra quién trabaja en qué y cuándo, con etapas organizadas en secuencia.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Mensaje listo para el cliente</strong><span>genera un texto profesional con fecha de entrega, hitos y resumen.</span></div></div>
+        </div>
+        <div class="card-tools">
+          <span class="tool-tag">HTML / CSS / JS</span>
+          <span class="tool-tag">GitHub Pages</span>
+          <span class="tool-tag">IA generativa</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Planificador asignaturas -->
+    <div class="project-card">
+      <div class="card-gallery">
+        <div class="gallery-scroll">
+          <div class="gallery-slide"><img src="img/planif-asig-etapas.jpg" alt="Seguimiento por etapas"></div>
+          <div class="gallery-slide"><img src="img/planif-asig-gantt.jpg" alt="Gantt de 16 asignaturas"></div>
+          <div class="gallery-slide"><img src="img/planif-asig-choques.jpg" alt="Detección de choques"></div>
+        </div>
+        <div class="gallery-dots"><span class="active"></span><span></span><span></span></div>
+        <span class="card-type">Web app</span>
+      </div>
+      <div class="card-body">
+        <h3>Planificador de Asignaturas</h3>
+        <div class="card-tagline">Coordinar múltiples asignaturas y un equipo multidisciplinario en tiempo real</div>
+        <div class="card-desc">Herramienta de planificación colaborativa para gestionar la producción de contenidos e-learning de un proyecto universitario con múltiples asignaturas en desarrollo simultáneo. En el ciclo actual gestiona 16 asignaturas. Reemplazó el seguimiento manual en planillas.</div>
+        <div class="card-features">
+          <div class="card-features-title">Qué hace</div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Seguimiento por etapas</strong><span>más de 15 sub-etapas por asignatura con fecha, estado y notas.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Detección de conflictos</strong><span>avisa cuando hay choques — un guionista sobrecargado o un docente citado a dos reuniones.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Simulador de capacidad</strong><span>proyecta qué pasa si sumamos personal, con fecha estimada de cierre.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Gantt interactivo</strong><span>cronograma visual filtrable por programa, con zoom semanal o diario.</span></div></div>
+        </div>
+        <div class="card-tools">
+          <span class="tool-tag">HTML / CSS / JS</span>
+          <span class="tool-tag">Supabase</span>
+          <span class="tool-tag">GitHub Pages</span>
+          <span class="tool-tag">IA generativa</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cotizador formación -->
+    <div class="project-card">
+      <div class="card-gallery">
+        <div class="gallery-scroll">
+          <div class="gallery-slide"><img src="img/cotizador-portal.jpg" alt="Portal cotizador"></div>
+          <div class="gallery-slide"><img src="img/cotizador-escenarios.jpg" alt="Cotización por escenario"></div>
+          <div class="gallery-slide"><img src="img/cotizador-desglose.jpg" alt="Desglose interno"></div>
+          <div class="gallery-slide"><img src="img/cotizador-exportar.jpg" alt="Exportar propuesta"></div>
+        </div>
+        <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span></div>
+        <span class="card-type">Web app</span>
+      </div>
+      <div class="card-body">
+        <h3>Cotizador de Formación Sincrónica</h3>
+        <div class="card-tagline">Cotizar programas masivos y descargar la propuesta lista</div>
+        <div class="card-desc">Automatiza la cotización de programas de formación sincrónica para clientes corporativos. En minutos genero una cotización con tres escenarios de participantes y descargo una propuesta PowerPoint editable lista para enviar.</div>
+        <div class="card-features">
+          <div class="card-features-title">Qué hace</div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Hasta tres escenarios en paralelo</strong><span>permite comparar precios por participante para distintos volúmenes, o trabajar con un solo escenario.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Modelo flexible de honorarios</strong><span>pago por hora o mes para docentes y personal del proyecto, con retención vigente en Chile.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Modo precio objetivo</strong><span>calcula margen y alerta con semáforo cuando no es viable.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Propuesta PPTX descargable</strong><span>11 láminas con identidad visual, listas para el cliente.</span></div></div>
+        </div>
+        <div class="card-tools">
+          <span class="tool-tag">HTML / CSS / JS</span>
+          <span class="tool-tag">PptxGenJS</span>
+          <span class="tool-tag">GitHub Pages</span>
+          <span class="tool-tag">IA generativa</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Observatorio SSOMA -->
+    <div class="project-card">
+      <div class="card-gallery">
+        <div class="gallery-scroll">
+          <div class="gallery-slide"><img src="img/obs-hero.jpg" alt="Portada observatorio"></div>
+          <div class="gallery-slide"><img src="img/obs-panorama.jpg" alt="Panorama Chile 2024"></div>
+          <div class="gallery-slide"><img src="img/obs-industrias.jpg" alt="Riesgo por industria"></div>
+          <div class="gallery-slide"><img src="img/obs-comparador.jpg" alt="Comparador de industrias"></div>
+          <div class="gallery-slide"><img src="img/obs-diagnostico.jpg" alt="Diagnóstico SSOMA"></div>
+          <div class="gallery-slide"><img src="img/obs-resultado.jpg" alt="Resultado diagnóstico"></div>
+          <div class="gallery-slide"><img src="img/obs-radar.jpg" alt="Radar normativo"></div>
+        </div>
+        <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <span class="card-type">Plataforma</span>
+      </div>
+      <div class="card-body">
+        <h3>Observatorio SSOMA · Más Prevención</h3>
+        <div class="card-tagline">Datos públicos de seguridad laboral, visualizados y accionables</div>
+        <div class="card-desc">Observatorio web de datos públicos sobre seguridad y salud ocupacional en Chile, Perú y Latinoamérica. La información oficial existe pero está dispersa. Aquí se consolida, se visualiza y se convierte en herramientas de decisión.</div>
+        <div class="card-features">
+          <div class="card-features-title">Qué hace</div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Visualizaciones interactivas</strong><span>tasas de accidentabilidad por rubro, mapas regionales y cruces entre industria y tipo de accidente.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Autodiagnóstico SSOMA en 4 minutos</strong><span>reporte con brechas legales y estimación de costos.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Estimación de sobrecosto por siniestralidad</strong><span>calcula cuánto está sobrepagando la empresa por estar sobre el promedio de su industria en accidentabilidad.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Reporte PDF de 7 páginas</strong><span>análisis completo, listo para presentar al directorio.</span></div></div>
+        </div>
+        <div class="card-tools">
+          <span class="tool-tag">HTML / CSS / JS</span>
+          <span class="tool-tag">Supabase</span>
+          <span class="tool-tag">Vercel</span>
+          <span class="tool-tag">IA generativa</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIOHS -->
+    <div class="project-card">
+      <div class="card-gallery">
+        <div class="gallery-scroll">
+          <div class="gallery-slide"><img src="img/riohs-login.jpg" alt="Portal RIOHS"></div>
+          <div class="gallery-slide"><img src="img/riohs-cliente.jpg" alt="Ficha nuevo cliente"></div>
+          <div class="gallery-slide"><img src="img/riohs-normativas.jpg" alt="Normativas y protocolos"></div>
+          <div class="gallery-slide"><img src="img/riohs-auditoria.jpg" alt="Auditoría RIOHS existente"></div>
+          <div class="gallery-slide"><img src="img/riohs-generar.jpg" alt="Generar RIOHS completo"></div>
+        </div>
+        <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
+        <span class="card-type">Plataforma</span>
+      </div>
+      <div class="card-body">
+        <h3>Generador de RIOHS con IA</h3>
+        <div class="card-tagline">Reglamentos internos de 35 a 110 páginas, generados en minutos</div>
+        <div class="card-desc">Plataforma que permite a profesionales de prevención generar Reglamentos Internos de Orden, Higiene y Seguridad completos, cumpliendo con la normativa laboral chilena. También audita reglamentos existentes y detecta brechas legales.</div>
+        <div class="card-features">
+          <div class="card-features-title">Qué hace</div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Generación inteligente</strong><span>ficha de empresa → RIOHS completo adaptado al perfil de la organización.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Auditoría legal</strong><span>sube un RIOHS antiguo y detecta artículos con riesgo legal.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Descarga con identidad corporativa</strong><span>Word editable con colores y logo del cliente.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Resumen ejecutivo</strong><span>síntesis para gerencias sin lenguaje jurídico.</span></div></div>
+        </div>
+        <div class="card-tools">
+          <span class="tool-tag">HTML / CSS / JS</span>
+          <span class="tool-tag">API de IA</span>
+          <span class="tool-tag">Supabase</span>
+          <span class="tool-tag">Vercel</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Landing LideraIA -->
+    <div class="project-card">
+      <div class="card-gallery">
+        <div class="gallery-scroll">
+          <div class="gallery-slide"><img src="img/lideraia-hero.jpg" alt="Hero LideraIA"></div>
+          <div class="gallery-slide"><img src="img/lideraia-datos.jpg" alt="Datos Chile con gráficos"></div>
+          <div class="gallery-slide"><img src="img/lideraia-quien.jpg" alt="Quién soy"></div>
+          <div class="gallery-slide"><img src="img/lideraia-programa.jpg" alt="Programa 5 sesiones"></div>
+        </div>
+        <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span></div>
+        <span class="card-type">Sitio web</span>
+      </div>
+      <div class="card-body">
+        <h3>Landing page LideraIA</h3>
+        <div class="card-tagline">Este mismo sitio web, construido sin saber programar</div>
+        <div class="card-desc">Diseñé y construí este sitio web profesional completo — identidad visual, textos, estructura, animaciones y formulario funcional — conversando con inteligencia artificial. Es la prueba más directa de lo que se puede lograr.</div>
+        <div class="card-features">
+          <div class="card-features-title">Qué hace</div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Identidad visual propia</strong><span>paleta, tipografías y elementos gráficos diseñados desde cero.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Datos interactivos animados</strong><span>gráficos que se activan al scroll con cifras reales.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Formulario inteligente</strong><span>12 preguntas conectadas a un servicio de respuestas.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Dominio y correo profesional</strong><span>lideraia.cl + natalia@lideraia.cl configurados.</span></div></div>
+        </div>
+        <div class="card-tools">
+          <span class="tool-tag">HTML / CSS / JS</span>
+          <span class="tool-tag">Vercel</span>
+          <span class="tool-tag">Formspree</span>
+          <span class="tool-tag">IA generativa</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ PERSONALES ═══════════ -->
+<section class="port-section alt">
+  <div class="port-inner">
+    <p class="s-label">Proyectos personales</p>
+    <h2 class="s-title">La IA también resuelve en la vida diaria</h2>
+    <p class="s-sub">Estas son herramientas que construí para mi familia y mi vida personal. Porque si algo te consume tiempo, probablemente se puede resolver.</p>
+    <div class="project-grid">
+
+      <!-- Martín Organizer -->
+      <div class="project-card">
+        <div class="card-gallery">
+          <div class="gallery-scroll">
+            <div class="gallery-slide"><img src="img/martin-inicio.jpg" alt="Dashboard con voz"></div>
+            <div class="gallery-slide"><img src="img/martin-tareas.jpg" alt="Tareas y preparación"></div>
+            <div class="gallery-slide"><img src="img/martin-notas.jpg" alt="Notas con semáforo"></div>
+            <div class="gallery-slide"><img src="img/martin-pomodoro.jpg" alt="Pomodoro de estudio"></div>
+            <div class="gallery-slide"><img src="img/martin-detalle.jpg" alt="Detalle de ramo"></div>
+          </div>
+          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
+          <span class="card-type">App móvil</span>
+        </div>
+        <div class="card-body">
+          <h3>Martín Organizer</h3>
+          <div class="card-tagline">App de apoyo al estudio para mi hijo de 18 años</div>
+          <div class="card-desc">Aplicación personalizada para ayudar a mi hijo en 4° medio a organizar su vida académica de forma autónoma. Reúne pruebas, trabajos, notas y tiempos de preparación en un solo lugar, con un diseño pensado para él.</div>
+          <div class="card-features">
+            <div class="card-features-title">Qué hace</div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Dashboard "cancha del día"</strong><span>bloques de mañana, tarde y noche con semáforo de ramos — los más urgentes en rojo.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Preparación incluida</strong><span>al registrar una prueba, sugiere bloques disponibles para estudiar.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Notas sincronizadas desde Napsis</strong><span>la app se conecta al portal escolar Napsis y cada vez que le suben una nota, aparece automáticamente en su panel sin intervención.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Próximo partido de la U</strong><span>como es hincha de la Universidad de Chile, el dashboard siempre muestra cuántos días faltan para el próximo partido — un detalle que hace la app completamente suya.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Racha semanal</strong><span>al completar todo, aparece "¡La noche es tuya!".</span></div></div>
+          </div>
+          <div class="card-tools">
+            <span class="tool-tag">Supabase</span>
+            <span class="tool-tag">Vercel</span>
+            <span class="tool-tag">API-Football</span>
+            <span class="tool-tag">Napsis</span>
+            <span class="tool-tag">IA generativa</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cuentas Claras -->
+      <div class="project-card">
+        <div class="card-gallery">
+          <div class="gallery-scroll">
+            <div class="gallery-slide"><img src="img/cuentas-perfiles.jpg" alt="Selección de perfil familiar"></div>
+            <div class="gallery-slide"><img src="img/cuentas-voz.jpg" alt="Registro por voz"></div>
+            <div class="gallery-slide"><img src="img/cuentas-metricas.jpg" alt="Métricas por categoría"></div>
+            <div class="gallery-slide"><img src="img/cuentas-privacidad.jpg" alt="Privacidad familiar"></div>
+            <div class="gallery-slide"><img src="img/cuentas-pin.jpg" alt="Acceso con PIN"></div>
+          </div>
+          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
+          <span class="card-type">App móvil</span>
+        </div>
+        <div class="card-body">
+          <h3>Cuentas Claras</h3>
+          <div class="card-tagline">Control de gastos familiares usando la voz</div>
+          <div class="card-desc">Aplicación de control de gastos que permite a cada integrante de la familia registrar compras desde el celular usando la voz, sin teclear nada. Entrega claridad en tiempo real sobre en qué se gasta, quién gasta más y dónde ahorrar.</div>
+          <div class="card-features">
+            <div class="card-features-title">Qué hace</div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Registro por voz en español chileno</strong><span>"gasté treinta mil en el supermercado" → clasifica automáticamente.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Privacidad por perfil con PIN</strong><span>cada persona ve solo sus gastos.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Vista familiar con doble autorización</strong><span>dos personas deben activar el permiso para ver juntos.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Métricas visuales</strong><span>gráficos de torta y barras por categoría, persona y mes.</span></div></div>
+          </div>
+          <div class="card-tools">
+            <span class="tool-tag">HTML / CSS / JS</span>
+            <span class="tool-tag">Web Speech API</span>
+            <span class="tool-tag">GitHub Pages</span>
+            <span class="tool-tag">IA generativa</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MiSalud -->
+      <div class="project-card">
+        <div class="card-gallery">
+          <div class="gallery-scroll">
+            <div class="gallery-slide"><img src="img/misalud-inicio.jpg" alt="Inicio MiSalud"></div>
+            <div class="gallery-slide"><img src="img/misalud-checkin1.jpg" alt="Check-in diario"></div>
+            <div class="gallery-slide"><img src="img/misalud-calendario.jpg" alt="Calendario de salud"></div>
+            <div class="gallery-slide"><img src="img/misalud-citas.jpg" alt="Citas médicas por voz"></div>
+            <div class="gallery-slide"><img src="img/misalud-examenes.jpg" alt="Registro de exámenes"></div>
+            <div class="gallery-slide"><img src="img/misalud-reporte.jpg" alt="Reporte médico"></div>
+          </div>
+          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span></div>
+          <span class="card-type">App móvil</span>
+        </div>
+        <div class="card-body">
+          <h3>MiSalud</h3>
+          <div class="card-tagline">Seguimiento de salud por voz para adultos mayores</div>
+          <div class="card-desc">Diseñé MiSalud pensando en mi familia. Varios de mis familiares tienen condiciones crónicas y necesitaban una forma simple de registrar cómo se sienten día a día, para llegar a sus consultas médicas con información clara. Hoy la usan varias personas, cada una con su perfil y condiciones configuradas desde un panel de administración.</div>
+          <div class="card-features">
+            <div class="card-features-title">Qué hace</div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Check-in guiado por voz</strong><span>preguntas personalizadas según condiciones (fibromialgia, hipertensión, diabetes).</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Agenda de citas por voz</strong><span>"tengo hora con el cardiólogo el 30 de mayo" → agenda automáticamente.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Reporte visual para el médico</strong><span>gráficos de bienestar general, tendencias de sueño, dolor, ánimo, síntomas y adherencia a medicamentos del último mes.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Diseño para personas mayores</strong><span>botones grandes, texto legible, lenguaje cálido.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Multi-perfil con administración</strong><span>desde un panel de admin creo perfiles familiares y configuro las condiciones de salud de cada persona, para que la app le haga preguntas pertinentes a cada una.</span></div></div>
+          </div>
+          <div class="card-tools">
+            <span class="tool-tag">HTML / CSS / JS</span>
+            <span class="tool-tag">Web Speech API</span>
+            <span class="tool-tag">Firebase</span>
+            <span class="tool-tag">GitHub Pages</span>
+            <span class="tool-tag">IA generativa</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Naty Bienestar -->
+      <div class="project-card">
+        <div class="card-gallery">
+          <div class="gallery-scroll">
+            <div class="gallery-slide"><img src="img/bienestar-checkin.jpg" alt="Check-in matinal"></div>
+            <div class="gallery-slide"><img src="img/bienestar-gineco.jpg" alt="Ginecología y ciclo"></div>
+            <div class="gallery-slide"><img src="img/bienestar-salud.jpg" alt="Salud y exámenes"></div>
+            <div class="gallery-slide"><img src="img/bienestar-historial.jpg" alt="Historial y tendencias"></div>
+            <div class="gallery-slide"><img src="img/bienestar-reporte.jpg" alt="Informe médico"></div>
+          </div>
+          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
+          <span class="card-type">App móvil</span>
+        </div>
+        <div class="card-body">
+          <h3>Naty Bienestar</h3>
+          <div class="card-tagline">Registro personal de salud femenina</div>
+          <div class="card-desc">La diseñé para mí, con un objetivo concreto: llegar a mis consultas médicas con datos reales de cómo he estado, para que el doctor pueda tomar mejores decisiones. Registro mi bienestar diario y la app genera informes clínicos listos para cualquier especialista.</div>
+          <div class="card-features">
+            <div class="card-features-title">Qué hace</div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Check-in matinal</strong><span>ánimo, energía, sueño, síntomas y hábitos en menos de 2 minutos.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Seguimiento ginecológico completo</strong><span>ciclo menstrual, episodios ginecológicos, síntomas premenstruales con calendario visual.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Informe médico PDF</strong><span>estructurado con alertas si detecta patrones preocupantes.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Gráficos de tendencia</strong><span>evolución de ánimo, energía o sueño en 14, 30 o 90 días.</span></div></div>
+          </div>
+          <div class="card-tools">
+            <span class="tool-tag">HTML / CSS / JS</span>
+            <span class="tool-tag">Supabase</span>
+            <span class="tool-tag">GitHub Pages</span>
+            <span class="tool-tag">IA generativa</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LevelUp! -->
+      <div class="project-card">
+        <div class="card-gallery">
+          <div class="gallery-scroll">
+            <div class="gallery-slide"><img src="img/levelup-inicio.jpg" alt="Inicio con XP y rachas"></div>
+            <div class="gallery-slide"><img src="img/levelup-pregunta.jpg" alt="Pregunta de inglés"></div>
+            <div class="gallery-slide"><img src="img/levelup-correcto.jpg" alt="Respuesta correcta con dato curioso"></div>
+            <div class="gallery-slide"><img src="img/levelup-error.jpg" alt="Error con explicación"></div>
+            <div class="gallery-slide"><img src="img/levelup-bloque.jpg" alt="Bloque completado"></div>
+            <div class="gallery-slide"><img src="img/levelup-panel.jpg" alt="Panel mamá"></div>
+          </div>
+          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span></div>
+          <span class="card-type">App educativa</span>
+        </div>
+        <div class="card-body">
+          <h3>LevelUp!</h3>
+          <div class="card-tagline">App educativa gamificada para mi hija de 9 años</div>
+          <div class="card-desc">Diseñé LevelUp! para mi hija, que necesitaba repasar el currículum de 4° básico sin aburrirse. Es una app tipo juego con puntos de experiencia, niveles, rachas y recompensas con referencias al mundo gamer que le encanta.</div>
+          <div class="card-features">
+            <div class="card-features-title">Qué hace</div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Dificultad adaptativa</strong><span>sube donde destaca y baja donde le cuesta, sin frustrar.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Sesiones de 5 minutos</strong><span>preguntas rápidas con recompensas (datos curiosos, chistes, "¿qué preferirías?").</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Explicación al equivocarse</strong><span>cada error se convierte en oportunidad de aprendizaje.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Panel para el adulto</strong><span>protegido por PIN, con estadísticas por materia y evolución.</span></div></div>
+          </div>
+          <div class="card-tools">
+            <span class="tool-tag">HTML / CSS / JS</span>
+            <span class="tool-tag">275 preguntas MINEDUC</span>
+            <span class="tool-tag">GitHub Pages</span>
+            <span class="tool-tag">IA generativa</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LucApp -->
+      <div class="project-card">
+        <div class="card-gallery">
+          <div class="gallery-scroll">
+            <div class="gallery-slide"><img src="img/lucapp-dashboard.jpg" alt="Dashboard ganancias"></div>
+            <div class="gallery-slide"><img src="img/lucapp-registro.jpg" alt="Registro por voz"></div>
+            <div class="gallery-slide"><img src="img/lucapp-precios.jpg" alt="Recomendación de precios"></div>
+            <div class="gallery-slide"><img src="img/lucapp-deudores.jpg" alt="Control de deudores"></div>
+            <div class="gallery-slide"><img src="img/lucapp-movimientos.jpg" alt="Movimientos"></div>
+          </div>
+          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
+          <span class="card-type">App móvil</span>
+        </div>
+        <div class="card-body">
+          <h3>LucApp</h3>
+          <div class="card-tagline">Mi hijo administra su emprendimiento escolar con IA</div>
+          <div class="card-desc">App para que mi hijo adolescente administre su emprendimiento de venta de snacks desde el celular. Usa IA y reconocimiento de voz para registrar compras, ventas y deudores, con recomendaciones de precio y tips de educación financiera.</div>
+          <div class="card-features">
+            <div class="card-features-title">Qué hace</div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Registro por voz con IA</strong><span>habla y la app entiende si fue compra, venta o fiado.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Control de deudores</strong><span>quién debe plata y cuánto, para no perder cobros.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Recomendación de precios</strong><span>sugiere precio de venta con margen razonable.</span></div></div>
+            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Tips de educación financiera</strong><span>consejos adaptados a un joven emprendedor.</span></div></div>
+          </div>
+          <div class="card-tools">
+            <span class="tool-tag">HTML / CSS / JS</span>
+            <span class="tool-tag">Web Speech API</span>
+            <span class="tool-tag">API de IA</span>
+            <span class="tool-tag">GitHub Pages</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="port-cta">
+  <h2>¿Te imaginaste haciendo algo así?</h2>
+  <p>Todo esto lo construí conversando con inteligencia artificial. Sin curso de programación, sin equipo técnico. En LideraIA empiezas ese camino: con una primera solución funcionando y la claridad de hasta dónde puedes llegar.</p>
+  <a href="index.html#contacto" class="port-cta-btn">Conversemos sobre tu caso →</a>
+</div>
+
+<footer><div class="fb">Lidera<span>IA</span></div><p style="margin-bottom:.3rem">natalia@lideraia.cl</p><p><a href="index.html#privacidad">Política de privacidad</a></p></footer>
+
+<script>
+function animateNum(el,s,e,d,sx,dc){if(!el)return;let st=null;const step=ts=>{if(!st)st=ts;const p=Math.min((ts-st)/d,1);const v=s+(e-s)*(1-Math.pow(1-p,3));el.textContent=v.toFixed(dc)+sx;if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
+const cntObs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){animateNum(document.getElementById('cnt1'),0,12,1200,'+',0);animateNum(document.getElementById('cnt2'),0,7,1000,'',0);animateNum(document.getElementById('cnt3'),0,6,1000,'',0);cntObs.unobserve(en.target)}})},{threshold:.15});
+const pc=document.querySelector('.port-counter');if(pc)cntObs.observe(pc);
+const cardObs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)';cardObs.unobserve(en.target)}})},{threshold:.05});
+document.querySelectorAll('.project-card').forEach((c,i)=>{c.style.opacity='0';c.style.transform='translateY(24px)';c.style.transition='all 0.5s ease-out '+(i%2*.15)+'s';cardObs.observe(c)});
+document.querySelectorAll('.gallery-scroll').forEach(g=>{const dots=g.parentElement.querySelector('.gallery-dots');if(!dots)return;const spans=dots.querySelectorAll('span');g.addEventListener('scroll',()=>{const idx=Math.round(g.scrollLeft/g.offsetWidth);spans.forEach((s,i)=>s.classList.toggle('active',i===idx))})});
+</script>
+</body>
+</html>
