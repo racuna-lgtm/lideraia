@@ -53,13 +53,29 @@ nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(247,246,243,.92)
 .gallery-scroll{display:flex;width:100%;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .gallery-scroll::-webkit-scrollbar{display:none}
 .gallery-slide{flex:0 0 100%;height:100%;scroll-snap-align:start;display:flex;align-items:center;justify-content:center}
-.gallery-slide img{width:100%;height:100%;object-fit:cover;object-position:top}
+.gallery-slide img{width:100%;height:100%;object-fit:cover;object-position:top;cursor:pointer}
 .gallery-ph{display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--text-light);font-size:.8rem}
 .gallery-ph .ph-icon{width:52px;height:52px;background:var(--coral-bg);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
 .gallery-ph small{font-size:.68rem;color:var(--border)}
-.gallery-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:2}
-.gallery-dots span{width:6px;height:6px;border-radius:50%;background:rgba(42,45,53,.2);transition:all .3s}
+.gallery-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:3}
+.gallery-dots span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);transition:all .3s;cursor:pointer}
 .gallery-dots span.active{background:var(--coral);width:16px;border-radius:3px}
+.gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.85);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--carbon);z-index:3;opacity:0;transition:opacity .3s;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.card-gallery:hover .gallery-nav{opacity:1}
+.gallery-prev{left:8px}
+.gallery-next{right:8px}
+.gallery-nav:hover{background:#fff;transform:translateY(-50%) scale(1.1)}
+.gallery-count{position:absolute;top:.6rem;left:.75rem;background:rgba(0,0,0,.5);color:#fff;font-size:.65rem;font-weight:600;padding:.15rem .5rem;border-radius:4px;z-index:3}
+
+/* Lightbox */
+.lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);z-index:1000;display:none;align-items:center;justify-content:center;cursor:pointer}
+.lightbox.active{display:flex}
+.lightbox img{max-width:90%;max-height:90%;object-fit:contain;border-radius:8px}
+.lightbox-close{position:absolute;top:1.5rem;right:1.5rem;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lightbox-prev{left:1.5rem}
+.lightbox-next{right:1.5rem}
+.lightbox-nav:hover,.lightbox-close:hover{background:rgba(255,255,255,.3)}
 .card-type{position:absolute;top:.75rem;right:.75rem;background:var(--carbon);color:#fff;font-size:.62rem;font-weight:700;padding:.2rem .55rem;border-radius:5px;letter-spacing:.5px;text-transform:uppercase;z-index:2}
 
 .card-body{padding:1.4rem 1.5rem;flex:1;display:flex;flex-direction:column}
@@ -144,7 +160,10 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="gallery-slide"><img src="img/hackea-gantt.jpg" alt="Gantt de producción"></div>
           <div class="gallery-slide"><img src="img/hackea-resumen.jpg" alt="Resumen para cliente"></div>
         </div>
-        <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span></div>
+                  <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+          <div class="gallery-count">1 / 6</div>
+          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span></div>
         <span class="card-type">Web app</span>
       </div>
       <div class="card-body">
@@ -174,7 +193,10 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="gallery-slide"><img src="img/planif-asig-gantt.jpg" alt="Gantt de 16 asignaturas"></div>
           <div class="gallery-slide"><img src="img/planif-asig-choques.jpg" alt="Detección de choques"></div>
         </div>
-        <div class="gallery-dots"><span class="active"></span><span></span><span></span></div>
+                  <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+          <div class="gallery-count">1 / 3</div>
+          <div class="gallery-dots"><span class="active"></span><span></span><span></span></div>
         <span class="card-type">Web app</span>
       </div>
       <div class="card-body">
@@ -206,7 +228,10 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="gallery-slide"><img src="img/cotizador-desglose.jpg" alt="Desglose interno"></div>
           <div class="gallery-slide"><img src="img/cotizador-exportar.jpg" alt="Exportar propuesta"></div>
         </div>
-        <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span></div>
+                  <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+          <div class="gallery-count">1 / 4</div>
+          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span></div>
         <span class="card-type">Web app</span>
       </div>
       <div class="card-body">
@@ -241,7 +266,10 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="gallery-slide"><img src="img/obs-resultado.jpg" alt="Resultado diagnóstico"></div>
           <div class="gallery-slide"><img src="img/obs-radar.jpg" alt="Radar normativo"></div>
         </div>
-        <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                  <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+          <div class="gallery-count">1 / 7</div>
+          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         <span class="card-type">Plataforma</span>
       </div>
       <div class="card-body">
@@ -274,7 +302,10 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="gallery-slide"><img src="img/riohs-auditoria.jpg" alt="Auditoría RIOHS existente"></div>
           <div class="gallery-slide"><img src="img/riohs-generar.jpg" alt="Generar RIOHS completo"></div>
         </div>
-        <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
+                  <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+          <div class="gallery-count">1 / 5</div>
+          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
         <span class="card-type">Plataforma</span>
       </div>
       <div class="card-body">
@@ -306,7 +337,10 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="gallery-slide"><img src="img/lideraia-quien.jpg" alt="Quién soy"></div>
           <div class="gallery-slide"><img src="img/lideraia-programa.jpg" alt="Programa 5 sesiones"></div>
         </div>
-        <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span></div>
+                  <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+          <div class="gallery-count">1 / 4</div>
+          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span></div>
         <span class="card-type">Sitio web</span>
       </div>
       <div class="card-body">
@@ -350,6 +384,9 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
             <div class="gallery-slide"><img src="img/martin-pomodoro.jpg" alt="Pomodoro de estudio"></div>
             <div class="gallery-slide"><img src="img/martin-detalle.jpg" alt="Detalle de ramo"></div>
           </div>
+          <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+          <div class="gallery-count">1 / 5</div>
           <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
           <span class="card-type">App móvil</span>
         </div>
@@ -385,6 +422,9 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
             <div class="gallery-slide"><img src="img/cuentas-privacidad.jpg" alt="Privacidad familiar"></div>
             <div class="gallery-slide"><img src="img/cuentas-pin.jpg" alt="Acceso con PIN"></div>
           </div>
+          <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+          <div class="gallery-count">1 / 5</div>
           <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
           <span class="card-type">App móvil</span>
         </div>
@@ -419,6 +459,9 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
             <div class="gallery-slide"><img src="img/misalud-examenes.jpg" alt="Registro de exámenes"></div>
             <div class="gallery-slide"><img src="img/misalud-reporte.jpg" alt="Reporte médico"></div>
           </div>
+          <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+          <div class="gallery-count">1 / 6</div>
           <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span></div>
           <span class="card-type">App móvil</span>
         </div>
@@ -454,6 +497,9 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
             <div class="gallery-slide"><img src="img/bienestar-historial.jpg" alt="Historial y tendencias"></div>
             <div class="gallery-slide"><img src="img/bienestar-reporte.jpg" alt="Informe médico"></div>
           </div>
+          <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+          <div class="gallery-count">1 / 5</div>
           <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
           <span class="card-type">App móvil</span>
         </div>
@@ -488,6 +534,9 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
             <div class="gallery-slide"><img src="img/levelup-bloque.jpg" alt="Bloque completado"></div>
             <div class="gallery-slide"><img src="img/levelup-panel.jpg" alt="Panel mamá"></div>
           </div>
+          <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+          <div class="gallery-count">1 / 6</div>
           <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span></div>
           <span class="card-type">App educativa</span>
         </div>
@@ -521,6 +570,9 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
             <div class="gallery-slide"><img src="img/lucapp-deudores.jpg" alt="Control de deudores"></div>
             <div class="gallery-slide"><img src="img/lucapp-movimientos.jpg" alt="Movimientos"></div>
           </div>
+          <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+          <div class="gallery-count">1 / 5</div>
           <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
           <span class="card-type">App móvil</span>
         </div>
@@ -555,7 +607,15 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
   <a href="index.html#contacto" class="port-cta-btn">Conversemos sobre tu caso →</a>
 </div>
 
-<footer><div class="fb">Lidera<span>IA</span></div><p style="margin-bottom:.3rem">natalia@lideraia.cl</p><p><a href="index.html#privacidad">Política de privacidad</a></p></footer>
+<footer><div class="fb">Lidera<span>IA</span></div><p style="margin-bottom:.3rem">natalia@lideraia.cl</p><p><a href="privacidad.html">Política de privacidad</a></p></footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(event,-1)">‹</button>
+  <img src="" alt="" id="lightbox-img">
+  <button class="lightbox-nav lightbox-next" onclick="lightboxNav(event,1)">›</button>
+</div>
 
 <script>
 function animateNum(el,s,e,d,sx,dc){if(!el)return;let st=null;const step=ts=>{if(!st)st=ts;const p=Math.min((ts-st)/d,1);const v=s+(e-s)*(1-Math.pow(1-p,3));el.textContent=v.toFixed(dc)+sx;if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
@@ -563,7 +623,75 @@ const cntObs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){a
 const pc=document.querySelector('.port-counter');if(pc)cntObs.observe(pc);
 const cardObs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)';cardObs.unobserve(en.target)}})},{threshold:.05});
 document.querySelectorAll('.project-card').forEach((c,i)=>{c.style.opacity='0';c.style.transform='translateY(24px)';c.style.transition='all 0.5s ease-out '+(i%2*.15)+'s';cardObs.observe(c)});
-document.querySelectorAll('.gallery-scroll').forEach(g=>{const dots=g.parentElement.querySelector('.gallery-dots');if(!dots)return;const spans=dots.querySelectorAll('span');g.addEventListener('scroll',()=>{const idx=Math.round(g.scrollLeft/g.offsetWidth);spans.forEach((s,i)=>s.classList.toggle('active',i===idx))})});
+
+// Gallery navigation
+function galleryNav(btn, dir) {
+  const gallery = btn.closest('.card-gallery');
+  const scroll = gallery.querySelector('.gallery-scroll');
+  const w = scroll.offsetWidth;
+  scroll.scrollBy({left: w * dir, behavior: 'smooth'});
+}
+
+// Update dots and counter on scroll
+document.querySelectorAll('.gallery-scroll').forEach(g => {
+  const gallery = g.parentElement;
+  const dots = gallery.querySelector('.gallery-dots');
+  const counter = gallery.querySelector('.gallery-count');
+  const total = g.querySelectorAll('.gallery-slide').length;
+  if (!dots) return;
+  const spans = dots.querySelectorAll('span');
+  g.addEventListener('scroll', () => {
+    const idx = Math.round(g.scrollLeft / g.offsetWidth);
+    spans.forEach((s, i) => s.classList.toggle('active', i === idx));
+    if (counter) counter.textContent = (idx + 1) + ' / ' + total;
+  });
+  // Click dots to navigate
+  spans.forEach((s, i) => {
+    s.addEventListener('click', () => {
+      g.scrollTo({left: g.offsetWidth * i, behavior: 'smooth'});
+    });
+  });
+});
+
+// Lightbox
+let lbImages = [];
+let lbIndex = 0;
+
+document.querySelectorAll('.gallery-slide img').forEach(img => {
+  img.addEventListener('click', () => {
+    const gallery = img.closest('.gallery-scroll');
+    lbImages = Array.from(gallery.querySelectorAll('.gallery-slide img')).map(i => i.src);
+    lbIndex = lbImages.indexOf(img.src);
+    openLightbox();
+  });
+});
+
+function openLightbox() {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src = lbImages[lbIndex];
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e) {
+  if (e && e.target !== e.currentTarget && !e.target.classList.contains('lightbox-close')) return;
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function lightboxNav(e, dir) {
+  e.stopPropagation();
+  lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+  document.getElementById('lightbox-img').src = lbImages[lbIndex];
+}
+
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('active')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') lightboxNav(e, 1);
+  if (e.key === 'ArrowLeft') lightboxNav(e, -1);
+});
 </script>
 </body>
 </html>
