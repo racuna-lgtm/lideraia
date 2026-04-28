@@ -48,7 +48,6 @@ nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(247,246,243,.92)
 .project-card:hover{border-color:var(--coral-light);transform:translateY(-4px);box-shadow:0 12px 32px rgba(42,45,53,.08)}
 .project-card:hover::before{transform:scaleX(1)}
 
-/* Professional image carousel */
 .card-gallery{position:relative;width:100%;height:280px;background:#1a1a2e;border-bottom:1px solid var(--border);overflow:hidden}
 .gallery-scroll{position:relative;width:100%;height:100%}
 .gallery-slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .5s ease;pointer-events:none}
@@ -68,7 +67,6 @@ nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(247,246,243,.92)
 .gallery-nav:hover{background:#fff;transform:translateY(-50%) scale(1.1);box-shadow:0 4px 16px rgba(0,0,0,.25)}
 .gallery-count{position:absolute;top:.7rem;left:.8rem;background:rgba(0,0,0,.55);color:#fff;font-size:.7rem;font-weight:600;padding:.2rem .6rem;border-radius:5px;z-index:3;backdrop-filter:blur(4px)}
 
-/* Lightbox */
 .lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:1000;display:none;align-items:center;justify-content:center;cursor:pointer}
 .lightbox.active{display:flex}
 .lightbox img{max-width:92%;max-height:92%;object-fit:contain;border-radius:6px;box-shadow:0 8px 40px rgba(0,0,0,.5)}
@@ -92,6 +90,23 @@ nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(247,246,243,.92)
 .feature-content span{color:var(--text-mid);font-size:.8rem;line-height:1.55}
 .card-tools{display:flex;flex-wrap:wrap;gap:.35rem;padding-top:.6rem;border-top:1px solid var(--border)}
 .tool-tag{background:var(--bg);border:1px solid var(--border);padding:.18rem .55rem;border-radius:5px;font-size:.68rem;font-weight:600;color:var(--text-mid);letter-spacing:.3px}
+.tool-tag.accent{background:var(--coral-bg);border-color:var(--coral-light);color:var(--coral)}
+.card-impact{display:flex;align-items:center;gap:.4rem;background:var(--green-bg);border:1px solid rgba(90,138,106,.2);border-radius:8px;padding:.5rem .8rem;margin-bottom:1rem;font-size:.78rem;color:var(--green);font-weight:600}
+.card-impact .imp-icon{font-size:.9rem}
+
+.compact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.compact-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .3s;position:relative}
+.compact-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--coral);transform:scaleX(0);transform-origin:left;transition:transform .4s;z-index:2}
+.compact-card:hover{border-color:var(--coral-light);transform:translateY(-3px);box-shadow:0 8px 24px rgba(42,45,53,.06)}
+.compact-card:hover::before{transform:scaleX(1)}
+.compact-img{width:100%;height:160px;background:#1a1a2e;overflow:hidden;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
+.compact-img img{max-width:92%;max-height:90%;object-fit:contain;border-radius:3px;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.compact-body{padding:1.1rem 1.2rem}
+.compact-body h3{font-family:'DM Serif Display',serif;font-size:1rem;color:var(--carbon);margin-bottom:.15rem;line-height:1.3}
+.compact-body .card-tagline{margin-bottom:.5rem}
+.compact-body p{font-size:.8rem;color:var(--text-mid);line-height:1.6;margin-bottom:0}
+
+.port-bridge{max-width:620px;margin:1.2rem auto 0;font-size:.88rem;color:var(--text-light);font-style:italic;line-height:1.7}
 
 .port-cta{background:var(--coral-bg);border-top:1px solid var(--coral-soft);padding:3.5rem 2rem;text-align:center}
 .port-cta h2{font-family:'DM Serif Display',serif;font-size:clamp(1.5rem,3vw,2rem);color:var(--carbon);margin-bottom:.8rem}
@@ -109,6 +124,7 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
   .port-hero{padding:7rem 1.5rem 2rem}
   .port-section{padding:3rem 1.5rem}.port-section.alt{padding:3rem 1.5rem}
   .project-grid{grid-template-columns:1fr}
+  .compact-grid{grid-template-columns:1fr 1fr}
   .card-gallery{height:250px}
   .port-counter-inner{gap:1.2rem}
   .port-cta{padding:2.5rem 1.5rem}
@@ -120,10 +136,9 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
 <nav>
   <a href="index.html" class="logo">Lidera<span>IA</span></a>
   <div class="nav-links">
-    <a href="index.html#datos">Datos</a>
-    <a href="index.html#ejemplos">Ejemplos</a>
-    <a href="portafolio.html" class="active nav-always">Portafolio</a>
     <a href="index.html#programa">Programa</a>
+    <a href="index.html#quien-soy">Sobre mí</a>
+    <a href="portafolio.html" class="active nav-always">Portafolio</a>
     <a href="index.html#contacto" class="cta-nav">Conversemos →</a>
   </div>
 </nav>
@@ -131,7 +146,8 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
 <section class="port-hero">
   <div class="port-badge">Portafolio de proyectos reales</div>
   <h1>Lo que he construido <em>con IA</em></h1>
-  <p>Cada uno de estos proyectos nació de un problema concreto. Ninguno requirió saber programar. Todos los construí conversando con inteligencia artificial. Este es el tipo de camino que empiezas a recorrer en el programa de LideraIA.</p>
+  <p>Cada uno de estos proyectos nació de un problema concreto. Ninguno requirió saber programar. Todos los construí conversando con inteligencia artificial.</p>
+  <p class="port-bridge">En el programa no vas a construir 12 apps. Vas a construir una solución concreta que resuelva un problema real de tu gestión — como cada uno de estos proyectos empezó.</p>
 </section>
 
 <div class="port-counter">
@@ -171,6 +187,7 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
         <h3>Kit de Herramientas Hackea</h3>
         <div class="card-tagline">Costear, planificar y coordinar proyectos e-learning</div>
         <div class="card-desc">Desarrollé un sistema de herramientas digitales internas para mi empresa de producción e-learning, que resuelve uno de los problemas más comunes en este rubro: no saber con precisión cuánto cuesta producir un curso ni cuándo va a estar listo.</div>
+        <div class="card-impact"><span class="imp-icon">⏱️</span> ~4 horas ahorradas por proyecto cotizado</div>
         <div class="card-features">
           <div class="card-features-title">Qué hace</div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Calculadora de costos</strong><span>calcula horas de equipo y costo de producción según tipo de curso, módulos y recursos, y sugiere precio de venta según el margen deseado.</span></div></div>
@@ -179,9 +196,9 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Mensaje listo para el cliente</strong><span>genera un texto profesional con fecha de entrega, hitos y resumen.</span></div></div>
         </div>
         <div class="card-tools">
-          <span class="tool-tag">HTML / CSS / JS</span>
-          <span class="tool-tag">GitHub Pages</span>
-          <span class="tool-tag">IA generativa</span>
+          <span class="tool-tag accent">Construido con IA</span>
+          <span class="tool-tag">Sin programación</span>
+          <span class="tool-tag">En uso activo</span>
         </div>
       </div>
     </div>
@@ -204,6 +221,7 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
         <h3>Planificador de Asignaturas</h3>
         <div class="card-tagline">Coordinar múltiples asignaturas y un equipo multidisciplinario en tiempo real</div>
         <div class="card-desc">Herramienta de planificación colaborativa para gestionar la producción de contenidos e-learning de un proyecto universitario con múltiples asignaturas en desarrollo simultáneo. En el ciclo actual gestiona 16 asignaturas. Reemplazó el seguimiento manual en planillas.</div>
+        <div class="card-impact"><span class="imp-icon">⏱️</span> ~6 horas ahorradas por semana en seguimiento</div>
         <div class="card-features">
           <div class="card-features-title">Qué hace</div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Seguimiento por etapas</strong><span>más de 15 sub-etapas por asignatura con fecha, estado y notas.</span></div></div>
@@ -212,10 +230,9 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Gantt interactivo</strong><span>cronograma visual filtrable por programa, con zoom semanal o diario.</span></div></div>
         </div>
         <div class="card-tools">
-          <span class="tool-tag">HTML / CSS / JS</span>
-          <span class="tool-tag">Supabase</span>
-          <span class="tool-tag">GitHub Pages</span>
-          <span class="tool-tag">IA generativa</span>
+          <span class="tool-tag accent">Construido con IA</span>
+          <span class="tool-tag">Sin programación</span>
+          <span class="tool-tag">En uso activo</span>
         </div>
       </div>
     </div>
@@ -239,6 +256,7 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
         <h3>Cotizador de Formación Sincrónica</h3>
         <div class="card-tagline">Cotizar programas masivos y descargar la propuesta lista</div>
         <div class="card-desc">Automatiza la cotización de programas de formación sincrónica para clientes corporativos. En minutos genero una cotización con tres escenarios de participantes y descargo una propuesta PowerPoint editable lista para enviar.</div>
+        <div class="card-impact"><span class="imp-icon">⏱️</span> ~3 horas ahorradas por cotización</div>
         <div class="card-features">
           <div class="card-features-title">Qué hace</div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Hasta tres escenarios en paralelo</strong><span>permite comparar precios por participante para distintos volúmenes, o trabajar con un solo escenario.</span></div></div>
@@ -247,10 +265,9 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Propuesta PPTX descargable</strong><span>11 láminas con identidad visual, listas para el cliente.</span></div></div>
         </div>
         <div class="card-tools">
-          <span class="tool-tag">HTML / CSS / JS</span>
-          <span class="tool-tag">PptxGenJS</span>
-          <span class="tool-tag">GitHub Pages</span>
-          <span class="tool-tag">IA generativa</span>
+          <span class="tool-tag accent">Construido con IA</span>
+          <span class="tool-tag">Sin programación</span>
+          <span class="tool-tag">En uso activo</span>
         </div>
       </div>
     </div>
@@ -277,6 +294,7 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
         <h3>Observatorio SSOMA · Más Prevención</h3>
         <div class="card-tagline">Datos públicos de seguridad laboral, visualizados y accionables</div>
         <div class="card-desc">Observatorio web de datos públicos sobre seguridad y salud ocupacional en Chile, Perú y Latinoamérica. La información oficial existe pero está dispersa. Aquí se consolida, se visualiza y se convierte en herramientas de decisión.</div>
+        <div class="card-impact"><span class="imp-icon">⏱️</span> Días de recopilación manual → acceso inmediato</div>
         <div class="card-features">
           <div class="card-features-title">Qué hace</div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Visualizaciones interactivas</strong><span>tasas de accidentabilidad por rubro, mapas regionales y cruces entre industria y tipo de accidente.</span></div></div>
@@ -285,10 +303,9 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Reporte PDF de 7 páginas</strong><span>análisis completo, listo para presentar al directorio.</span></div></div>
         </div>
         <div class="card-tools">
-          <span class="tool-tag">HTML / CSS / JS</span>
-          <span class="tool-tag">Supabase</span>
-          <span class="tool-tag">Vercel</span>
-          <span class="tool-tag">IA generativa</span>
+          <span class="tool-tag accent">Construido con IA</span>
+          <span class="tool-tag">Sin programación</span>
+          <span class="tool-tag">Funcionando en producción</span>
         </div>
       </div>
     </div>
@@ -313,6 +330,7 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
         <h3>Generador de RIOHS con IA</h3>
         <div class="card-tagline">Reglamentos internos de 35 a 110 páginas, generados en minutos</div>
         <div class="card-desc">Plataforma que permite a profesionales de prevención generar Reglamentos Internos de Orden, Higiene y Seguridad completos, cumpliendo con la normativa laboral chilena. También audita reglamentos existentes y detecta brechas legales.</div>
+        <div class="card-impact"><span class="imp-icon">⏱️</span> ~20 horas ahorradas por reglamento generado</div>
         <div class="card-features">
           <div class="card-features-title">Qué hace</div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Generación inteligente</strong><span>ficha de empresa → RIOHS completo adaptado al perfil de la organización.</span></div></div>
@@ -321,10 +339,9 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Resumen ejecutivo</strong><span>síntesis para gerencias sin lenguaje jurídico.</span></div></div>
         </div>
         <div class="card-tools">
-          <span class="tool-tag">HTML / CSS / JS</span>
-          <span class="tool-tag">API de IA</span>
-          <span class="tool-tag">Supabase</span>
-          <span class="tool-tag">Vercel</span>
+          <span class="tool-tag accent">Construido con IA</span>
+          <span class="tool-tag">Sin programación</span>
+          <span class="tool-tag">Funcionando en producción</span>
         </div>
       </div>
     </div>
@@ -336,7 +353,7 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="gallery-slide"><img src="img/lideraia-hero.jpg" alt="Hero LideraIA"></div>
           <div class="gallery-slide"><img src="img/lideraia-datos.jpg" alt="Datos Chile con gráficos"></div>
           <div class="gallery-slide"><img src="img/lideraia-quien.jpg" alt="Quién soy"></div>
-          <div class="gallery-slide"><img src="img/lideraia-programa.jpg" alt="Programa 5 sesiones"></div>
+          <div class="gallery-slide"><img src="img/lideraia-programa.jpg" alt="Programa 4 sesiones"></div>
         </div>
                   <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
           <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
@@ -356,10 +373,9 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Dominio y correo profesional</strong><span>lideraia.cl + natalia@lideraia.cl configurados.</span></div></div>
         </div>
         <div class="card-tools">
-          <span class="tool-tag">HTML / CSS / JS</span>
-          <span class="tool-tag">Vercel</span>
-          <span class="tool-tag">Formspree</span>
-          <span class="tool-tag">IA generativa</span>
+          <span class="tool-tag accent">Construido con IA</span>
+          <span class="tool-tag">Sin programación</span>
+          <span class="tool-tag">Este sitio web</span>
         </div>
       </div>
     </div>
@@ -372,228 +388,60 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
   <div class="port-inner">
     <p class="s-label">Proyectos personales</p>
     <h2 class="s-title">La IA también resuelve en la vida diaria</h2>
-    <p class="s-sub">Estas son herramientas que construí para mi familia y mi vida personal. Porque si algo te consume tiempo, probablemente se puede resolver.</p>
-    <div class="project-grid">
+    <p class="s-sub">Herramientas que construí para mi familia. Porque si algo te consume tiempo, probablemente se puede resolver.</p>
+    <div class="compact-grid">
 
-      <!-- Martín Organizer -->
-      <div class="project-card">
-        <div class="card-gallery">
-          <div class="gallery-scroll">
-            <div class="gallery-slide"><img src="img/martin-inicio.jpg" alt="Dashboard con voz"></div>
-            <div class="gallery-slide"><img src="img/martin-tareas.jpg" alt="Tareas y preparación"></div>
-            <div class="gallery-slide"><img src="img/martin-notas.jpg" alt="Notas con semáforo"></div>
-            <div class="gallery-slide"><img src="img/martin-pomodoro.jpg" alt="Pomodoro de estudio"></div>
-            <div class="gallery-slide"><img src="img/martin-detalle.jpg" alt="Detalle de ramo"></div>
-          </div>
-          <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
-          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
-          <div class="gallery-count">1 / 5</div>
-          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
-          <span class="card-type">App móvil</span>
-        </div>
-        <div class="card-body">
+      <div class="compact-card">
+        <div class="compact-img"><img src="img/martin-inicio.jpg" alt="Martín Organizer"></div>
+        <div class="compact-body">
           <h3>Martín Organizer</h3>
-          <div class="card-tagline">App de apoyo al estudio para mi hijo de 18 años</div>
-          <div class="card-desc">Aplicación personalizada para ayudar a mi hijo en 4° medio a organizar su vida académica de forma autónoma. Reúne pruebas, trabajos, notas y tiempos de preparación en un solo lugar, con un diseño pensado para él.</div>
-          <div class="card-features">
-            <div class="card-features-title">Qué hace</div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Dashboard "cancha del día"</strong><span>bloques de mañana, tarde y noche con semáforo de ramos — los más urgentes en rojo.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Preparación incluida</strong><span>al registrar una prueba, sugiere bloques disponibles para estudiar.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Notas sincronizadas desde Napsis</strong><span>la app se conecta al portal escolar Napsis y cada vez que le suben una nota, aparece automáticamente en su panel sin intervención.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Próximo partido de la U</strong><span>como es hincha de la Universidad de Chile, el dashboard siempre muestra cuántos días faltan para el próximo partido — un detalle que hace la app completamente suya.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Racha semanal</strong><span>al completar todo, aparece "¡La noche es tuya!".</span></div></div>
-          </div>
-          <div class="card-tools">
-            <span class="tool-tag">Supabase</span>
-            <span class="tool-tag">Vercel</span>
-            <span class="tool-tag">API-Football</span>
-            <span class="tool-tag">Napsis</span>
-            <span class="tool-tag">IA generativa</span>
-          </div>
+          <div class="card-tagline">Organización académica para mi hijo de 18</div>
+          <p>Pruebas, trabajos, notas y tiempos de estudio en un solo lugar. Se conecta al portal escolar y actualiza notas automáticamente.</p>
         </div>
       </div>
 
-      <!-- Cuentas Claras -->
-      <div class="project-card">
-        <div class="card-gallery">
-          <div class="gallery-scroll">
-            <div class="gallery-slide"><img src="img/cuentas-perfiles.jpg" alt="Selección de perfil familiar"></div>
-            <div class="gallery-slide"><img src="img/cuentas-voz.jpg" alt="Registro por voz"></div>
-            <div class="gallery-slide"><img src="img/cuentas-metricas.jpg" alt="Métricas por categoría"></div>
-            <div class="gallery-slide"><img src="img/cuentas-privacidad.jpg" alt="Privacidad familiar"></div>
-            <div class="gallery-slide"><img src="img/cuentas-pin.jpg" alt="Acceso con PIN"></div>
-          </div>
-          <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
-          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
-          <div class="gallery-count">1 / 5</div>
-          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
-          <span class="card-type">App móvil</span>
-        </div>
-        <div class="card-body">
+      <div class="compact-card">
+        <div class="compact-img"><img src="img/cuentas-voz.jpg" alt="Cuentas Claras"></div>
+        <div class="compact-body">
           <h3>Cuentas Claras</h3>
-          <div class="card-tagline">Control de gastos familiares usando la voz</div>
-          <div class="card-desc">Aplicación de control de gastos que permite a cada integrante de la familia registrar compras desde el celular usando la voz, sin teclear nada. Entrega claridad en tiempo real sobre en qué se gasta, quién gasta más y dónde ahorrar.</div>
-          <div class="card-features">
-            <div class="card-features-title">Qué hace</div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Registro por voz en español chileno</strong><span>"gasté treinta mil en el supermercado" → clasifica automáticamente.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Privacidad por perfil con PIN</strong><span>cada persona ve solo sus gastos.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Vista familiar con doble autorización</strong><span>dos personas deben activar el permiso para ver juntos.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Métricas visuales</strong><span>gráficos de torta y barras por categoría, persona y mes.</span></div></div>
-          </div>
-          <div class="card-tools">
-            <span class="tool-tag">HTML / CSS / JS</span>
-            <span class="tool-tag">Web Speech API</span>
-            <span class="tool-tag">GitHub Pages</span>
-            <span class="tool-tag">IA generativa</span>
-          </div>
+          <div class="card-tagline">Gastos familiares registrados por voz</div>
+          <p>"Gasté treinta mil en el supermercado" → clasifica automáticamente. Cada persona ve solo sus gastos con PIN privado.</p>
         </div>
       </div>
 
-      <!-- MiSalud -->
-      <div class="project-card">
-        <div class="card-gallery">
-          <div class="gallery-scroll">
-            <div class="gallery-slide"><img src="img/misalud-inicio.jpg" alt="Inicio MiSalud"></div>
-            <div class="gallery-slide"><img src="img/misalud-checkin1.jpg" alt="Check-in diario"></div>
-            <div class="gallery-slide"><img src="img/misalud-calendario.jpg" alt="Calendario de salud"></div>
-            <div class="gallery-slide"><img src="img/misalud-citas.jpg" alt="Citas médicas por voz"></div>
-            <div class="gallery-slide"><img src="img/misalud-examenes.jpg" alt="Registro de exámenes"></div>
-            <div class="gallery-slide"><img src="img/misalud-reporte.jpg" alt="Reporte médico"></div>
-          </div>
-          <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
-          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
-          <div class="gallery-count">1 / 6</div>
-          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span></div>
-          <span class="card-type">App móvil</span>
-        </div>
-        <div class="card-body">
+      <div class="compact-card">
+        <div class="compact-img"><img src="img/misalud-checkin1.jpg" alt="MiSalud"></div>
+        <div class="compact-body">
           <h3>MiSalud</h3>
           <div class="card-tagline">Seguimiento de salud por voz para adultos mayores</div>
-          <div class="card-desc">Diseñé MiSalud pensando en mi familia. Varios de mis familiares tienen condiciones crónicas y necesitaban una forma simple de registrar cómo se sienten día a día, para llegar a sus consultas médicas con información clara. Hoy la usan varias personas, cada una con su perfil y condiciones configuradas desde un panel de administración.</div>
-          <div class="card-features">
-            <div class="card-features-title">Qué hace</div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Check-in guiado por voz</strong><span>preguntas personalizadas según condiciones (fibromialgia, hipertensión, diabetes).</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Agenda de citas por voz</strong><span>"tengo hora con el cardiólogo el 30 de mayo" → agenda automáticamente.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Reporte visual para el médico</strong><span>gráficos de bienestar general, tendencias de sueño, dolor, ánimo, síntomas y adherencia a medicamentos del último mes.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Diseño para personas mayores</strong><span>botones grandes, texto legible, lenguaje cálido.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Multi-perfil con administración</strong><span>desde un panel de admin creo perfiles familiares y configuro las condiciones de salud de cada persona, para que la app le haga preguntas pertinentes a cada una.</span></div></div>
-          </div>
-          <div class="card-tools">
-            <span class="tool-tag">HTML / CSS / JS</span>
-            <span class="tool-tag">Web Speech API</span>
-            <span class="tool-tag">Firebase</span>
-            <span class="tool-tag">GitHub Pages</span>
-            <span class="tool-tag">IA generativa</span>
-          </div>
+          <p>Check-in diario guiado por voz. Genera reportes visuales para llevar al médico con tendencias de bienestar del último mes.</p>
         </div>
       </div>
 
-      <!-- Naty Bienestar -->
-      <div class="project-card">
-        <div class="card-gallery">
-          <div class="gallery-scroll">
-            <div class="gallery-slide"><img src="img/bienestar-checkin.jpg" alt="Check-in matinal"></div>
-            <div class="gallery-slide"><img src="img/bienestar-gineco.jpg" alt="Ginecología y ciclo"></div>
-            <div class="gallery-slide"><img src="img/bienestar-salud.jpg" alt="Salud y exámenes"></div>
-            <div class="gallery-slide"><img src="img/bienestar-historial.jpg" alt="Historial y tendencias"></div>
-            <div class="gallery-slide"><img src="img/bienestar-reporte.jpg" alt="Informe médico"></div>
-          </div>
-          <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
-          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
-          <div class="gallery-count">1 / 5</div>
-          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
-          <span class="card-type">App móvil</span>
-        </div>
-        <div class="card-body">
+      <div class="compact-card">
+        <div class="compact-img"><img src="img/bienestar-checkin.jpg" alt="Naty Bienestar"></div>
+        <div class="compact-body">
           <h3>Naty Bienestar</h3>
           <div class="card-tagline">Registro personal de salud femenina</div>
-          <div class="card-desc">La diseñé para mí, con un objetivo concreto: llegar a mis consultas médicas con datos reales de cómo he estado, para que el doctor pueda tomar mejores decisiones. Registro mi bienestar diario y la app genera informes clínicos listos para cualquier especialista.</div>
-          <div class="card-features">
-            <div class="card-features-title">Qué hace</div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Check-in matinal</strong><span>ánimo, energía, sueño, síntomas y hábitos en menos de 2 minutos.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Seguimiento ginecológico completo</strong><span>ciclo menstrual, episodios ginecológicos, síntomas premenstruales con calendario visual.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Informe médico PDF</strong><span>estructurado con alertas si detecta patrones preocupantes.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Gráficos de tendencia</strong><span>evolución de ánimo, energía o sueño en 14, 30 o 90 días.</span></div></div>
-          </div>
-          <div class="card-tools">
-            <span class="tool-tag">HTML / CSS / JS</span>
-            <span class="tool-tag">Supabase</span>
-            <span class="tool-tag">GitHub Pages</span>
-            <span class="tool-tag">IA generativa</span>
-          </div>
+          <p>Check-in matinal de 2 minutos. Genera informes clínicos PDF listos para cualquier especialista.</p>
         </div>
       </div>
 
-      <!-- LevelUp! -->
-      <div class="project-card">
-        <div class="card-gallery">
-          <div class="gallery-scroll">
-            <div class="gallery-slide"><img src="img/levelup-inicio.jpg" alt="Inicio con XP y rachas"></div>
-            <div class="gallery-slide"><img src="img/levelup-pregunta.jpg" alt="Pregunta de inglés"></div>
-            <div class="gallery-slide"><img src="img/levelup-correcto.jpg" alt="Respuesta correcta con dato curioso"></div>
-            <div class="gallery-slide"><img src="img/levelup-error.jpg" alt="Error con explicación"></div>
-            <div class="gallery-slide"><img src="img/levelup-bloque.jpg" alt="Bloque completado"></div>
-            <div class="gallery-slide"><img src="img/levelup-panel.jpg" alt="Panel mamá"></div>
-          </div>
-          <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
-          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
-          <div class="gallery-count">1 / 6</div>
-          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span></div>
-          <span class="card-type">App educativa</span>
-        </div>
-        <div class="card-body">
+      <div class="compact-card">
+        <div class="compact-img"><img src="img/levelup-inicio.jpg" alt="LevelUp!"></div>
+        <div class="compact-body">
           <h3>LevelUp!</h3>
-          <div class="card-tagline">App educativa gamificada para mi hija de 9 años</div>
-          <div class="card-desc">Diseñé LevelUp! para mi hija, que necesitaba repasar el currículum de 4° básico sin aburrirse. Es una app tipo juego con puntos de experiencia, niveles, rachas y recompensas con referencias al mundo gamer que le encanta.</div>
-          <div class="card-features">
-            <div class="card-features-title">Qué hace</div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Dificultad adaptativa</strong><span>sube donde destaca y baja donde le cuesta, sin frustrar.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Sesiones de 5 minutos</strong><span>preguntas rápidas con recompensas (datos curiosos, chistes, "¿qué preferirías?").</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Explicación al equivocarse</strong><span>cada error se convierte en oportunidad de aprendizaje.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Panel para el adulto</strong><span>protegido por PIN, con estadísticas por materia y evolución.</span></div></div>
-          </div>
-          <div class="card-tools">
-            <span class="tool-tag">HTML / CSS / JS</span>
-            <span class="tool-tag">275 preguntas MINEDUC</span>
-            <span class="tool-tag">GitHub Pages</span>
-            <span class="tool-tag">IA generativa</span>
-          </div>
+          <div class="card-tagline">App educativa gamificada para mi hija de 9</div>
+          <p>Repaso del currículum de 4° básico con puntos de experiencia, niveles y dificultad que se adapta sola.</p>
         </div>
       </div>
 
-      <!-- LucApp -->
-      <div class="project-card">
-        <div class="card-gallery">
-          <div class="gallery-scroll">
-            <div class="gallery-slide"><img src="img/lucapp-dashboard.jpg" alt="Dashboard ganancias"></div>
-            <div class="gallery-slide"><img src="img/lucapp-registro.jpg" alt="Registro por voz"></div>
-            <div class="gallery-slide"><img src="img/lucapp-precios.jpg" alt="Recomendación de precios"></div>
-            <div class="gallery-slide"><img src="img/lucapp-deudores.jpg" alt="Control de deudores"></div>
-            <div class="gallery-slide"><img src="img/lucapp-movimientos.jpg" alt="Movimientos"></div>
-          </div>
-          <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
-          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
-          <div class="gallery-count">1 / 5</div>
-          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
-          <span class="card-type">App móvil</span>
-        </div>
-        <div class="card-body">
+      <div class="compact-card">
+        <div class="compact-img"><img src="img/lucapp-dashboard.jpg" alt="LucApp"></div>
+        <div class="compact-body">
           <h3>LucApp</h3>
-          <div class="card-tagline">Mi hijo administra su emprendimiento escolar con IA</div>
-          <div class="card-desc">App para que mi hijo adolescente administre su emprendimiento de venta de snacks desde el celular. Usa IA y reconocimiento de voz para registrar compras, ventas y deudores, con recomendaciones de precio y tips de educación financiera.</div>
-          <div class="card-features">
-            <div class="card-features-title">Qué hace</div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Registro por voz con IA</strong><span>habla y la app entiende si fue compra, venta o fiado.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Control de deudores</strong><span>quién debe plata y cuánto, para no perder cobros.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Recomendación de precios</strong><span>sugiere precio de venta con margen razonable.</span></div></div>
-            <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Tips de educación financiera</strong><span>consejos adaptados a un joven emprendedor.</span></div></div>
-          </div>
-          <div class="card-tools">
-            <span class="tool-tag">HTML / CSS / JS</span>
-            <span class="tool-tag">Web Speech API</span>
-            <span class="tool-tag">API de IA</span>
-            <span class="tool-tag">GitHub Pages</span>
-          </div>
+          <div class="card-tagline">Emprendimiento escolar administrado con IA</div>
+          <p>Mi hijo registra compras, ventas y deudores por voz. La app recomienda precios y enseña educación financiera.</p>
         </div>
       </div>
 
@@ -625,7 +473,6 @@ const pc=document.querySelector('.port-counter');if(pc)cntObs.observe(pc);
 const cardObs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)';cardObs.unobserve(en.target)}})},{threshold:.05});
 document.querySelectorAll('.project-card').forEach((c,i)=>{c.style.opacity='0';c.style.transform='translateY(24px)';c.style.transition='all 0.5s ease-out '+(i%2*.15)+'s';cardObs.observe(c)});
 
-// Gallery fade carousel
 function galleryNav(btn, dir) {
   const gallery = btn.closest('.card-gallery');
   const slides = gallery.querySelectorAll('.gallery-slide');
@@ -641,7 +488,6 @@ function galleryNav(btn, dir) {
   if (counter) counter.textContent = (current + 1) + ' / ' + slides.length;
 }
 
-// Initialize all galleries: set first slide active + dot clicks
 document.querySelectorAll('.card-gallery').forEach(gallery => {
   const slides = gallery.querySelectorAll('.gallery-slide');
   const dots = gallery.querySelectorAll('.gallery-dots span');
@@ -658,7 +504,6 @@ document.querySelectorAll('.card-gallery').forEach(gallery => {
   });
 });
 
-// Lightbox
 let lbImages = [];
 let lbIndex = 0;
 
