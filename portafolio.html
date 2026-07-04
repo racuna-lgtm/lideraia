@@ -6,128 +6,154 @@
 <title>Lo que he construido con IA — LideraIA</title>
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--carbon:#2A2D35;--carbon-light:#3A3D45;--coral:#C4705A;--coral-light:#D4917E;--coral-soft:#F5E6E0;--coral-bg:#FDF5F2;--bg:#F7F6F3;--surface:#FFF;--text:#2A2D35;--text-mid:#5A5D65;--text-light:#8A8D95;--border:#E0DEDA;--green:#5A8A6A;--green-bg:#E8F0EB}
+:root{
+  --paper:#F5F4EF;--card:#FBFAF6;--ink:#1C2022;--ink-soft:#54595C;--ink-mute:#8B9093;
+  --line:#DBD8CD;--accent:#1E5A52;--accent-hi:#2E7A6F;--accent-soft:#E2ECE9;--warm:#B4653F;
+}
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
 
-nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(247,246,243,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:.85rem 2rem;display:flex;justify-content:space-between;align-items:center}
-.logo{font-family:'DM Serif Display',serif;font-size:1.45rem;color:var(--carbon);text-decoration:none;letter-spacing:-.5px}.logo span{color:var(--coral)}
-.nav-links{display:flex;gap:1.8rem;align-items:center}.nav-links a{color:var(--text-mid);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s}.nav-links a:hover{color:var(--carbon)}
-.nav-links a.active{color:var(--coral);font-weight:600}
-.nav-links a.cta-nav{background:var(--carbon);color:#fff;padding:.5rem 1.2rem;border-radius:8px;font-weight:600}.nav-links a.cta-nav:hover{background:var(--coral)}
+nav{position:sticky;top:0;z-index:50;background:rgba(245,244,239,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:1.1rem 2.4rem}
+.logo{font-family:'Fraunces',serif;font-weight:600;font-size:1.4rem;color:var(--ink);text-decoration:none}
+.logo span{color:var(--accent)}
+.navlinks{display:flex;gap:2rem;align-items:center}
+.navlinks a{color:var(--ink-soft);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s}
+.navlinks a:hover{color:var(--accent)}
+.navlinks a.active{color:var(--accent);font-weight:600}
+.navlinks a.ncta{color:var(--accent);border:1.5px solid var(--accent);padding:.45rem 1.1rem;border-radius:2px}
+.navlinks a.ncta:hover{background:var(--accent);color:var(--paper)}
 
-.port-hero{padding:8rem 2rem 3rem;text-align:center;position:relative;overflow:hidden}
-.port-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;border:40px solid var(--coral-soft);opacity:.3;pointer-events:none}
-.port-hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;border-radius:50%;background:var(--coral-bg);opacity:.4;pointer-events:none}
-.port-hero>*{position:relative;z-index:1}
-.port-badge{display:inline-block;background:var(--coral-bg);border:1px solid var(--coral-light);color:var(--coral);font-size:.76rem;font-weight:600;padding:.35rem 1rem;border-radius:100px;margin-bottom:1.5rem;letter-spacing:.5px}
-.port-hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4.5vw,3rem);line-height:1.15;color:var(--carbon);margin-bottom:1rem;letter-spacing:-1px}
-.port-hero h1 em{font-style:italic;color:var(--coral)}
-.port-hero p{font-size:1.02rem;color:var(--text-mid);max-width:620px;margin:0 auto;line-height:1.8}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:translateY(0)}
 
-.port-counter{background:var(--carbon);padding:2.2rem 2rem;text-align:center}
-.port-counter-inner{max-width:900px;margin:0 auto;display:flex;justify-content:center;gap:3rem;flex-wrap:wrap}
-.pc-item{display:flex;flex-direction:column;align-items:center;gap:.2rem}
-.pc-num{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--coral);line-height:1}
-.pc-txt{font-size:.75rem;color:rgba(255,255,255,.5);max-width:120px;text-align:center}
+/* HERO */
+.port-hero{padding:5.5rem 2.4rem 3rem;max-width:1080px;margin:0 auto;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:.7rem;font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem}
+.eyebrow::before{content:'';width:26px;height:1.5px;background:var(--accent)}
+.port-hero h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(2.1rem,4.4vw,3.1rem);line-height:1.1;letter-spacing:-.5px;margin-bottom:1rem;max-width:38rem}
+.port-hero h1 em{font-style:italic;color:var(--accent)}
+.port-hero p{font-size:1.02rem;color:var(--ink-soft);max-width:38rem;line-height:1.75}
+.port-bridge{margin-top:1.1rem;font-family:'Fraunces',serif;font-style:italic;font-size:.98rem;color:var(--ink-mute);max-width:38rem;line-height:1.6}
 
-.s-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--coral);margin-bottom:.8rem}
-.s-title{font-family:'DM Serif Display',serif;font-size:clamp(1.7rem,3.5vw,2.2rem);color:var(--carbon);line-height:1.2;margin-bottom:.5rem;letter-spacing:-.5px}
-.s-sub{font-size:.92rem;color:var(--text-mid);max-width:560px;line-height:1.7;margin-bottom:2.5rem}
+/* COUNTER */
+.port-counter{background:var(--ink);padding:0;margin:2.5rem 0 0}
+.port-counter-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.pc-item{padding:1.8rem 1.5rem;text-align:center;border-right:1px solid rgba(245,244,239,.1)}
+.pc-item:last-child{border-right:none}
+.pc-num{font-family:'Fraunces',serif;font-weight:500;font-size:2.1rem;color:var(--accent-hi);line-height:1;font-feature-settings:"tnum"}
+.pc-txt{font-size:.74rem;color:rgba(245,244,239,.55);margin-top:.4rem;line-height:1.4}
 
-.port-section{padding:4rem 2rem;max-width:1100px;margin:0 auto}
-.port-section.alt{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);max-width:100%;padding:4rem 2rem}
-.port-section.alt .port-inner{max-width:1100px;margin:0 auto}
+/* TYPE EXPLAINER + FILTERS */
+.port-tools{max-width:1080px;margin:0 auto;padding:2.6rem 2.4rem 0}
+.type-strip{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);margin-bottom:2rem}
+.type-cell{padding:1.3rem 1.5rem}
+.type-cell:first-child{border-right:1px solid var(--line)}
+.type-cell h4{font-family:'Fraunces',serif;font-weight:600;font-size:1.02rem;color:var(--accent);margin-bottom:.3rem}
+.type-cell p{font-size:.83rem;color:var(--ink-soft);line-height:1.6}
+.filters{display:flex;gap:.6rem;flex-wrap:wrap}
+.fchip{background:var(--card);border:1px solid var(--line);color:var(--ink-soft);font-family:'Inter',sans-serif;font-size:.83rem;font-weight:600;padding:.5rem 1.1rem;border-radius:2px;cursor:pointer;transition:all .2s}
+.fchip:hover{border-color:var(--accent);color:var(--accent)}
+.fchip.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* SECTIONS */
+.s-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:.8rem}
+.s-title{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(1.6rem,3.2vw,2.1rem);line-height:1.15;margin-bottom:.5rem;letter-spacing:-.3px}
+.s-sub{font-size:.92rem;color:var(--ink-soft);max-width:560px;line-height:1.7;margin-bottom:2.4rem}
+.port-section{padding:3.2rem 2.4rem;max-width:1080px;margin:0 auto}
+.port-section.alt{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-width:100%;padding:3.2rem 2.4rem}
+.port-section.alt .port-inner{max-width:1080px;margin:0 auto}
 
 .project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
 
-.project-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .4s ease;position:relative;display:flex;flex-direction:column}
-.project-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--coral);transform:scaleX(0);transform-origin:left;transition:transform .4s ease;z-index:2}
-.project-card:hover{border-color:var(--coral-light);transform:translateY(-4px);box-shadow:0 12px 32px rgba(42,45,53,.08)}
+.project-card{background:var(--card);border:1px solid var(--line);overflow:hidden;transition:all .35s ease;position:relative;display:flex;flex-direction:column}
+.project-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s ease;z-index:2}
+.project-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 14px 34px rgba(30,90,82,.09)}
 .project-card:hover::before{transform:scaleX(1)}
+.project-card.hidden,.compact-card.hidden{display:none}
 
-.card-gallery{position:relative;width:100%;height:280px;background:#1a1a2e;border-bottom:1px solid var(--border);overflow:hidden}
+.card-gallery{position:relative;width:100%;height:280px;background:#14171A;border-bottom:1px solid var(--line);overflow:hidden}
 .gallery-scroll{position:relative;width:100%;height:100%}
 .gallery-slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .5s ease;pointer-events:none}
 .gallery-slide.active{opacity:1;pointer-events:auto}
-.gallery-slide img{max-width:92%;max-height:90%;object-fit:contain;cursor:pointer;border-radius:4px;box-shadow:0 4px 20px rgba(0,0,0,.3);transition:transform .3s}
+.gallery-slide img{max-width:92%;max-height:90%;object-fit:contain;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.3);transition:transform .3s}
 .gallery-slide img:hover{transform:scale(1.02)}
-.gallery-ph{display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--text-light);font-size:.8rem}
-.gallery-ph .ph-icon{width:52px;height:52px;background:var(--coral-bg);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
-.gallery-ph small{font-size:.68rem;color:var(--border)}
 .gallery-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:3}
-.gallery-dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);transition:all .3s;cursor:pointer}
-.gallery-dots span.active{background:var(--coral);width:20px;border-radius:4px}
-.gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.9);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--carbon);z-index:3;opacity:0;transition:all .3s;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.gallery-dots span{width:8px;height:8px;border-radius:50%;background:rgba(245,244,239,.3);transition:all .3s;cursor:pointer}
+.gallery-dots span.active{background:var(--accent-hi);width:20px;border-radius:4px}
+.gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(245,244,239,.92);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--ink);z-index:3;opacity:0;transition:all .3s;box-shadow:0 2px 10px rgba(0,0,0,.2)}
 .card-gallery:hover .gallery-nav{opacity:1}
 .gallery-prev{left:10px}
 .gallery-next{right:10px}
-.gallery-nav:hover{background:#fff;transform:translateY(-50%) scale(1.1);box-shadow:0 4px 16px rgba(0,0,0,.25)}
-.gallery-count{position:absolute;top:.7rem;left:.8rem;background:rgba(0,0,0,.55);color:#fff;font-size:.7rem;font-weight:600;padding:.2rem .6rem;border-radius:5px;z-index:3;backdrop-filter:blur(4px)}
+.gallery-nav:hover{background:#fff;transform:translateY(-50%) scale(1.1)}
+.gallery-count{position:absolute;top:.7rem;left:.8rem;background:rgba(0,0,0,.55);color:#fff;font-size:.7rem;font-weight:600;padding:.2rem .6rem;border-radius:2px;z-index:3;backdrop-filter:blur(4px)}
+.card-type{position:absolute;top:.75rem;right:.75rem;font-size:.62rem;font-weight:700;padding:.25rem .6rem;border-radius:2px;letter-spacing:.5px;text-transform:uppercase;z-index:3}
+.type-tool{background:var(--accent);color:var(--paper)}
+.type-app{background:var(--warm);color:var(--paper)}
+.type-web{background:rgba(245,244,239,.9);color:var(--ink)}
 
 .lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:1000;display:none;align-items:center;justify-content:center;cursor:pointer}
 .lightbox.active{display:flex}
-.lightbox img{max-width:92%;max-height:92%;object-fit:contain;border-radius:6px;box-shadow:0 8px 40px rgba(0,0,0,.5)}
+.lightbox img{max-width:92%;max-height:92%;object-fit:contain;box-shadow:0 8px 40px rgba(0,0,0,.5)}
 .lightbox-close{position:absolute;top:1.2rem;right:1.2rem;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
 .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
 .lightbox-prev{left:1.2rem}
 .lightbox-next{right:1.2rem}
 .lightbox-nav:hover,.lightbox-close:hover{background:rgba(255,255,255,.25)}
-.card-type{position:absolute;top:.75rem;right:.75rem;background:var(--carbon);color:#fff;font-size:.62rem;font-weight:700;padding:.2rem .55rem;border-radius:5px;letter-spacing:.5px;text-transform:uppercase;z-index:2}
 
 .card-body{padding:1.4rem 1.5rem;flex:1;display:flex;flex-direction:column}
-.card-body h3{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--carbon);margin-bottom:.1rem;line-height:1.3}
-.card-tagline{font-size:.8rem;color:var(--coral);font-weight:500;font-style:italic;margin-bottom:.8rem}
-.card-desc{font-size:.84rem;color:var(--text-mid);line-height:1.7;margin-bottom:1rem;text-align:left}
+.card-body h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.18rem;margin-bottom:.1rem;line-height:1.3}
+.card-tagline{font-family:'Fraunces',serif;font-size:.85rem;color:var(--accent);font-style:italic;margin-bottom:.8rem}
+.card-desc{font-size:.84rem;color:var(--ink-soft);line-height:1.7;margin-bottom:1rem}
+.card-impact{display:flex;align-items:center;gap:.5rem;background:var(--accent-soft);border:1px solid rgba(30,90,82,.18);padding:.5rem .8rem;margin-bottom:1rem;font-size:.78rem;color:var(--accent);font-weight:600}
 .card-features{margin-bottom:1rem;flex:1}
-.card-features-title{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
-.feature-item{display:flex;gap:.5rem;font-size:.82rem;line-height:1.55;margin-bottom:.65rem;align-items:flex-start}
-.feature-dot{flex-shrink:0;width:6px;height:6px;background:var(--coral);border-radius:50%;margin-top:7px}
-.feature-content{display:flex;flex-direction:column;gap:.05rem}
-.feature-content strong{color:var(--text);font-weight:700;font-size:.82rem}
-.feature-content span{color:var(--text-mid);font-size:.8rem;line-height:1.55}
-.card-tools{display:flex;flex-wrap:wrap;gap:.35rem;padding-top:.6rem;border-top:1px solid var(--border)}
-.tool-tag{background:var(--bg);border:1px solid var(--border);padding:.18rem .55rem;border-radius:5px;font-size:.68rem;font-weight:600;color:var(--text-mid);letter-spacing:.3px}
-.tool-tag.accent{background:var(--coral-bg);border-color:var(--coral-light);color:var(--coral)}
-.card-impact{display:flex;align-items:center;gap:.4rem;background:var(--green-bg);border:1px solid rgba(90,138,106,.2);border-radius:8px;padding:.5rem .8rem;margin-bottom:1rem;font-size:.78rem;color:var(--green);font-weight:600}
-.card-impact .imp-icon{font-size:.9rem}
+.card-features-title{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink-mute);margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1px solid var(--line)}
+.feature-item{display:flex;gap:.55rem;font-size:.82rem;line-height:1.55;margin-bottom:.65rem;align-items:flex-start}
+.feature-dot{flex-shrink:0;width:8px;height:8px;border:2px solid var(--accent);border-radius:50%;margin-top:6px}
+.feature-content strong{font-weight:700;font-size:.82rem}
+.feature-content span{color:var(--ink-soft);font-size:.8rem;line-height:1.55;display:block}
+.card-tools{display:flex;flex-wrap:wrap;gap:.35rem;padding-top:.6rem;border-top:1px solid var(--line)}
+.tool-tag{background:var(--paper);border:1px solid var(--line);padding:.18rem .55rem;border-radius:2px;font-size:.68rem;font-weight:600;color:var(--ink-soft)}
+.tool-tag.accent{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 
 .compact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
-.compact-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .3s;position:relative}
-.compact-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--coral);transform:scaleX(0);transform-origin:left;transition:transform .4s;z-index:2}
-.compact-card:hover{border-color:var(--coral-light);transform:translateY(-3px);box-shadow:0 8px 24px rgba(42,45,53,.06)}
+.compact-card{background:var(--paper);border:1px solid var(--line);overflow:hidden;transition:all .3s;position:relative}
+.compact-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s;z-index:2}
+.compact-card:hover{border-color:var(--accent);transform:translateY(-3px)}
 .compact-card:hover::before{transform:scaleX(1)}
-.compact-img{width:100%;height:160px;background:#1a1a2e;overflow:hidden;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
-.compact-img img{max-width:92%;max-height:90%;object-fit:contain;border-radius:3px;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.compact-img{width:100%;height:160px;background:#14171A;overflow:hidden;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line)}
+.compact-img img{max-width:92%;max-height:90%;object-fit:contain;box-shadow:0 2px 12px rgba(0,0,0,.25)}
 .compact-body{padding:1.1rem 1.2rem}
-.compact-body h3{font-family:'DM Serif Display',serif;font-size:1rem;color:var(--carbon);margin-bottom:.15rem;line-height:1.3}
+.compact-body h3{font-family:'Fraunces',serif;font-weight:600;font-size:1rem;margin-bottom:.1rem;line-height:1.3}
 .compact-body .card-tagline{margin-bottom:.5rem}
-.compact-body p{font-size:.8rem;color:var(--text-mid);line-height:1.6;margin-bottom:0}
+.compact-body p{font-size:.8rem;color:var(--ink-soft);line-height:1.6}
 
-.port-bridge{max-width:620px;margin:1.2rem auto 0;font-size:.88rem;color:var(--text-light);font-style:italic;line-height:1.7}
+.port-cta{background:var(--ink);color:var(--paper);padding:3.5rem 2.4rem;text-align:center;position:relative;overflow:hidden}
+.port-cta::after{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;border:1.5px solid rgba(46,122,111,.3)}
+.port-cta h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(1.5rem,3vw,2rem);margin-bottom:.8rem;position:relative}
+.port-cta p{font-size:.95rem;color:rgba(245,244,239,.7);max-width:540px;margin:0 auto 1.6rem;line-height:1.7;position:relative}
+.port-cta-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent-hi);color:var(--paper);padding:.95rem 2rem;border-radius:2px;text-decoration:none;font-weight:600;font-size:.95rem;transition:all .3s;position:relative}
+.port-cta-btn:hover{background:var(--paper);color:var(--ink);transform:translateY(-2px)}
 
-.port-cta{background:var(--coral-bg);border-top:1px solid var(--coral-soft);padding:3.5rem 2rem;text-align:center}
-.port-cta h2{font-family:'DM Serif Display',serif;font-size:clamp(1.5rem,3vw,2rem);color:var(--carbon);margin-bottom:.8rem}
-.port-cta p{font-size:.95rem;color:var(--text-mid);max-width:520px;margin:0 auto 1.5rem;line-height:1.7}
-.port-cta-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--coral);color:#fff;padding:.95rem 2rem;border-radius:10px;text-decoration:none;font-weight:600;font-size:.95rem;transition:all .3s;box-shadow:0 4px 16px rgba(196,112,90,.25)}.port-cta-btn:hover{background:var(--carbon);transform:translateY(-2px)}
+footer{background:var(--ink);color:rgba(245,244,239,.5);padding:2.2rem;text-align:center;font-size:.78rem;border-top:1px solid rgba(255,255,255,.08)}
+footer a{color:rgba(245,244,239,.5)}
+.fb{font-family:'Fraunces',serif;font-size:1.15rem;color:var(--paper);margin-bottom:.4rem}
+.fb span{color:var(--accent-hi)}
 
-footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;text-align:center;font-size:.78rem}footer a{color:rgba(255,255,255,.45)}.fb{font-family:'DM Serif Display',serif;font-size:1.15rem;color:#fff;margin-bottom:.4rem}.fb span{color:var(--coral)}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.port-badge,.port-hero h1,.port-hero p{animation:fadeUp .6s ease-out both}
-.port-hero h1{animation-delay:.1s}.port-hero p{animation-delay:.2s}
-
-@media(max-width:768px){
-  nav{padding:.7rem 1rem}.nav-links a:not(.cta-nav):not(.active):not(.nav-always){display:none}
-  .port-hero{padding:7rem 1.5rem 2rem}
-  .port-section{padding:3rem 1.5rem}.port-section.alt{padding:3rem 1.5rem}
+@media(max-width:820px){
+  nav{padding:1rem 1.4rem}.navlinks a:not(.ncta):not(.active){display:none}
+  .port-hero{padding:4rem 1.4rem 2rem}
+  .port-tools,.port-section{padding-left:1.4rem;padding-right:1.4rem}
   .project-grid{grid-template-columns:1fr}
   .compact-grid{grid-template-columns:1fr 1fr}
+  .type-strip{grid-template-columns:1fr}
+  .type-cell:first-child{border-right:none;border-bottom:1px solid var(--line)}
+  .port-counter-inner{grid-template-columns:1fr 1fr}
+  .pc-item:nth-child(2){border-right:none}
+  .pc-item{border-bottom:1px solid rgba(245,244,239,.1)}
   .card-gallery{height:250px}
-  .port-counter-inner{gap:1.2rem}
-  .port-cta{padding:2.5rem 1.5rem}
 }
 </style>
 </head>
@@ -135,39 +161,59 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
 
 <nav>
   <a href="index.html" class="logo">Lidera<span>IA</span></a>
-  <div class="nav-links">
-    <a href="index.html#programa">Programa</a>
+  <div class="navlinks">
+    <a href="diagnostico.html">Diagnóstico</a>
+    <a href="index.html#como-trabajamos">Cómo trabajamos</a>
     <a href="index.html#quien-soy">Sobre mí</a>
-    <a href="portafolio.html" class="active nav-always">Portafolio</a>
-    <a href="index.html#contacto" class="cta-nav">Conversemos →</a>
+    <a href="portafolio.html" class="active">Portafolio</a>
+    <a href="index.html#contacto" class="ncta">Conversemos</a>
   </div>
 </nav>
 
 <section class="port-hero">
-  <div class="port-badge">Portafolio de proyectos reales</div>
+  <span class="eyebrow">Portafolio de proyectos reales</span>
   <h1>Lo que he construido <em>con IA</em></h1>
   <p>Cada uno de estos proyectos nació de un problema concreto. Ninguno requirió saber programar. Todos los construí conversando con inteligencia artificial.</p>
-  <p class="port-bridge">En el programa no vas a construir 12 apps. Vas a construir una solución concreta que resuelva un problema real de tu gestión — como cada uno de estos proyectos empezó.</p>
+  <p class="port-bridge">Van desde herramientas simples que trabajan con un Excel hasta aplicaciones completas con su propio espacio. Así también empieza tu caso: con una solución concreta que yo construyo para ti, o que aprendes a crear conmigo.</p>
 </section>
 
 <div class="port-counter">
   <div class="port-counter-inner">
-    <div class="pc-item"><div class="pc-num" id="cnt1">0</div><div class="pc-txt">proyectos construidos</div></div>
-    <div class="pc-item"><div class="pc-num" id="cnt2">0</div><div class="pc-txt">herramientas de gestión</div></div>
-    <div class="pc-item"><div class="pc-num" id="cnt3">0</div><div class="pc-txt">apps funcionando</div></div>
+    <div class="pc-item"><div class="pc-num" data-count="12">0</div><div class="pc-txt">proyectos construidos</div></div>
+    <div class="pc-item"><div class="pc-num" data-count="6">0</div><div class="pc-txt">para el trabajo y las organizaciones</div></div>
+    <div class="pc-item"><div class="pc-num" data-count="6">0</div><div class="pc-txt">para la vida diaria</div></div>
     <div class="pc-item"><div class="pc-num">0</div><div class="pc-txt">líneas de código escritas a mano</div></div>
   </div>
 </div>
 
-<!-- ═══════════ LABORALES ═══════════ -->
-<section class="port-section">
+<div class="port-tools">
+  <div class="type-strip rv">
+    <div class="type-cell">
+      <h4>Herramientas listas</h4>
+      <p>Se alimentan de los archivos que ya usas (un Excel, tus documentos). Procesan lo que les das y te devuelven el resultado al instante.</p>
+    </div>
+    <div class="type-cell">
+      <h4>Aplicaciones con su propio espacio</h4>
+      <p>Viven en internet, van guardando información en el tiempo, entran varias personas y permiten adjuntar archivos o evidencias.</p>
+    </div>
+  </div>
+  <div class="filters rv">
+    <button class="fchip active" data-filter="all">Todos</button>
+    <button class="fchip" data-filter="tool">Herramientas listas</button>
+    <button class="fchip" data-filter="app">Aplicaciones</button>
+    <button class="fchip" data-filter="personal">Personales</button>
+  </div>
+</div>
+
+<!-- LABORALES -->
+<section class="port-section" id="laborales">
   <p class="s-label">Proyectos laborales</p>
   <h2 class="s-title">Herramientas reales para el trabajo diario</h2>
-  <p class="s-sub">Soluciones que resuelven problemas reales de gestión profesional — algunas para mi propio trabajo, otras diseñadas para equipos y organizaciones con las que colaboro.</p>
+  <p class="s-sub">Soluciones que resuelven problemas reales de gestión profesional. Algunas para mi propio trabajo, otras diseñadas para equipos y organizaciones con las que colaboro.</p>
   <div class="project-grid">
 
-    <!-- Kit Hackea -->
-    <div class="project-card">
+    <!-- Kit Hackea (herramienta) -->
+    <div class="project-card rv" data-cat="tool">
       <div class="card-gallery">
         <div class="gallery-scroll">
           <div class="gallery-slide"><img src="img/hackea-portal.jpg" alt="Portal calculadora"></div>
@@ -177,17 +223,17 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="gallery-slide"><img src="img/hackea-gantt.jpg" alt="Gantt de producción"></div>
           <div class="gallery-slide"><img src="img/hackea-resumen.jpg" alt="Resumen para cliente"></div>
         </div>
-                  <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
-          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
-          <div class="gallery-count">1 / 6</div>
-          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span></div>
-        <span class="card-type">Web app</span>
+        <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+        <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+        <div class="gallery-count">1 / 6</div>
+        <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span></div>
+        <span class="card-type type-tool">Herramienta lista</span>
       </div>
       <div class="card-body">
         <h3>Kit de Herramientas Hackea</h3>
         <div class="card-tagline">Costear, planificar y coordinar proyectos e-learning</div>
-        <div class="card-desc">Desarrollé un sistema de herramientas digitales internas para mi empresa de producción e-learning, que resuelve uno de los problemas más comunes en este rubro: no saber con precisión cuánto cuesta producir un curso ni cuándo va a estar listo.</div>
-        <div class="card-impact"><span class="imp-icon">⏱️</span> ~4 horas ahorradas por proyecto cotizado</div>
+        <div class="card-desc">Sistema de herramientas digitales internas para mi empresa de producción e-learning, que resuelve uno de los problemas más comunes del rubro: no saber con precisión cuánto cuesta producir un curso ni cuándo va a estar listo.</div>
+        <div class="card-impact">⏱ ~4 horas ahorradas por proyecto cotizado</div>
         <div class="card-features">
           <div class="card-features-title">Qué hace</div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Calculadora de costos</strong><span>calcula horas de equipo y costo de producción según tipo de curso, módulos y recursos, y sugiere precio de venta según el margen deseado.</span></div></div>
@@ -195,50 +241,42 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Gantt visual automático</strong><span>muestra quién trabaja en qué y cuándo, con etapas organizadas en secuencia.</span></div></div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Mensaje listo para el cliente</strong><span>genera un texto profesional con fecha de entrega, hitos y resumen.</span></div></div>
         </div>
-        <div class="card-tools">
-          <span class="tool-tag accent">Construido con IA</span>
-          <span class="tool-tag">Sin programación</span>
-          <span class="tool-tag">En uso activo</span>
-        </div>
+        <div class="card-tools"><span class="tool-tag accent">Construido con IA</span><span class="tool-tag">Sin programación</span><span class="tool-tag">En uso activo</span></div>
       </div>
     </div>
 
-    <!-- Planificador asignaturas -->
-    <div class="project-card">
+    <!-- Planificador (aplicación) -->
+    <div class="project-card rv" data-cat="app">
       <div class="card-gallery">
         <div class="gallery-scroll">
           <div class="gallery-slide"><img src="img/planif-asig-etapas.jpg" alt="Seguimiento por etapas"></div>
           <div class="gallery-slide"><img src="img/planif-asig-gantt.jpg" alt="Gantt de 16 asignaturas"></div>
           <div class="gallery-slide"><img src="img/planif-asig-choques.jpg" alt="Detección de choques"></div>
         </div>
-                  <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
-          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
-          <div class="gallery-count">1 / 3</div>
-          <div class="gallery-dots"><span class="active"></span><span></span><span></span></div>
-        <span class="card-type">Web app</span>
+        <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+        <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+        <div class="gallery-count">1 / 3</div>
+        <div class="gallery-dots"><span class="active"></span><span></span><span></span></div>
+        <span class="card-type type-app">Aplicación</span>
       </div>
       <div class="card-body">
         <h3>Planificador de Asignaturas</h3>
         <div class="card-tagline">Coordinar múltiples asignaturas y un equipo multidisciplinario en tiempo real</div>
         <div class="card-desc">Herramienta de planificación colaborativa para gestionar la producción de contenidos e-learning de un proyecto universitario con múltiples asignaturas en desarrollo simultáneo. En el ciclo actual gestiona 16 asignaturas. Reemplazó el seguimiento manual en planillas.</div>
-        <div class="card-impact"><span class="imp-icon">⏱️</span> ~6 horas ahorradas por semana en seguimiento</div>
+        <div class="card-impact">⏱ ~6 horas ahorradas por semana en seguimiento</div>
         <div class="card-features">
           <div class="card-features-title">Qué hace</div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Seguimiento por etapas</strong><span>más de 15 sub-etapas por asignatura con fecha, estado y notas.</span></div></div>
-          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Detección de conflictos</strong><span>avisa cuando hay choques — un guionista sobrecargado o un docente citado a dos reuniones.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Detección de conflictos</strong><span>avisa cuando hay choques: un guionista sobrecargado o un docente citado a dos reuniones.</span></div></div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Simulador de capacidad</strong><span>proyecta qué pasa si sumamos personal, con fecha estimada de cierre.</span></div></div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Gantt interactivo</strong><span>cronograma visual filtrable por programa, con zoom semanal o diario.</span></div></div>
         </div>
-        <div class="card-tools">
-          <span class="tool-tag accent">Construido con IA</span>
-          <span class="tool-tag">Sin programación</span>
-          <span class="tool-tag">En uso activo</span>
-        </div>
+        <div class="card-tools"><span class="tool-tag accent">Construido con IA</span><span class="tool-tag">Sin programación</span><span class="tool-tag">En uso activo</span></div>
       </div>
     </div>
 
-    <!-- Cotizador formación -->
-    <div class="project-card">
+    <!-- Cotizador (herramienta) -->
+    <div class="project-card rv" data-cat="tool">
       <div class="card-gallery">
         <div class="gallery-scroll">
           <div class="gallery-slide"><img src="img/cotizador-portal.jpg" alt="Portal cotizador"></div>
@@ -246,17 +284,17 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="gallery-slide"><img src="img/cotizador-desglose.jpg" alt="Desglose interno"></div>
           <div class="gallery-slide"><img src="img/cotizador-exportar.jpg" alt="Exportar propuesta"></div>
         </div>
-                  <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
-          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
-          <div class="gallery-count">1 / 4</div>
-          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span></div>
-        <span class="card-type">Web app</span>
+        <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+        <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+        <div class="gallery-count">1 / 4</div>
+        <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span></div>
+        <span class="card-type type-tool">Herramienta lista</span>
       </div>
       <div class="card-body">
         <h3>Cotizador de Formación Sincrónica</h3>
         <div class="card-tagline">Cotizar programas masivos y descargar la propuesta lista</div>
         <div class="card-desc">Automatiza la cotización de programas de formación sincrónica para clientes corporativos. En minutos genero una cotización con tres escenarios de participantes y descargo una propuesta PowerPoint editable lista para enviar.</div>
-        <div class="card-impact"><span class="imp-icon">⏱️</span> ~3 horas ahorradas por cotización</div>
+        <div class="card-impact">⏱ ~3 horas ahorradas por cotización</div>
         <div class="card-features">
           <div class="card-features-title">Qué hace</div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Hasta tres escenarios en paralelo</strong><span>permite comparar precios por participante para distintos volúmenes, o trabajar con un solo escenario.</span></div></div>
@@ -264,16 +302,12 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Modo precio objetivo</strong><span>calcula margen y alerta con semáforo cuando no es viable.</span></div></div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Propuesta PPTX descargable</strong><span>11 láminas con identidad visual, listas para el cliente.</span></div></div>
         </div>
-        <div class="card-tools">
-          <span class="tool-tag accent">Construido con IA</span>
-          <span class="tool-tag">Sin programación</span>
-          <span class="tool-tag">En uso activo</span>
-        </div>
+        <div class="card-tools"><span class="tool-tag accent">Construido con IA</span><span class="tool-tag">Sin programación</span><span class="tool-tag">En uso activo</span></div>
       </div>
     </div>
 
-    <!-- Observatorio SSOMA -->
-    <div class="project-card">
+    <!-- Observatorio (aplicación) -->
+    <div class="project-card rv" data-cat="app">
       <div class="card-gallery">
         <div class="gallery-scroll">
           <div class="gallery-slide"><img src="img/obs-hero.jpg" alt="Portada observatorio"></div>
@@ -284,34 +318,30 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="gallery-slide"><img src="img/obs-resultado.jpg" alt="Resultado diagnóstico"></div>
           <div class="gallery-slide"><img src="img/obs-radar.jpg" alt="Radar normativo"></div>
         </div>
-                  <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
-          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
-          <div class="gallery-count">1 / 7</div>
-          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <span class="card-type">Plataforma</span>
+        <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+        <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+        <div class="gallery-count">1 / 7</div>
+        <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <span class="card-type type-app">Aplicación</span>
       </div>
       <div class="card-body">
         <h3>Observatorio SSOMA · Más Prevención</h3>
         <div class="card-tagline">Datos públicos de seguridad laboral, visualizados y accionables</div>
         <div class="card-desc">Observatorio web de datos públicos sobre seguridad y salud ocupacional en Chile, Perú y Latinoamérica. La información oficial existe pero está dispersa. Aquí se consolida, se visualiza y se convierte en herramientas de decisión.</div>
-        <div class="card-impact"><span class="imp-icon">⏱️</span> Días de recopilación manual → acceso inmediato</div>
+        <div class="card-impact">⏱ Días de recopilación manual → acceso inmediato</div>
         <div class="card-features">
           <div class="card-features-title">Qué hace</div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Visualizaciones interactivas</strong><span>tasas de accidentabilidad por rubro, mapas regionales y cruces entre industria y tipo de accidente.</span></div></div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Autodiagnóstico SSOMA en 4 minutos</strong><span>reporte con brechas legales y estimación de costos.</span></div></div>
-          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Estimación de sobrecosto por siniestralidad</strong><span>calcula cuánto está sobrepagando la empresa por estar sobre el promedio de su industria en accidentabilidad.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Estimación de sobrecosto por siniestralidad</strong><span>calcula cuánto está sobrepagando la empresa por estar sobre el promedio de su industria.</span></div></div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Reporte PDF de 7 páginas</strong><span>análisis completo, listo para presentar al directorio.</span></div></div>
         </div>
-        <div class="card-tools">
-          <span class="tool-tag accent">Construido con IA</span>
-          <span class="tool-tag">Sin programación</span>
-          <span class="tool-tag">Funcionando en producción</span>
-        </div>
+        <div class="card-tools"><span class="tool-tag accent">Construido con IA</span><span class="tool-tag">Sin programación</span><span class="tool-tag">Funcionando en producción</span></div>
       </div>
     </div>
 
-    <!-- RIOHS -->
-    <div class="project-card">
+    <!-- RIOHS (aplicación) -->
+    <div class="project-card rv" data-cat="app">
       <div class="card-gallery">
         <div class="gallery-scroll">
           <div class="gallery-slide"><img src="img/riohs-login.jpg" alt="Portal RIOHS"></div>
@@ -320,17 +350,17 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="gallery-slide"><img src="img/riohs-auditoria.jpg" alt="Auditoría RIOHS existente"></div>
           <div class="gallery-slide"><img src="img/riohs-generar.jpg" alt="Generar RIOHS completo"></div>
         </div>
-                  <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
-          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
-          <div class="gallery-count">1 / 5</div>
-          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
-        <span class="card-type">Plataforma</span>
+        <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+        <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+        <div class="gallery-count">1 / 5</div>
+        <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
+        <span class="card-type type-app">Aplicación</span>
       </div>
       <div class="card-body">
         <h3>Generador de RIOHS con IA</h3>
         <div class="card-tagline">Reglamentos internos de 35 a 110 páginas, generados en minutos</div>
         <div class="card-desc">Plataforma que permite a profesionales de prevención generar Reglamentos Internos de Orden, Higiene y Seguridad completos, cumpliendo con la normativa laboral chilena. También audita reglamentos existentes y detecta brechas legales.</div>
-        <div class="card-impact"><span class="imp-icon">⏱️</span> ~20 horas ahorradas por reglamento generado</div>
+        <div class="card-impact">⏱ ~20 horas ahorradas por reglamento generado</div>
         <div class="card-features">
           <div class="card-features-title">Qué hace</div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Generación inteligente</strong><span>ficha de empresa → RIOHS completo adaptado al perfil de la organización.</span></div></div>
@@ -338,69 +368,61 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Descarga con identidad corporativa</strong><span>Word editable con colores y logo del cliente.</span></div></div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Resumen ejecutivo</strong><span>síntesis para gerencias sin lenguaje jurídico.</span></div></div>
         </div>
-        <div class="card-tools">
-          <span class="tool-tag accent">Construido con IA</span>
-          <span class="tool-tag">Sin programación</span>
-          <span class="tool-tag">Funcionando en producción</span>
-        </div>
+        <div class="card-tools"><span class="tool-tag accent">Construido con IA</span><span class="tool-tag">Sin programación</span><span class="tool-tag">Funcionando en producción</span></div>
       </div>
     </div>
 
-    <!-- Landing LideraIA -->
-    <div class="project-card">
+    <!-- Landing (sitio web) -->
+    <div class="project-card rv" data-cat="web">
       <div class="card-gallery">
         <div class="gallery-scroll">
           <div class="gallery-slide"><img src="img/lideraia-hero.jpg" alt="Hero LideraIA"></div>
           <div class="gallery-slide"><img src="img/lideraia-datos.jpg" alt="Datos Chile con gráficos"></div>
           <div class="gallery-slide"><img src="img/lideraia-quien.jpg" alt="Quién soy"></div>
-          <div class="gallery-slide"><img src="img/lideraia-programa.jpg" alt="Programa 4 sesiones"></div>
+          <div class="gallery-slide"><img src="img/lideraia-programa.jpg" alt="Cómo trabajamos"></div>
         </div>
-                  <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
-          <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
-          <div class="gallery-count">1 / 4</div>
-          <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span></div>
-        <span class="card-type">Sitio web</span>
+        <button class="gallery-nav gallery-prev" onclick="galleryNav(this,-1)">‹</button>
+        <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
+        <div class="gallery-count">1 / 4</div>
+        <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span></div>
+        <span class="card-type type-web">Sitio web</span>
       </div>
       <div class="card-body">
-        <h3>Landing page LideraIA</h3>
-        <div class="card-tagline">Este mismo sitio web, construido sin saber programar</div>
-        <div class="card-desc">Diseñé y construí este sitio web profesional completo — identidad visual, textos, estructura, animaciones y formulario funcional — conversando con inteligencia artificial. Es la prueba más directa de lo que se puede lograr.</div>
+        <h3>Sitio web LideraIA</h3>
+        <div class="card-tagline">Este mismo sitio, construido sin saber programar</div>
+        <div class="card-desc">Diseñé y construí este sitio web profesional completo (identidad visual, textos, estructura, animaciones, un diagnóstico interactivo y formularios funcionales) conversando con inteligencia artificial. Es la prueba más directa de lo que se puede lograr.</div>
         <div class="card-features">
           <div class="card-features-title">Qué hace</div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Identidad visual propia</strong><span>paleta, tipografías y elementos gráficos diseñados desde cero.</span></div></div>
-          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Datos interactivos animados</strong><span>gráficos que se activan al scroll con cifras reales.</span></div></div>
-          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Formulario inteligente</strong><span>12 preguntas conectadas a un servicio de respuestas.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Diagnóstico interactivo</strong><span>8 preguntas que entregan un perfil de gestión y una recomendación personalizada.</span></div></div>
+          <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Formularios funcionales</strong><span>conectados a un servicio de respuestas, sin servidor propio.</span></div></div>
           <div class="feature-item"><span class="feature-dot"></span><div class="feature-content"><strong>Dominio y correo profesional</strong><span>lideraia.cl + natalia@lideraia.cl configurados.</span></div></div>
         </div>
-        <div class="card-tools">
-          <span class="tool-tag accent">Construido con IA</span>
-          <span class="tool-tag">Sin programación</span>
-          <span class="tool-tag">Este sitio web</span>
-        </div>
+        <div class="card-tools"><span class="tool-tag accent">Construido con IA</span><span class="tool-tag">Sin programación</span><span class="tool-tag">Este sitio web</span></div>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- ═══════════ PERSONALES ═══════════ -->
-<section class="port-section alt">
+<!-- PERSONALES -->
+<section class="port-section alt" id="personales">
   <div class="port-inner">
     <p class="s-label">Proyectos personales</p>
     <h2 class="s-title">La IA también resuelve en la vida diaria</h2>
     <p class="s-sub">Herramientas que construí para mi familia. Porque si algo te consume tiempo, probablemente se puede resolver.</p>
     <div class="compact-grid">
 
-      <div class="compact-card">
-        <div class="compact-img"><img src="img/martin-inicio.jpg" alt="Martín Organizer"></div>
+      <div class="compact-card rv" data-cat="personal">
+        <div class="compact-img"><img src="img/martin-inicio.jpg" alt="Organizador académico"></div>
         <div class="compact-body">
-          <h3>Martín Organizer</h3>
-          <div class="card-tagline">Organización académica para mi hijo de 18</div>
+          <h3>Organizador Académico</h3>
+          <div class="card-tagline">Organización escolar para mi hijo adolescente</div>
           <p>Pruebas, trabajos, notas y tiempos de estudio en un solo lugar. Se conecta al portal escolar y actualiza notas automáticamente.</p>
         </div>
       </div>
 
-      <div class="compact-card">
+      <div class="compact-card rv" data-cat="personal">
         <div class="compact-img"><img src="img/cuentas-voz.jpg" alt="Cuentas Claras"></div>
         <div class="compact-body">
           <h3>Cuentas Claras</h3>
@@ -409,7 +431,7 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
         </div>
       </div>
 
-      <div class="compact-card">
+      <div class="compact-card rv" data-cat="personal">
         <div class="compact-img"><img src="img/misalud-checkin1.jpg" alt="MiSalud"></div>
         <div class="compact-body">
           <h3>MiSalud</h3>
@@ -418,7 +440,7 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
         </div>
       </div>
 
-      <div class="compact-card">
+      <div class="compact-card rv" data-cat="personal">
         <div class="compact-img"><img src="img/bienestar-checkin.jpg" alt="Naty Bienestar"></div>
         <div class="compact-body">
           <h3>Naty Bienestar</h3>
@@ -427,19 +449,19 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
         </div>
       </div>
 
-      <div class="compact-card">
+      <div class="compact-card rv" data-cat="personal">
         <div class="compact-img"><img src="img/levelup-inicio.jpg" alt="LevelUp!"></div>
         <div class="compact-body">
           <h3>LevelUp!</h3>
-          <div class="card-tagline">App educativa gamificada para mi hija de 9</div>
-          <p>Repaso del currículum de 4° básico con puntos de experiencia, niveles y dificultad que se adapta sola.</p>
+          <div class="card-tagline">App educativa gamificada para mi hija de primaria</div>
+          <p>Repaso del currículum escolar con puntos de experiencia, niveles y dificultad que se adapta sola.</p>
         </div>
       </div>
 
-      <div class="compact-card">
-        <div class="compact-img"><img src="img/lucapp-dashboard.jpg" alt="LucApp"></div>
+      <div class="compact-card rv" data-cat="personal">
+        <div class="compact-img"><img src="img/lucapp-dashboard.jpg" alt="Emprendimiento escolar"></div>
         <div class="compact-body">
-          <h3>LucApp</h3>
+          <h3>Mi Primer Negocio</h3>
           <div class="card-tagline">Emprendimiento escolar administrado con IA</div>
           <p>Mi hijo registra compras, ventas y deudores por voz. La app recomienda precios y enseña educación financiera.</p>
         </div>
@@ -452,8 +474,9 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
 <!-- CTA -->
 <div class="port-cta">
   <h2>¿Te imaginaste haciendo algo así?</h2>
-  <p>Todo esto lo construí conversando con inteligencia artificial. Sin curso de programación, sin equipo técnico. En LideraIA empiezas ese camino: con una primera solución funcionando y la claridad de hasta dónde puedes llegar.</p>
+  <p>Todo esto lo construí conversando con inteligencia artificial. Sin curso de programación, sin equipo técnico. Tu caso empieza igual: con una herramienta concreta que yo construyo para ti, o que aprendes a crear conmigo.</p>
   <a href="index.html#contacto" class="port-cta-btn">Conversemos sobre tu caso →</a>
+  <p class="port-cta-note" style="font-size:.78rem;color:rgba(245,244,239,.45);margin:0;margin-top:.9rem;position:relative">30 minutos, sin costo y sin compromiso.</p>
 </div>
 
 <footer><div class="fb">Lidera<span>IA</span></div><p style="margin-bottom:.3rem">natalia@lideraia.cl</p><p><a href="privacidad.html">Política de privacidad</a></p></footer>
@@ -467,80 +490,95 @@ footer{background:var(--carbon);color:rgba(255,255,255,.45);padding:2.2rem 2rem;
 </div>
 
 <script>
-function animateNum(el,s,e,d,sx,dc){if(!el)return;let st=null;const step=ts=>{if(!st)st=ts;const p=Math.min((ts-st)/d,1);const v=s+(e-s)*(1-Math.pow(1-p,3));el.textContent=v.toFixed(dc)+sx;if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
-const cntObs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){animateNum(document.getElementById('cnt1'),0,12,1200,'+',0);animateNum(document.getElementById('cnt2'),0,7,1000,'',0);animateNum(document.getElementById('cnt3'),0,6,1000,'',0);cntObs.unobserve(en.target)}})},{threshold:.15});
+/* reveals */
+const rvObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvObs.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
+
+/* contadores */
+function animateNum(el,s,e,d){if(!el)return;let st=null;const step=ts=>{if(!st)st=ts;const p=Math.min((ts-st)/d,1);el.textContent=Math.round(s+(e-s)*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
+const cntObs=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){
+document.querySelectorAll('.pc-num[data-count]').forEach(el=>animateNum(el,0,parseInt(el.dataset.count),1200));
+cntObs.unobserve(en.target)}})},{threshold:.2});
 const pc=document.querySelector('.port-counter');if(pc)cntObs.observe(pc);
-const cardObs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)';cardObs.unobserve(en.target)}})},{threshold:.05});
-document.querySelectorAll('.project-card').forEach((c,i)=>{c.style.opacity='0';c.style.transform='translateY(24px)';c.style.transition='all 0.5s ease-out '+(i%2*.15)+'s';cardObs.observe(c)});
 
-function galleryNav(btn, dir) {
-  const gallery = btn.closest('.card-gallery');
-  const slides = gallery.querySelectorAll('.gallery-slide');
-  const dots = gallery.querySelectorAll('.gallery-dots span');
-  const counter = gallery.querySelector('.gallery-count');
-  let current = Array.from(slides).findIndex(s => s.classList.contains('active'));
-  if (current < 0) current = 0;
-  slides[current].classList.remove('active');
-  if (dots[current]) dots[current].classList.remove('active');
-  current = (current + dir + slides.length) % slides.length;
-  slides[current].classList.add('active');
-  if (dots[current]) dots[current].classList.add('active');
-  if (counter) counter.textContent = (current + 1) + ' / ' + slides.length;
-}
-
-document.querySelectorAll('.card-gallery').forEach(gallery => {
-  const slides = gallery.querySelectorAll('.gallery-slide');
-  const dots = gallery.querySelectorAll('.gallery-dots span');
-  const counter = gallery.querySelector('.gallery-count');
-  if (slides.length > 0) slides[0].classList.add('active');
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-      slides.forEach(s => s.classList.remove('active'));
-      dots.forEach(d => d.classList.remove('active'));
-      slides[i].classList.add('active');
-      dot.classList.add('active');
-      if (counter) counter.textContent = (i + 1) + ' / ' + slides.length;
-    });
-  });
+/* filtros */
+document.querySelectorAll('.fchip').forEach(chip=>{
+chip.addEventListener('click',()=>{
+document.querySelectorAll('.fchip').forEach(c=>c.classList.remove('active'));
+chip.classList.add('active');
+const f=chip.dataset.filter;
+document.querySelectorAll('[data-cat]').forEach(card=>{
+card.classList.toggle('hidden',!(f==='all'||card.dataset.cat===f));
+});
+const lab=document.getElementById('laborales');
+const per=document.getElementById('personales');
+lab.style.display=(f==='personal')?'none':'';
+per.style.display=(f==='tool'||f==='app')?'none':'';
+});
 });
 
-let lbImages = [];
-let lbIndex = 0;
-
-document.querySelectorAll('.gallery-slide img').forEach(img => {
-  img.addEventListener('click', () => {
-    const gallery = img.closest('.gallery-scroll');
-    lbImages = Array.from(gallery.querySelectorAll('.gallery-slide img')).map(i => i.src);
-    lbIndex = lbImages.indexOf(img.src);
-    openLightbox();
-  });
+/* galerías */
+function galleryNav(btn,dir){
+const gallery=btn.closest('.card-gallery');
+const slides=gallery.querySelectorAll('.gallery-slide');
+const dots=gallery.querySelectorAll('.gallery-dots span');
+const counter=gallery.querySelector('.gallery-count');
+let current=Array.from(slides).findIndex(s=>s.classList.contains('active'));
+if(current<0)current=0;
+slides[current].classList.remove('active');
+if(dots[current])dots[current].classList.remove('active');
+current=(current+dir+slides.length)%slides.length;
+slides[current].classList.add('active');
+if(dots[current])dots[current].classList.add('active');
+if(counter)counter.textContent=(current+1)+' / '+slides.length;
+}
+document.querySelectorAll('.card-gallery').forEach(gallery=>{
+const slides=gallery.querySelectorAll('.gallery-slide');
+const dots=gallery.querySelectorAll('.gallery-dots span');
+const counter=gallery.querySelector('.gallery-count');
+if(slides.length>0)slides[0].classList.add('active');
+dots.forEach((dot,i)=>{
+dot.addEventListener('click',()=>{
+slides.forEach(s=>s.classList.remove('active'));
+dots.forEach(d=>d.classList.remove('active'));
+slides[i].classList.add('active');
+dot.classList.add('active');
+if(counter)counter.textContent=(i+1)+' / '+slides.length;
+});
+});
 });
 
-function openLightbox() {
-  const lb = document.getElementById('lightbox');
-  document.getElementById('lightbox-img').src = lbImages[lbIndex];
-  lb.classList.add('active');
-  document.body.style.overflow = 'hidden';
+/* lightbox */
+let lbImages=[];let lbIndex=0;
+document.querySelectorAll('.gallery-slide img').forEach(img=>{
+img.addEventListener('click',()=>{
+const gallery=img.closest('.gallery-scroll');
+lbImages=Array.from(gallery.querySelectorAll('.gallery-slide img')).map(i=>i.src);
+lbIndex=lbImages.indexOf(img.src);
+openLightbox();
+});
+});
+function openLightbox(){
+document.getElementById('lightbox-img').src=lbImages[lbIndex];
+document.getElementById('lightbox').classList.add('active');
+document.body.style.overflow='hidden';
 }
-
-function closeLightbox(e) {
-  if (e && e.target !== e.currentTarget && !e.target.classList.contains('lightbox-close')) return;
-  document.getElementById('lightbox').classList.remove('active');
-  document.body.style.overflow = '';
+function closeLightbox(e){
+if(e&&e.target!==e.currentTarget&&!e.target.classList.contains('lightbox-close'))return;
+document.getElementById('lightbox').classList.remove('active');
+document.body.style.overflow='';
 }
-
-function lightboxNav(e, dir) {
-  e.stopPropagation();
-  lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
-  document.getElementById('lightbox-img').src = lbImages[lbIndex];
+function lightboxNav(e,dir){
+e.stopPropagation();
+lbIndex=(lbIndex+dir+lbImages.length)%lbImages.length;
+document.getElementById('lightbox-img').src=lbImages[lbIndex];
 }
-
-document.addEventListener('keydown', e => {
-  const lb = document.getElementById('lightbox');
-  if (!lb.classList.contains('active')) return;
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowRight') lightboxNav(e, 1);
-  if (e.key === 'ArrowLeft') lightboxNav(e, -1);
+document.addEventListener('keydown',e=>{
+const lb=document.getElementById('lightbox');
+if(!lb.classList.contains('active'))return;
+if(e.key==='Escape')closeLightbox();
+if(e.key==='ArrowRight')lightboxNav(e,1);
+if(e.key==='ArrowLeft')lightboxNav(e,-1);
 });
 </script>
 </body>
