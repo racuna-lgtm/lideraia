@@ -6,153 +6,186 @@
 <title>Diagnóstico de gestión — LideraIA</title>
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--carbon:#2A2D35;--coral:#C4705A;--coral-light:#D4917E;--coral-bg:#FDF5F2;--bg:#F7F6F3;--bg2:#F0EDEA;--surface:#FFF;--text:#2A2D35;--mid:#5A5D65;--light:#8A8D95;--border:#E0DEDA;--green:#5A8A6A;--green-bg:#E8F0EB;--amber:#C49A5A;--amber-bg:#F5F0E5}
+:root{
+  --paper:#F5F4EF;--card:#FBFAF6;--ink:#1C2022;--ink-soft:#54595C;--ink-mute:#8B9093;
+  --line:#DBD8CD;--accent:#1E5A52;--accent-hi:#2E7A6F;--accent-soft:#E2ECE9;--warm:#B4653F;--warm-soft:#F2E4DB;
+  --amber:#C7952C;--amber-soft:#F4ECD8;
+}
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);min-height:100vh;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);min-height:100vh;-webkit-font-smoothing:antialiased}
 
-.header{padding:18px 24px;text-align:center}
-.header a{font-family:'DM Serif Display',serif;font-size:17px;color:var(--carbon);text-decoration:none;letter-spacing:-.3px}
-.header a span{color:var(--coral)}
+.header{padding:20px 24px;text-align:center}
+.header a{font-family:'Fraunces',serif;font-weight:600;font-size:17px;color:var(--ink);text-decoration:none}
+.header a span{color:var(--accent)}
 
 .container{max-width:560px;margin:0 auto;padding:0 24px}
-.container.wide{max-width:620px}
+.container.wide{max-width:640px}
 
-/* Screens */
 .screen{display:none;opacity:0;transform:translateY(14px);transition:all .5s cubic-bezier(.22,1,.36,1)}
 .screen.active{display:block}
 .screen.visible{opacity:1;transform:translateY(0)}
 
 /* Welcome */
-.welcome-icon{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,var(--coral),#D4885A);display:flex;align-items:center;justify-content:center;margin-bottom:26px;box-shadow:0 4px 16px rgba(196,112,90,.25)}
-.welcome-icon svg{width:24px;height:24px}
-h1{font-family:'DM Serif Display',serif;font-size:30px;color:var(--carbon);line-height:1.2;margin-bottom:14px;font-weight:400}
-.intro{font-size:15.5px;color:var(--mid);line-height:1.7;margin-bottom:10px}
+.welcome-mark{width:72px;height:72px;margin-bottom:26px}
+.welcome-mark svg{width:100%;height:100%}
+h1{font-family:'Fraunces',serif;font-weight:500;font-size:30px;line-height:1.15;margin-bottom:14px;letter-spacing:-.3px}
+.intro{font-size:15.5px;color:var(--ink-soft);line-height:1.7;margin-bottom:10px}
 .intro:last-of-type{margin-bottom:32px}
-.btn-primary{background:var(--coral);color:#fff;border:none;padding:14px 36px;border-radius:10px;font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(196,112,90,.25);transition:all .25s}
-.btn-primary:hover{background:var(--carbon);transform:translateY(-2px)}
-.note{font-size:12px;color:var(--light);margin-top:14px}
+.btn-primary{background:var(--ink);color:var(--paper);border:none;padding:14px 34px;border-radius:2px;font-size:15.5px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;transition:all .25s}
+.btn-primary:hover{background:var(--accent);transform:translateY(-2px)}
+.note{font-size:12px;color:var(--ink-mute);margin-top:14px}
 
-/* Progress */
-.progress-label{font-size:12.5px;color:var(--coral);font-weight:600;margin-bottom:6px}
-.progress-track{height:3px;background:#EDE8E3;border-radius:4px;overflow:hidden;margin-bottom:26px}
-.progress-fill{height:100%;background:var(--coral);border-radius:4px;transition:width .5s cubic-bezier(.22,1,.36,1)}
+/* Progress diana */
+.prog-row{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.prog-mark{width:46px;height:46px;flex-shrink:0}
+.prog-mark svg{width:100%;height:100%;transform:rotate(-90deg)}
+.prog-mark .pm-arc{transition:stroke-dashoffset .5s cubic-bezier(.22,1,.36,1)}
+.progress-label{font-size:12.5px;color:var(--accent);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
 
 /* Question */
-h2{font-family:'DM Serif Display',serif;font-size:21px;color:var(--carbon);line-height:1.35;font-weight:400;margin-bottom:22px}
-.q-subtitle{font-size:13.5px;color:var(--light);font-style:italic;line-height:1.5;margin-top:-14px;margin-bottom:20px}
+h2{font-family:'Fraunces',serif;font-weight:500;font-size:21.5px;line-height:1.35;margin-bottom:22px;letter-spacing:-.2px}
+.q-subtitle{font-family:'Fraunces',serif;font-size:14px;color:var(--ink-mute);font-style:italic;line-height:1.5;margin-top:-14px;margin-bottom:20px}
 .options{display:flex;flex-direction:column;gap:9px}
-.opt{background:var(--surface);color:var(--carbon);border:2px solid var(--border);border-radius:10px;padding:13px 16px;text-align:left;font-size:14.5px;font-family:'Plus Jakarta Sans',sans-serif;line-height:1.5;cursor:pointer;transition:all .2s}
-.opt:hover{border-color:var(--coral);background:var(--coral-bg)}
-.opt.selected{background:var(--carbon);color:#fff;border-color:var(--carbon);box-shadow:0 2px 8px rgba(42,45,53,.12)}
+.opt{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:2px;padding:13px 16px;text-align:left;font-size:14.5px;font-family:'Inter',sans-serif;line-height:1.5;cursor:pointer;transition:all .2s;position:relative}
+.opt:hover{border-color:var(--accent);background:var(--accent-soft);transform:translateX(3px)}
+.opt.selected{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .q-nav{display:flex;justify-content:space-between;margin-top:28px}
-.btn-back{background:none;border:none;color:var(--light);font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;cursor:pointer}
-.btn-next{background:var(--coral);color:#fff;border:none;padding:12px 26px;border-radius:8px;font-size:15px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;cursor:pointer;transition:all .2s}
-.btn-next:disabled{background:#D9D0CA;opacity:.5;cursor:default}
+.btn-back{background:none;border:none;color:var(--ink-mute);font-family:'Inter',sans-serif;font-size:13.5px;cursor:pointer}
+.btn-back:hover{color:var(--ink)}
+.btn-next{background:var(--ink);color:var(--paper);border:none;padding:12px 26px;border-radius:2px;font-size:15px;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-next:hover:not(:disabled){background:var(--accent)}
+.btn-next:disabled{background:var(--line);color:var(--ink-mute);cursor:default}
 
-/* Results */
-.result-header{background:var(--carbon);border-radius:16px;padding:30px 26px 26px;margin-bottom:18px;position:relative;overflow:hidden}
-.result-header .circle1{position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;border:2px solid rgba(196,112,90,.12)}
-.result-header .circle2{position:absolute;bottom:-20px;left:-20px;width:80px;height:80px;border-radius:50%;border:2px solid rgba(255,255,255,.04)}
+/* Results header */
+.result-header{background:var(--ink);border-radius:2px;padding:30px 26px 26px;margin-bottom:16px;position:relative;overflow:hidden}
+.result-header .circle1{position:absolute;top:-30px;right:-30px;width:130px;height:130px;border-radius:50%;border:1.5px solid rgba(46,122,111,.35)}
+.result-header .circle2{position:absolute;bottom:-24px;left:-24px;width:90px;height:90px;border-radius:50%;border:1.5px solid rgba(245,244,239,.08)}
 .result-header-inner{position:relative;z-index:1}
 .result-meta{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap;gap:8px}
-.tag{font-size:11px;color:var(--coral);font-weight:700;text-transform:uppercase;letter-spacing:.1em}
-.fit-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600}
-.fit-alto{background:rgba(90,138,106,.15);color:#8BC8A0}
-.fit-bajo{background:rgba(255,255,255,.08);color:rgba(255,255,255,.5)}
+.tag{font-size:11px;color:var(--accent-hi);font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+.fit-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:2px;font-size:11px;font-weight:600}
+.fit-alto{background:rgba(46,122,111,.18);color:#7FBFB2}
+.fit-bajo{background:rgba(245,244,239,.08);color:rgba(245,244,239,.5)}
 .fit-dot{width:7px;height:7px;border-radius:50%}
-.result-title{font-family:'DM Serif Display',serif;font-size:24px;color:#fff;line-height:1.3;font-weight:400;margin-bottom:20px}
+.result-title{font-family:'Fraunces',serif;font-weight:500;font-size:24px;color:var(--paper);line-height:1.3;margin-bottom:20px}
 
-/* Maturity scale */
 .scale{margin-bottom:4px}
 .scale-track{position:relative;height:42px;margin-bottom:6px}
-.scale-bg{position:absolute;top:15px;left:0;right:0;height:8px;border-radius:10px;background:linear-gradient(90deg,rgba(196,112,90,.15),rgba(196,154,90,.15),rgba(90,138,106,.15))}
-.scale-fill{position:absolute;top:15px;left:0;height:8px;border-radius:10px;background:linear-gradient(90deg,var(--coral),var(--amber),var(--green));width:0;transition:width 1.2s cubic-bezier(.22,1,.36,1)}
+.scale-bg{position:absolute;top:15px;left:0;right:0;height:6px;border-radius:3px;background:rgba(245,244,239,.1)}
+.scale-fill{position:absolute;top:15px;left:0;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--warm),var(--accent-hi));width:0;transition:width 1.2s cubic-bezier(.22,1,.36,1)}
 .scale-marker{position:absolute;top:8px;left:0;transform:translateX(-50%);transition:left 1.2s cubic-bezier(.22,1,.36,1);z-index:2}
-.scale-dot{width:22px;height:22px;border-radius:50%;background:var(--carbon);border:3px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.25)}
-.scale-labels{display:flex;justify-content:space-between;font-size:10.5px;color:rgba(255,255,255,.4)}
+.scale-dot{width:20px;height:20px;border-radius:50%;background:var(--paper);border:5px solid var(--accent-hi);box-shadow:0 2px 10px rgba(0,0,0,.3)}
+.scale-labels{display:flex;justify-content:space-between;font-size:10.5px;color:rgba(245,244,239,.4)}
 
 /* Cards */
-.card{background:var(--surface);border-radius:14px;padding:22px 20px;border:1px solid var(--border);margin-bottom:14px}
-.card-dark{background:var(--carbon);border:none}
-.card-coral{background:var(--coral-bg);border-left:3px solid var(--coral)}
-.card-warm{background:#F8F6F3}
-.card-honesty{background:#FFF9F0;border:1px solid #E8DDD0}
-.section-label{font-size:12px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}
-.body-text{font-size:14.5px;color:#404040;line-height:1.75}
+.card{background:var(--card);border-radius:2px;padding:22px 20px;border:1px solid var(--line);margin-bottom:14px}
+.card-accent{background:var(--accent-soft);border-left:3px solid var(--accent)}
+.card-honesty{background:var(--amber-soft);border:1px solid #E3D5B2}
+.section-label{font-size:11.5px;font-weight:700;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}
+.body-text{font-size:14.5px;color:var(--ink-soft);line-height:1.75}
 .body-text+.body-text{margin-top:14px}
 
-/* Dimension bars */
+/* Dimensions */
 .dim{margin-bottom:16px}
 .dim-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}
-.dim-label{font-size:13px;font-weight:600;color:var(--carbon)}
-.dim-level{font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px}
-.dim-desc{font-size:11.5px;color:var(--light);margin-bottom:6px;line-height:1.4}
-.dim-track{height:7px;background:#EDE8E3;border-radius:10px;overflow:hidden}
-.dim-fill{height:100%;border-radius:10px;width:0;transition:width 1s cubic-bezier(.22,1,.36,1)}
+.dim-label{font-size:13px;font-weight:600}
+.dim-level{font-size:11px;font-weight:700;padding:2px 10px;border-radius:2px}
+.dim-desc{font-size:11.5px;color:var(--ink-mute);margin-bottom:6px;line-height:1.4}
+.dim-track{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.dim-fill{height:100%;border-radius:3px;width:0;transition:width 1s cubic-bezier(.22,1,.36,1)}
 
-/* Hours card */
-.hours-card{display:flex;align-items:center;gap:18px;padding:22px 24px}
-.hours-circle{min-width:62px;height:62px;border-radius:50%;background:rgba(196,112,90,.12);display:flex;align-items:center;justify-content:center;flex-direction:column}
-.hours-num{font-family:'DM Serif Display',serif;font-size:23px;color:var(--coral);line-height:1}
-.hours-unit{font-size:9px;color:var(--coral-light);font-weight:600;margin-top:1px}
-.hours-text{font-size:14px;color:#fff;line-height:1.5;font-weight:500}
-.hours-sub{font-size:11.5px;color:rgba(255,255,255,.4);line-height:1.4;margin-top:3px}
+/* Hours */
+.hours-card{display:flex;align-items:center;gap:18px;padding:22px 24px;background:var(--ink);border:none}
+.hours-circle{min-width:64px;height:64px;border-radius:50%;border:2px solid var(--accent-hi);display:flex;align-items:center;justify-content:center;flex-direction:column}
+.hours-num{font-family:'Fraunces',serif;font-weight:600;font-size:21px;color:var(--accent-hi);line-height:1}
+.hours-unit{font-size:9px;color:rgba(245,244,239,.5);font-weight:600;margin-top:2px}
+.hours-text{font-size:14px;color:var(--paper);line-height:1.5;font-weight:500}
+.hours-sub{font-size:11.5px;color:rgba(245,244,239,.45);line-height:1.5;margin-top:4px}
 
-/* Pain insight */
-.pain-label{font-size:11px;color:var(--coral);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
-.pain-detail{font-size:14px;color:#5A5050;line-height:1.65;margin-top:8px}
+/* Pain */
+.pain-label{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.pain-detail{font-size:14px;color:var(--ink-soft);line-height:1.65;margin-top:8px}
 
 /* Before/After */
-.ba-grid{display:grid;grid-template-columns:1fr 1fr;border-radius:14px;overflow:hidden;border:1px solid var(--border);margin-bottom:14px}
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;border-radius:2px;overflow:hidden;border:1px solid var(--line);margin-bottom:14px}
 .ba-col{padding:18px 16px}
-.ba-before{background:#F8F2EE;border-right:1px solid var(--border)}
-.ba-after{background:#EFF5F0}
+.ba-before{background:var(--warm-soft);border-right:1px solid var(--line)}
+.ba-after{background:var(--accent-soft)}
 .ba-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
-.ba-tag-before{color:var(--coral)}
-.ba-tag-after{color:var(--green)}
-.ba-text{font-size:13px;line-height:1.6}
-.ba-before .ba-text{color:#6B5E55}
-.ba-after .ba-text{color:#3A5A45}
-.ba-link{background:var(--surface);padding:11px 16px;border-top:1px solid var(--border)}
-.ba-link a{font-size:12.5px;color:var(--coral);font-weight:600;text-decoration:none}
-.ba-link a:hover{color:var(--carbon)}
+.ba-tag-before{color:var(--warm)}
+.ba-tag-after{color:var(--accent)}
+.ba-text{font-size:13px;line-height:1.6;color:var(--ink-soft)}
+.ba-portlink{background:var(--card);border:1px solid var(--line);border-top:none;padding:11px 16px;margin-top:-14px;margin-bottom:14px}
+.ba-portlink a{font-size:12.5px;color:var(--accent);font-weight:600;text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:1px}
 
-/* Readiness */
-.readiness{font-size:13.5px;color:var(--mid);line-height:1.6;font-style:italic}
-.honesty{font-size:13.5px;color:#6B5E50;line-height:1.6}
+/* Recommendation */
+.card-rec{background:var(--card);border:1.5px solid var(--accent);position:relative;overflow:hidden}
+.card-rec .rec-circle{position:absolute;top:-36px;right:-36px;width:120px;height:120px;border-radius:50%;border:1.5px solid rgba(30,90,82,.18);pointer-events:none}
+.rec-inner{position:relative;z-index:1}
+.rec-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.rec-eyebrow{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.09em;padding-top:5px}
+.rec-price-wrap{text-align:right}
+.rec-price{font-family:'Fraunces',serif;font-weight:600;font-size:27px;line-height:1}
+.rec-price-tag{display:block;font-size:10px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
+.rec-pay{display:block;font-size:11px;color:var(--ink-soft);font-weight:500;margin-top:6px}
+.rec-title{font-family:'Fraunces',serif;font-weight:600;font-size:22px;line-height:1.25;margin-bottom:6px}
+.rec-sessions{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:.28rem .6rem;border-radius:2px;margin-bottom:12px}
+.rec-text{font-size:14.5px;color:var(--ink-soft);line-height:1.7}
+.rec-meta{font-size:12.5px;color:var(--accent);font-weight:600;margin-top:14px;padding-top:13px;border-top:1px solid var(--line)}
+.rec-pricenote{font-size:11.5px;color:var(--ink-mute);margin-top:8px;line-height:1.5}
+.rec-alt{font-size:12.5px;color:var(--ink-soft);line-height:1.6;margin-top:14px;padding:11px 14px;background:var(--paper);border-radius:2px;border:1px dashed var(--line)}
+
+/* Explainer */
+.explain-item{padding:14px 0;border-bottom:1px solid var(--line)}
+.explain-item:last-of-type{border-bottom:none}
+.explain-head{font-family:'Fraunces',serif;font-weight:600;font-size:15px;color:var(--accent);margin-bottom:5px}
+.explain-desc{font-size:13.5px;color:var(--ink-soft);line-height:1.6}
+.explain-egs-label{font-size:11px;font-weight:700;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.05em;margin-top:11px;margin-bottom:7px}
+.explain-egs{list-style:none;display:flex;flex-direction:column;gap:8px}
+.explain-egs li{font-size:13px;color:var(--ink-soft);line-height:1.55;padding-left:19px;position:relative}
+.explain-egs li::before{content:'';position:absolute;left:0;top:6px;width:8px;height:8px;border:2px solid var(--accent);border-radius:50%}
+.explain-egs strong{color:var(--ink);font-weight:600}
+.explain-foot{font-size:13px;color:var(--ink-soft);line-height:1.6;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+.explain-foot strong{color:var(--ink)}
+
+/* Testimonial */
+.card-testi{background:var(--ink);border:none;position:relative;overflow:hidden}
+.card-testi::after{content:'';position:absolute;top:-40px;right:-40px;width:130px;height:130px;border-radius:50%;border:1.5px solid rgba(46,122,111,.3)}
+.testi-quote{font-family:'Fraunces',serif;font-style:italic;font-size:16px;color:var(--paper);line-height:1.55;position:relative}
+.testi-author{font-size:11px;color:var(--accent-hi);font-weight:700;margin-top:12px;text-transform:uppercase;letter-spacing:.07em;position:relative}
+
+/* honesty */
+.honesty{font-size:13.5px;color:#6E5A38;line-height:1.6}
 
 /* CTA */
-.cta-text{font-size:14.5px;color:var(--carbon);line-height:1.65;font-weight:500;margin-bottom:18px}
-.alt-cta{font-size:13px;color:var(--light);margin-top:14px}
-
-/* Inline form */
+.cta-text{font-size:14.5px;line-height:1.65;font-weight:500;margin-bottom:18px}
+.alt-cta{font-size:13px;color:var(--ink-mute);margin-top:14px}
 .inline-form{display:none;flex-direction:column;gap:10px}
 .inline-form.open{display:flex}
 .inline-form .frow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.inline-form input,.inline-form textarea{width:100%;padding:11px 14px;border-radius:8px;border:1.5px solid var(--border);font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--carbon);background:var(--surface);outline:none;transition:border-color .2s;box-sizing:border-box}
-.inline-form input:focus,.inline-form textarea:focus{border-color:var(--coral)}
+.inline-form input,.inline-form textarea{width:100%;padding:11px 14px;border-radius:2px;border:1px solid var(--line);font-size:14px;font-family:'Inter',sans-serif;color:var(--ink);background:var(--card);outline:none;transition:border-color .2s;box-sizing:border-box}
+.inline-form input:focus,.inline-form textarea:focus{border-color:var(--accent)}
 .inline-form textarea{resize:vertical}
-.form-note{font-size:11px;color:var(--light);text-align:center;line-height:1.5}
+.form-note{font-size:11px;color:var(--ink-mute);text-align:center;line-height:1.5}
 .form-success{text-align:center;padding:24px 16px}
-.form-success-icon{width:42px;height:42px;border-radius:50%;background:var(--green-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:18px;color:var(--green)}
+.form-success-icon{width:42px;height:42px;border-radius:50%;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:18px;color:var(--accent)}
 
-/* Footer */
-.diag-footer{text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);margin-bottom:20px}
-.restart{background:none;border:none;color:var(--light);font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;cursor:pointer;margin:20px auto 8px;display:block}
+.diag-footer{text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid var(--line);margin-bottom:20px}
+.restart{background:none;border:none;color:var(--ink-mute);font-family:'Inter',sans-serif;font-size:12.5px;cursor:pointer;margin:20px auto 8px;display:block}
 
-/* Responsive */
 @media(max-width:600px){
 h1{font-size:26px}
 .result-title{font-size:21px}
 .ba-grid{grid-template-columns:1fr}
-.ba-before{border-right:none;border-bottom:1px solid var(--border)}
+.ba-before{border-right:none;border-bottom:1px solid var(--line)}
 .inline-form .frow{grid-template-columns:1fr}
 .result-meta{flex-direction:column}
+.rec-top{flex-direction:column}
+.rec-price-wrap{text-align:left}
 }
-
-/* Centered layout for welcome/questions */
 .centered-layout{min-height:100vh;display:flex;flex-direction:column;justify-content:center}
 .results-layout{padding-top:0;padding-bottom:40px}
 </style>
@@ -162,9 +195,7 @@ h1{font-size:26px}
 <div id="app"></div>
 
 <script>
-/* ══════════════════════════════════════════════════════════
-   DATA
-   ══════════════════════════════════════════════════════════ */
+/* ══════════ DATA ══════════ */
 const Q=[
 {id:1,dim:"info",text:"Cuando necesitas tomar una decisión importante sobre tu equipo o un proyecto, ¿de dónde sacas la información?",opts:[
 {t:"La tengo en la cabeza o pregunto directamente a las personas",s:1},
@@ -177,10 +208,10 @@ const Q=[
 {t:"Tengo que juntar información de varias fuentes, me tomo más de una hora",s:1},
 {t:"Depende del proyecto, a veces ni yo tengo el panorama completo",s:1}]},
 {id:3,dim:"efficiency",text:"¿Cuánto tiempo a la semana dedicas a tareas necesarias pero repetitivas?",sub:"Reportes, seguimiento, coordinación, responder lo mismo varias veces.",opts:[
-{t:"Menos de 2 horas",s:4,h:[.5,1]},
-{t:"Entre 2 y 5 horas",s:3,h:[1,2]},
-{t:"Entre 5 y 10 horas",s:2,h:[2,4]},
-{t:"Más de 10 horas",s:1,h:[4,6]}]},
+{t:"Menos de 2 horas",s:4,h:[0.5,1]},
+{t:"Entre 2 y 5 horas",s:3,h:[1,1.5]},
+{t:"Entre 5 y 10 horas",s:2,h:[1.5,3]},
+{t:"Más de 10 horas",s:1,h:[3,5]}]},
 {id:4,tag:"pain",text:"¿Cuál de estas situaciones vives con más frecuencia?",sub:"Probablemente varias te suenan. Elige la que pesa más en tu semana.",opts:[
 {t:"Paso más tiempo preparando información que tomando decisiones con ella",v:"visibility"},
 {t:"Sé que hay datos útiles en algún lado pero no tengo tiempo de buscarlos",v:"access"},
@@ -201,11 +232,10 @@ const Q=[
 {t:"Dedicar más tiempo a mi equipo y su desarrollo",s:3},
 {t:"Avanzar en proyectos que tengo postergados",s:3},
 {t:"Llevo tanto tiempo en modo operativo que no lo he pensado",s:1}]},
-{id:8,tag:"readiness",text:"¿Qué tan cómodo/a te sientes probando herramientas digitales nuevas?",opts:[
-{t:"Me cuesta, prefiero lo que ya conozco",v:"low"},
-{t:"Lo hago si alguien me guía o me lo explica",v:"guided"},
-{t:"Pruebo cosas por mi cuenta cuando tengo tiempo",v:"autonomous"},
-{t:"Me gusta explorar herramientas nuevas, lo hago seguido",v:"high"}]}
+{id:8,tag:"intent",text:"Cuando resuelvas esto que te trae hasta aquí, ¿qué se acerca más a lo que buscas?",sub:"No hay respuesta correcta. Solo nos ayuda a elegir la forma de trabajar.",opts:[
+{t:"Que me entreguen la solución funcionando. Necesito el resultado, no aprender a construirlo.",v:"done"},
+{t:"Quiero aprender a crear estas herramientas yo, para poder hacer más por mi cuenta.",v:"learn"},
+{t:"Todavía no lo tengo claro, me gustaría que me orienten.",v:"unsure"}]}
 ];
 
 const DIM={
@@ -222,38 +252,72 @@ dependency:{l:"Autonomía del equipo",dt:"Si tu equipo necesita preguntarte para
 communication:{l:"Comunicación de información",dt:"Tu desafío no es de análisis, es de traducción: convertir lo que sabes en formatos que otros puedan usar sin depender de ti. Eso es exactamente lo que se puede sistematizar.",b:"Tienes la información en la cabeza pero armar una presentación, un informe o una actualización clara te consume tiempo que no está presupuestado.",a:"La información se transforma automáticamente en el formato que necesitas: resumen ejecutivo, reporte para el directorio, actualización para el equipo.",p:"automatización de reportes y propuestas"}
 };
 
-const READY={
-low:"El programa es guiado paso a paso. No necesitas aprender por tu cuenta ni tener conocimiento técnico previo. Construimos juntos, a tu ritmo.",
-guided:"El programa funciona exactamente así: te guío en cada paso, construimos juntos, y te llevas algo funcionando sin necesidad de descifrar nada solo/a.",
-autonomous:"Como ya tienes el hábito de probar cosas nuevas, el programa se enfocaría menos en enseñarte herramientas y más en diseñar la solución correcta para tu contexto.",
-high:"Tu curiosidad es una ventaja enorme. El programa canalizaría eso hacia una solución concreta, para que la exploración se traduzca en impacto real en tu gestión."
+const REC={
+done:{
+eyebrow:"Tu punto de partida recomendado",
+label:"Hágalo por mí",
+sessions:"2 a 3 sesiones",
+price:"$490.000",
+priceTag:"Precio de lanzamiento",
+text:"Por lo que nos cuentas, tu mejor punto de partida es que yo construya la solución con tu información y te la entregue funcionando, sin que tengas que aprender nada técnico ni dedicarle horas. Lo confirmamos en nuestra conversación.",
+meta:"Nos juntamos para el diagnóstico, después te muestro lo que construí, lo revisas a tu ritmo, y hago una ronda de ajustes hasta dejarlo funcionando.",
+pay:"Transferencia, débito o crédito",
+pricenote:"Precio para los primeros clientes. El diagnóstico confirma que tu caso calza con este formato antes de cualquier compromiso."
+},
+learn:{
+eyebrow:"Tu punto de partida recomendado",
+label:"Aprende conmigo",
+sessions:"6 a 7 sesiones",
+price:"$750.000",
+priceTag:"Precio de lanzamiento",
+text:"Encajas con aprender a construir tus propias herramientas. No solo te llevas una solución funcionando: te llevas la capacidad de crear más por tu cuenta. Lo confirmamos en la conversación.",
+meta:"Primero construyo tu primera herramienta contigo, explicándote el paso a paso mientras la ves nacer. Después construyes tú una segunda, con mi guía.",
+pay:"Transferencia, débito o crédito",
+pricenote:"Precio para los primeros clientes.",
+alt:"¿Prefieres que simplemente te lo entregue listo, sin aprender a construirlo? También existe ese camino, más acotado. Lo vemos en la conversación."
+},
+done_survival:{
+eyebrow:"Tu punto de partida recomendado",
+label:"Hágalo por mí",
+sessions:"2 a 3 sesiones",
+price:"$490.000",
+priceTag:"Precio de lanzamiento",
+text:"Nos dijiste que te gustaría aprender a crearlas tú, y esa puerta siempre va a estar abierta. Pero tu semana hoy está tan copada que lo más sensato es empezar por que yo te lo resuelva y recuperes tiempo primero. Cuando ese aire aparezca, aprender será el paso natural siguiente. Lo confirmamos en la conversación.",
+meta:"Nos juntamos para el diagnóstico, después te muestro lo que construí, lo revisas a tu ritmo, y hago una ronda de ajustes hasta dejarlo funcionando.",
+pay:"Transferencia, débito o crédito",
+pricenote:"Precio para los primeros clientes.",
+alt:"¿Quieres igual partir aprendiendo a construirlas tú? Podemos. Lo vemos en la conversación."
+},
+unsure:{
+eyebrow:"Cómo trabajaríamos esto",
+label:null,
+sessions:null,
+price:null,
+text:"Hay dos formas de trabajar esto: que yo te construya la solución y te la entregue lista, o que aprendas a crearla tú con mi guía. Elegimos la correcta según tu caso, en la conversación, sin costo.",
+meta:"Desde $490.000, según el camino que elijas. Te lo aclaro todo antes de cualquier compromiso.",
+pay:"Transferencia, débito o crédito",
+pricenote:null
+}
 };
 
 const PROF={
 1:{tag:"Nivel inicial",title:"Tu experiencia lidera, pero tus herramientas no la acompañan",fit:"alto",
-body:["Tienes años tomando buenas decisiones con información incompleta, dispersa o que te cuesta demasiado reunir. Eso habla de tu criterio, pero también de cuánta energía estás gastando en el proceso en vez de en la decisión misma.","La oportunidad más grande en tu caso no está en \"aprender IA\" como concepto, sino en conectar herramientas concretas con los problemas que ya resuelves todos los días."],
-cta:"Este programa está diseñado para líderes en tu situación. En 4 sesiones construimos juntos una solución concreta que resuelve uno de estos problemas con tu información real, no con ejercicios genéricos."},
+body:["Tienes años tomando buenas decisiones con información incompleta, dispersa o que te cuesta demasiado reunir. Eso habla de tu criterio, pero también de cuánta energía estás gastando en el proceso en vez de en la decisión misma.","La oportunidad más grande en tu caso no está en \"aprender IA\" como concepto, sino en conectar herramientas concretas con los problemas que ya resuelves todos los días."]},
 2:{tag:"Uso inicial de IA",title:"Usas IA, pero le estás sacando una fracción de lo que puede darte",fit:"alto",
-body:["Ya diste un paso que muchos líderes en tu posición no han dado: probaste herramientas de IA y las incorporaste a parte de tu trabajo.","Pero hay una diferencia grande entre usar la IA como asistente puntual y usarla como parte de tu sistema de gestión. No es lo mismo pedirle que \"redacte un informe\" que tener una herramienta que toma tus datos operativos y te entrega el informe listo, cada semana, sin que lo pidas."],
-cta:"El programa te ayudaría a dar el salto de usar IA para tareas sueltas a integrarla en tu gestión. Como ya tienes familiaridad con las herramientas, el foco estaría en diseñar soluciones con tu información real."},
+body:["Ya diste un paso que muchos líderes en tu posición no han dado: probaste herramientas de IA y las incorporaste a parte de tu trabajo.","Pero hay una diferencia grande entre usar la IA como asistente puntual y usarla como parte de tu sistema de gestión. No es lo mismo pedirle que \"redacte un informe\" que tener una herramienta que toma tus datos operativos y te entrega el informe listo, cada semana, sin que lo pidas."]},
 3:{tag:"Alta carga operativa",title:"Estás en modo supervivencia, y eso es precisamente el problema",fit:"alto",
 body:["Tu semana se parece más a una lista interminable de urgencias que a un plan. Eso no es un problema de organización personal: es un síntoma de que tu rol absorbe más operación de la que debería, y probablemente no tienes herramientas que te descarguen.","Hay una paradoja en tu situación: eres quien más se beneficiaría de automatizar y sistematizar, pero también quien menos tiempo tiene para hacerlo. La buena noticia es que en perfiles como el tuyo, los resultados suelen ser los más visibles."],
-cta:"El programa dura un mes, con sesiones de 1,5 horas. Está pensado para personas con poco tiempo. No te voy a pedir que estudies ni que hagas tarea: construimos juntos en la sesión y te llevas algo funcionando.",
-honesty:"Un punto importante: si tu agenda no te permite comprometerte con 4 sesiones en un mes, puede que este no sea el mejor momento. Eso es válido. Puedes guardar este resultado y retomarlo cuando tengas un espacio."},
+honesty:"Un punto importante: aun cuando el formato es liviano y casi no te quita tiempo, necesita un mínimo de espacio de tu parte. Si tu agenda hoy no te deja ni eso, puede que este no sea el mejor momento, y es válido. Puedes guardar este resultado y retomarlo cuando tengas aire."},
 4:{tag:"Nivel avanzado",title:"Tu gestión ya está en buen camino",fit:"bajo",
-body:["Tu nivel de gestión y uso de herramientas es significativamente más alto que el de la mayoría de líderes en posiciones similares. Ya tienes estructura, usas tecnología de forma proactiva, y tu carga operativa parece estar bajo control.","Siendo directa: el programa LideraIA está diseñado para líderes que todavía no dieron ese salto, y probablemente no es donde mejor invertirías tu tiempo ahora mismo."],
+body:["Tu nivel de gestión y uso de herramientas es significativamente más alto que el de la mayoría de líderes en posiciones similares. Ya tienes estructura, usas tecnología de forma proactiva, y tu carga operativa parece estar bajo control.","Siendo directa: LideraIA está diseñado para líderes que todavía no dieron ese salto, y probablemente no es donde mejor invertirías tu tiempo ahora mismo."],
 cta:"Si te interesa explorar un punto específico, conversemos. Si no, me alegra saber que vas bien.",
 altCTA:"Si conoces a alguien en tu red que está en una situación distinta, puedes compartirle este diagnóstico."}
 };
 
-/* ══════════════════════════════════════════════════════════
-   STATE
-   ══════════════════════════════════════════════════════════ */
+/* ══════════ STATE ══════════ */
 let state={phase:"welcome",qi:0,answers:Array(8).fill(null),result:null};
 
-/* ══════════════════════════════════════════════════════════
-   SCORING
-   ══════════════════════════════════════════════════════════ */
+/* ══════════ SCORING ══════════ */
 function score(){
 const a=state.answers;
 const dims={info:[],efficiency:[],tools:[],strategic:[]};
@@ -261,34 +325,38 @@ Q.forEach((q,i)=>{if(q.dim&&a[i]!==null)dims[q.dim].push(q.opts[a[i]].s)});
 const dA={};Object.keys(dims).forEach(d=>{const arr=dims[d];dA[d]=arr.length?arr.reduce((s,v)=>s+v,0)/arr.length:2});
 let total=0;[0,1,2,4,5,6].forEach(i=>{if(a[i]!==null)total+=Q[i].opts[a[i]].s});
 const pain=a[3]!==null?Q[3].opts[a[3]].v:"visibility";
-const readiness=a[7]!==null?Q[7].opts[a[7]].v:"guided";
-const hours=a[2]!==null?Q[2].opts[a[2]].h:[1,2];
+const intent=a[7]!==null?Q[7].opts[a[7]].v:"unsure";
+const hours=a[2]!==null?Q[2].opts[a[2]].h:[1,1.5];
 const usesAI=a[4]===2;const q6=a[5],q7=a[6];
 const surv=q6===3||(q6===2&&q7===3);
 let pid;if(total>=19)pid=4;else if(surv)pid=3;else if(usesAI&&total>=10)pid=2;else pid=1;
 const mat=Math.max(5,Math.min(95,Math.round(((total-6)/18)*100)));
-return{pid,dA,pain,readiness,hours,mat};
+let rec;
+if(pid===4)rec="none";
+else if(intent==="done")rec="done";
+else if(intent==="learn")rec=(pid===3)?"done_survival":"learn";
+else rec="unsure";
+return{pid,dA,pain,hours,mat,intent,rec};
 }
 
 function levelOf(v){
-if(v<=1.5)return{l:"Inicial",c:"var(--coral)",bg:"var(--coral-bg)"};
-if(v<=2.5)return{l:"En desarrollo",c:"var(--amber)",bg:"var(--amber-bg)"};
-if(v<=3.2)return{l:"Intermedio",c:"var(--green)",bg:"var(--green-bg)"};
-return{l:"Avanzado",c:"#3A7A5A",bg:"#DFF0E5"};
+if(v<=1.5)return{l:"Inicial",c:"#B4653F",bg:"#F2E4DB"};
+if(v<=2.5)return{l:"En desarrollo",c:"#C7952C",bg:"#F4ECD8"};
+if(v<=3.2)return{l:"Intermedio",c:"#2E7A6F",bg:"#E2ECE9"};
+return{l:"Avanzado",c:"#1E5A52",bg:"#D8E6E2"};
 }
 
-/* ══════════════════════════════════════════════════════════
-   RENDER
-   ══════════════════════════════════════════════════════════ */
+/* ══════════ RENDER ══════════ */
 function render(){
 const app=document.getElementById("app");
 if(state.phase==="welcome")renderWelcome(app);
 else if(state.phase==="questions")renderQuestion(app);
 else if(state.phase==="result")renderResult(app);
 }
+function show(el,delay){setTimeout(()=>{el.classList.add("visible")},delay||50)}
 
-function show(el,delay){
-setTimeout(()=>{el.classList.add("visible")},delay||50);
+function dianaSVG(size){
+return `<svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="36" stroke="#DBD8CD" stroke-width="1.5"/><circle cx="40" cy="40" r="24" stroke="#DBD8CD" stroke-width="1.5"/><circle cx="40" cy="40" r="13" stroke="#1E5A52" stroke-width="2"/><circle cx="40" cy="40" r="4" fill="#1E5A52"/><line x1="40" y1="0" x2="40" y2="10" stroke="#1C2022" stroke-width="1.5"/><line x1="40" y1="70" x2="40" y2="80" stroke="#1C2022" stroke-width="1.5"/><line x1="0" y1="40" x2="10" y2="40" stroke="#1C2022" stroke-width="1.5"/><line x1="70" y1="40" x2="80" y2="40" stroke="#1C2022" stroke-width="1.5"/></svg>`;
 }
 
 function renderWelcome(app){
@@ -297,10 +365,10 @@ app.innerHTML=`
 <div class="header"><a href="https://lideraia.cl">Lidera<span>IA</span></a></div>
 <div class="container">
 <div id="welcome-screen" class="screen active">
-<div class="welcome-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+<div class="welcome-mark">${dianaSVG()}</div>
 <h1>Diagnóstico: ¿cómo gestionas hoy tu trabajo?</h1>
 <p class="intro">8 preguntas sobre tu día a día como líder. Sin tecnicismos, sin respuestas correctas.</p>
-<p class="intro">Al final recibirás tu perfil de gestión, un desglose por dimensión, y una estimación concreta de cuánto tiempo podrías recuperar cada semana. Toma menos de 3 minutos.</p>
+<p class="intro">Al final recibirás tu perfil de gestión, un desglose por dimensión, una estimación de cuánto tiempo podrías recuperar cada semana y una recomendación de por dónde empezar. Toma menos de 3 minutos.</p>
 <button class="btn-primary" onclick="startQuiz()">Comenzar diagnóstico</button>
 <p class="note">No recopilamos datos. Tu resultado es solo para ti.</p>
 </div>
@@ -311,13 +379,22 @@ show(document.getElementById("welcome-screen"));
 
 function renderQuestion(app){
 const q=Q[state.qi];const sel=state.answers[state.qi];
+const p=(state.qi+1)/Q.length;
+const C=2*Math.PI*20; /* circunferencia r=20 */
 app.innerHTML=`
 <div class="centered-layout">
 <div class="header"><a href="https://lideraia.cl">Lidera<span>IA</span></a></div>
 <div class="container">
 <div id="q-screen" class="screen active">
+<div class="prog-row">
+<div class="prog-mark"><svg viewBox="0 0 46 46" fill="none">
+<circle cx="23" cy="23" r="20" stroke="#DBD8CD" stroke-width="2"/>
+<circle cx="23" cy="23" r="12" stroke="#DBD8CD" stroke-width="1.5"/>
+<circle class="pm-arc" cx="23" cy="23" r="20" stroke="#1E5A52" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-p)}"/>
+<circle cx="23" cy="23" r="4" fill="${p===1?'#1E5A52':'#DBD8CD'}"/>
+</svg></div>
 <p class="progress-label">Pregunta ${state.qi+1} de ${Q.length}</p>
-<div class="progress-track"><div class="progress-fill" style="width:${((state.qi+1)/Q.length)*100}%"></div></div>
+</div>
 <h2>${q.text}</h2>
 ${q.sub?`<p class="q-subtitle">${q.sub}</p>`:""}
 <div class="options">
@@ -336,6 +413,7 @@ show(document.getElementById("q-screen"));
 function renderResult(app){
 const r=state.result;const p=PROF[r.pid];const pd=PAIN[r.pain];const isAdv=r.pid===4;
 const fitH=p.fit==="alto";
+const rec=(!isAdv&&REC[r.rec])?REC[r.rec]:null;
 
 let html=`
 <div class="results-layout">
@@ -343,13 +421,12 @@ let html=`
 <div class="container wide">
 <div id="result-screen" class="screen active">
 
-<!-- Header -->
 <div class="result-header">
 <div class="circle1"></div><div class="circle2"></div>
 <div class="result-header-inner">
 <div class="result-meta">
 <span class="tag">${p.tag}</span>
-<div class="fit-badge ${fitH?"fit-alto":"fit-bajo"}"><div class="fit-dot" style="background:${fitH?"var(--green)":"var(--light)"}"></div>${fitH?"Alta compatibilidad con el programa":"El programa podría no ser lo que necesitas ahora"}</div>
+<div class="fit-badge ${fitH?"fit-alto":"fit-bajo"}"><div class="fit-dot" style="background:${fitH?"#2E7A6F":"rgba(245,244,239,.4)"}"></div>${fitH?"Alta compatibilidad con LideraIA":"Puede que esto no sea lo que necesitas ahora"}</div>
 </div>
 <div class="result-title">${p.title}</div>
 <div class="scale">
@@ -363,53 +440,95 @@ let html=`
 </div>
 </div>
 
-<!-- Dimensions -->
 <div class="card">
 <div class="section-label">Tu perfil por dimensión</div>
 ${["info","efficiency","tools","strategic"].map((d,i)=>{
 const v=r.dA[d];const lv=levelOf(v);
-return`<div class="dim"><div class="dim-head"><span class="dim-label">${DIM[d].l}</span><span class="dim-level" style="color:${lv.c};background:${lv.bg}">${lv.l}</span></div><p class="dim-desc">${DIM[d].d}</p><div class="dim-track"><div class="dim-fill" id="dim-${d}" style="background:linear-gradient(90deg,${lv.c}BB,${lv.c})"></div></div></div>`;
+return`<div class="dim"><div class="dim-head"><span class="dim-label">${DIM[d].l}</span><span class="dim-level" style="color:${lv.c};background:${lv.bg}">${lv.l}</span></div><p class="dim-desc">${DIM[d].d}</p><div class="dim-track"><div class="dim-fill" id="dim-${d}" style="background:${lv.c}"></div></div></div>`;
 }).join("")}
 </div>
 
-<!-- Hours -->
-<div class="card card-dark hours-card">
-<div class="hours-circle"><span class="hours-num">${r.hours[0]}-${r.hours[1]}</span><span class="hours-unit">hrs/sem</span></div>
-<div><p class="hours-text">Tiempo estimado que podrías recuperar cada semana</p><p class="hours-sub">Estimación conservadora: reducción del 40% en tareas repetitivas, basada en tus respuestas.</p></div>
+<div class="card hours-card">
+<div class="hours-circle"><span class="hours-num">${String(r.hours[0]).replace('.',',')}-${String(r.hours[1]).replace('.',',')}</span><span class="hours-unit">hrs/sem</span></div>
+<div><p class="hours-text">Tiempo estimado que podrías recuperar cada semana</p><p class="hours-sub">Basado en un tercio del tiempo que hoy dedicas a tareas repetitivas, en línea con el ahorro promedio reportado por Federal Reserve Bank, Stanford y Harvard (2024).</p></div>
 </div>
 
-<!-- Body -->
 <div class="card">
 ${p.body.map(t=>`<p class="body-text">${t}</p>`).join("")}
 </div>`;
 
 if(!isAdv){
 html+=`
-<!-- Pain -->
-<div class="card card-coral">
+<div class="card card-accent">
 <span class="pain-label">Tu oportunidad principal: ${pd.l}</span>
 <p class="pain-detail">${pd.dt}</p>
 </div>
 
-<!-- Before/After -->
 <div class="ba-grid">
 <div class="ba-col ba-before"><div class="ba-tag ba-tag-before">Hoy</div><p class="ba-text">${pd.b}</p></div>
-<div class="ba-col ba-after"><div class="ba-tag ba-tag-after">Después del programa</div><p class="ba-text">${pd.a}</p></div>
+<div class="ba-col ba-after"><div class="ba-tag ba-tag-after">Después</div><p class="ba-text">${pd.a}</p></div>
 </div>
-<div class="card" style="margin-top:-14px;border-top-left-radius:0;border-top-right-radius:0"><a href="https://www.lideraia.cl/portafolio.html" style="font-size:12.5px;color:var(--coral);font-weight:600;text-decoration:none">Ver ejemplos reales de ${pd.p} →</a></div>
+<div class="ba-portlink"><a href="https://www.lideraia.cl/portafolio.html">Ver ejemplos reales de ${pd.p} →</a></div>`;
+}
 
-<!-- Readiness -->
-<div class="card card-warm"><p class="readiness">${READY[r.readiness]}</p></div>`;
+if(rec){
+html+=`
+<div class="card card-rec">
+<div class="rec-circle"></div>
+<div class="rec-inner">
+<div class="rec-top">
+<span class="rec-eyebrow">${rec.eyebrow}</span>
+${rec.price?`<span class="rec-price-wrap"><span class="rec-price">${rec.price}</span><span class="rec-price-tag">${rec.priceTag}</span><span class="rec-pay">${rec.pay}</span></span>`:``}
+</div>
+${rec.label?`<div class="rec-title">${rec.label}</div>`:``}
+${rec.sessions?`<span class="rec-sessions">${rec.sessions}</span>`:``}
+<p class="rec-text">${rec.text}</p>
+${rec.meta?`<p class="rec-meta">${rec.meta}</p>`:``}
+${rec.pricenote?`<p class="rec-pricenote">${rec.pricenote}</p>`:``}
+${rec.alt?`<p class="rec-alt">${rec.alt}</p>`:``}
+</div>
+</div>
+<div class="card">
+<div class="section-label">¿Qué te construiría, exactamente?</div>
+<p class="body-text" style="margin-bottom:2px">Lo definimos con precisión en el diagnóstico. Pero para que te hagas una idea concreta, casi siempre es una de estas dos formas. Te lo explico sin tecnicismos:</p>
+<div class="explain-item">
+<div class="explain-head">1 · Una herramienta lista</div>
+<p class="explain-desc">Se alimenta de los archivos que ya usas: un Excel, un PDF, tus documentos. Tú le entregas la información y ella te devuelve el resultado al instante. No guarda nada por su cuenta: procesa lo que le das y listo. Es lo más rápido de tener funcionando.</p>
+<p class="explain-egs-label">Por ejemplo</p>
+<ul class="explain-egs">
+<li>Un <strong>dashboard</strong> que lee tu planilla Excel de control y arma solo los gráficos y las alertas, cada vez que actualizas el archivo.</li>
+<li>Una herramienta que <strong>configura tus datos y entrega cotizaciones listas</strong>: le das los parámetros y te devuelve la cotización armada en segundos.</li>
+<li>Un <strong>asistente que redacta</strong> tus informes o propuestas a partir de una plantilla y unos pocos datos que tú le pasas.</li>
+<li>Una herramienta que <strong>revisa un documento largo</strong> (unas bases de licitación, un contrato) y te resume lo importante en minutos.</li>
+</ul>
+</div>
+<div class="explain-item">
+<div class="explain-head">2 · Una aplicación con su propio espacio</div>
+<p class="explain-desc">Vive en internet, con su propia dirección y su usuario y contraseña. Va guardando la información con el tiempo: lo que registras hoy sigue ahí mañana. Pueden entrar varias personas, y permite adjuntar y guardar archivos o evidencias.</p>
+<p class="explain-egs-label">Por ejemplo</p>
+<ul class="explain-egs">
+<li>Un <strong>seguimiento</strong> donde tu equipo marca avances, sube respaldos (fotos, PDFs) y los indicadores se actualizan solos.</li>
+<li>Un <strong>panel compartido</strong> donde varias personas registran datos y todos ven lo mismo, siempre al día.</li>
+<li>Un <strong>registro de casos o incidentes</strong> donde cada entrada queda guardada para consultarla cuando la necesites.</li>
+</ul>
+</div>
+<p class="explain-foot">¿Cuál es la tuya? Si tu herramienta necesita ir <strong>guardando información en el tiempo</strong> o que <strong>la usen varias personas a la vez</strong>, es del segundo tipo. Si solo necesitas que procese los archivos que le das, es del primero. Pero no tienes que decidirlo tú: eso lo defino yo en el diagnóstico.</p>
+</div>`;
 }
 
 if(p.honesty){
 html+=`<div class="card card-honesty"><p class="honesty">${p.honesty}</p></div>`;
 }
 
+if(!isAdv){
+html+=`<div class="card card-testi"><div class="testi-quote">"Creía que la IA era muy compleja de gestionar y que yo no tenía las competencias suficientes. Fue un gran descubrimiento: pudimos desarrollar, de manera rápida y simple, una herramienta que para mi nivel es de alta complejidad."</div><div class="testi-author">Esteban Vega · Director de Fundación CADES y Fundación FORPES</div></div>`;
+}
+
+const ctaLead=isAdv?p.cta:"Agendemos una conversación de 30 minutos, sin costo y sin compromiso: revisamos tu caso, resolvemos tus dudas y confirmamos el mejor punto de partida.";
+
 html+=`
-<!-- CTA -->
 <div class="card">
-<p class="cta-text">${p.cta}</p>
+<p class="cta-text">${ctaLead}</p>
 <div id="cta-area">
 <button class="btn-primary" onclick="showForm()">${isAdv?"Conversemos si te interesa":"Agendar una conversación →"}</button>
 ${p.altCTA?`<p class="alt-cta">${p.altCTA}</p>`:""}
@@ -426,26 +545,25 @@ ${p.altCTA?`<p class="alt-cta">${p.altCTA}</p>`:""}
 </div>
 <div id="form-success" class="form-success" style="display:none">
 <div class="form-success-icon">✓</div>
-<p style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--carbon);margin-bottom:6px">Mensaje enviado</p>
-<p style="font-size:13px;color:var(--light)">Te respondo dentro de 48 horas.</p>
+<p style="font-family:'Fraunces',serif;font-size:18px;margin-bottom:6px">Mensaje enviado</p>
+<p style="font-size:13px;color:var(--ink-mute)">Te respondo dentro de 48 horas.</p>
 </div>
 </div>
 
 <button class="restart" onclick="restart()">Volver a hacer el diagnóstico</button>
 
 <div class="diag-footer">
-<a href="https://lideraia.cl" style="font-family:'DM Serif Display',serif;font-size:16px;color:var(--carbon);text-decoration:none">Lidera<span style="color:var(--coral)">IA</span></a>
-<p style="font-size:11.5px;color:var(--light);margin-top:4px">natalia@lideraia.cl</p>
+<a href="https://lideraia.cl" style="font-family:'Fraunces',serif;font-weight:600;font-size:16px;color:var(--ink);text-decoration:none">Lidera<span style="color:var(--accent)">IA</span></a>
+<p style="font-size:11.5px;color:var(--ink-mute);margin-top:4px">natalia@lideraia.cl</p>
 </div>
 
-</div><!-- screen -->
-</div><!-- container -->
-</div><!-- layout -->`;
+</div>
+</div>
+</div>`;
 
 app.innerHTML=html;
 show(document.getElementById("result-screen"),100);
 
-// Animate scale and bars
 setTimeout(()=>{
 const sf=document.getElementById("scale-fill");
 const sm=document.getElementById("scale-marker");
@@ -460,9 +578,7 @@ if(el)el.style.width=(r.dA[d]/4*100)+"%";
 },300);
 }
 
-/* ══════════════════════════════════════════════════════════
-   ACTIONS
-   ══════════════════════════════════════════════════════════ */
+/* ══════════ ACTIONS ══════════ */
 function startQuiz(){state.phase="questions";state.qi=0;render();window.scrollTo(0,0)}
 function selectOpt(i){state.answers[state.qi]=i;render()}
 function goNext(){
@@ -488,7 +604,7 @@ const c=document.getElementById("f-cargo").value;
 const m=document.getElementById("f-mensaje").value;
 if(!n||!e.includes("@")||!c)return;
 const btn=document.getElementById("f-btn");
-btn.textContent="Enviando...";btn.disabled=true;
+btn.textContent="Enviando…";btn.disabled=true;
 fetch("https://formspree.io/f/xkokykwe",{
 method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
 body:JSON.stringify({nombre:n,email:e,cargo:c,mensaje:m,origen:"diagnostico"})
@@ -500,7 +616,6 @@ document.getElementById("form-success").style.display="block";
 }).catch(()=>{btn.textContent="Error, intenta de nuevo";btn.disabled=false});
 }
 
-// Init
 render();
 </script>
 </body>
