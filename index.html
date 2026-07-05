@@ -49,7 +49,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(245,244,239,.88);backdrop-f
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
 
 /* diana */
-.hero-mark{position:relative;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+.hero-mark{position:relative;aspect-ratio:1;display:flex;align-items:center;justify-content:center;min-height:280px}
 .hero-mark svg{width:100%;max-width:320px;height:auto;cursor:crosshair}
 .mk-ring{fill:none;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 1.6s ease-out forwards}
 .mk-r1{animation-delay:.1s}.mk-r2{animation-delay:.35s}.mk-r3{animation-delay:.6s}
@@ -61,9 +61,13 @@ nav{position:sticky;top:0;z-index:50;background:rgba(245,244,239,.88);backdrop-f
 .hero-mark:hover .mk-pulse{animation:pulse 1.6s ease-out infinite}
 @keyframes pulse{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.28);opacity:0}}
 .mk-pulse{transform-origin:100px 100px}
-.hero-quote{position:absolute;bottom:-.5rem;right:0;font-family:'Fraunces',serif;font-style:italic;font-size:.92rem;color:var(--ink-mute);max-width:14rem;text-align:right;line-height:1.5}
 
-/* sections */
+/* testimonio centrado */
+.testi{margin-top:3rem;background:var(--ink);color:var(--paper);padding:2.6rem 2.4rem;position:relative;overflow:hidden;text-align:center}
+.testi-q{font-family:'Fraunces',serif;font-style:italic;font-size:1.22rem;line-height:1.55;max-width:44rem;position:relative;margin:0 auto}
+.testi-punch{font-family:'Fraunces',serif;font-weight:600;font-style:italic;font-size:1.55rem;color:var(--accent-hi);margin-top:1.3rem;position:relative}
+.testi-a{margin-top:1.4rem;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-hi);position:relative}
+.testi-a span{color:rgba(245,244,239,.5);font-weight:500;text-transform:none;letter-spacing:0;display:block;margin-top:.2rem;font-size:.8rem}
 .sec{padding:5rem 0;border-top:1px solid var(--line)}
 .sec-head{max-width:38rem;margin-bottom:3rem}
 .sec-num{font-family:'Fraunces',serif;font-size:.95rem;color:var(--accent);font-weight:600;letter-spacing:.05em;display:block;margin-bottom:.7rem}
@@ -81,8 +85,8 @@ nav{position:sticky;top:0;z-index:50;background:rgba(245,244,239,.88);backdrop-f
 .about-link:hover{color:var(--accent-hi)}
 
 /* CÓMO TRABAJAMOS — timelines */
-.ways-tl{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;margin-bottom:1.6rem;align-items:start}
-.wtl-card{border:1px solid var(--line);background:var(--card);padding:1.9rem 1.8rem;position:relative;overflow:hidden}
+.ways-tl{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;margin-bottom:1.6rem;align-items:stretch}
+.wtl-card{border:1px solid var(--line);background:var(--card);padding:1.9rem 1.8rem;position:relative;overflow:hidden;display:flex;flex-direction:column}
 .wtl-card::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
 .wtl-card:hover::after{transform:scaleX(1)}
 .wtl-head{margin-bottom:1.1rem}
@@ -96,7 +100,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(245,244,239,.88);backdrop-f
 .wleg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 
 /* timeline rows */
-.wtl{display:flex;flex-direction:column}
+.wtl{display:flex;flex-direction:column;flex:1}
 .wtl-item{display:grid;grid-template-columns:36px 1fr;cursor:pointer}
 .wtl-item:hover .wtl-title{color:var(--accent)}
 .wtl-spine{display:flex;flex-direction:column;align-items:center;padding-top:3px}
@@ -190,10 +194,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(245,244,239,.88);backdrop-f
 .testi{margin-top:3rem;background:var(--ink);color:var(--paper);padding:2.6rem 2.4rem;position:relative;overflow:hidden}
 .testi::after{content:'';position:absolute;top:-55px;right:-55px;width:190px;height:190px;border-radius:50%;border:1.5px solid rgba(46,122,111,.35)}
 .testi::before{content:'';position:absolute;top:-25px;right:-25px;width:130px;height:130px;border-radius:50%;border:1.5px solid rgba(46,122,111,.22)}
-.testi-q{font-family:'Fraunces',serif;font-style:italic;font-size:1.22rem;line-height:1.55;max-width:44rem;position:relative}
-.testi-punch{font-family:'Fraunces',serif;font-weight:600;font-style:italic;font-size:1.55rem;color:var(--accent-hi);margin-top:1.3rem;position:relative}
-.testi-a{margin-top:1.4rem;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-hi);position:relative}
-.testi-a span{color:rgba(245,244,239,.5);font-weight:500;text-transform:none;letter-spacing:0;display:block;margin-top:.2rem;font-size:.8rem}
 .proof-more{margin-top:2rem;font-size:.95rem;color:var(--ink-soft)}
 .proof-more a{color:var(--accent);font-weight:600;text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:1px;transition:color .2s}
 .proof-more a:hover{color:var(--accent-hi);border-color:var(--accent-hi)}
@@ -306,7 +306,7 @@ footer a{color:rgba(245,244,239,.5)}
         <line class="mk-tick" x1="0" y1="100" x2="30" y2="100" stroke="var(--ink)" stroke-width="1.5"/>
         <line class="mk-tick" x1="170" y1="100" x2="200" y2="100" stroke="var(--ink)" stroke-width="1.5"/>
       </svg>
-      <p class="hero-quote">"No es saber de tecnología. Es saber dónde aplicarla."</p>
+      <p class="hero-quote" style="display:none"></p>
     </div>
   </div>
 </section>
@@ -397,7 +397,7 @@ footer a{color:rgba(245,244,239,.5)}
           </div>
         </div>
         <div class="wtl-foot">
-          <div><div class="wtl-price">$490.000</div><div class="wtl-ptag">Precio de lanzamiento · transferencia, débito o crédito</div></div>
+          <div><div class="wtl-price">$490.000</div><div class="wtl-ptag">Precio de lanzamiento</div></div>
           <a href="#contacto" class="wtl-btn">Conversemos →</a>
         </div>
       </div>
@@ -449,7 +449,7 @@ footer a{color:rgba(245,244,239,.5)}
           </div>
         </div>
         <div class="wtl-foot">
-          <div><div class="wtl-price">$750.000</div><div class="wtl-ptag">Precio de lanzamiento · transferencia, débito o crédito</div></div>
+          <div><div class="wtl-price">$750.000</div><div class="wtl-ptag">Precio de lanzamiento</div></div>
           <a href="#contacto" class="wtl-btn">Conversemos →</a>
         </div>
       </div>
@@ -570,8 +570,20 @@ footer a{color:rgba(245,244,239,.5)}
     </div>
     <div class="faq-list rv">
       <div class="faq-item">
-        <button class="faq-q" onclick="faqToggle(this)">¿Qué pasa si necesito reagendar una sesión?<span class="faq-icon">+</span></button>
-        <div class="faq-a"><p>Sin problema. Te pido avisarme con al menos 24 horas de anticipación para poder reorganizar mi agenda.</p></div>
+        <button class="faq-q" onclick="faqToggle(this)">¿Qué diferencia hay entre una herramienta de escritorio y una en línea?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>La herramienta de escritorio se alimenta de los archivos que ya usas (un Excel, un PDF) y te devuelve el resultado al instante. No guarda nada por su cuenta. La herramienta en línea vive en internet con su propia dirección: va guardando información en el tiempo, pueden entrar varias personas y permite adjuntar archivos o evidencias. La diferencia práctica: si necesitas que varias personas accedan o que la información quede guardada entre una sesión y otra, es en línea. Si necesitas procesar archivos propios y obtener un resultado, es de escritorio. En la conversación inicial lo definimos juntos.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">¿Cómo se paga?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Transferencia bancaria, débito o crédito. El pago se coordina antes de iniciar el trabajo, una vez que confirmamos que tu caso calza con el formato elegido.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">¿En qué consiste el seguimiento mensual?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Es un complemento opcional para después de entregar la herramienta. Cubre ajustes, mejoras pequeñas y consultas. No incluye construir herramientas nuevas desde cero. Se puede contratar por mes o en bolsa de horas, según lo que necesites.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">¿Puedo empezar con una forma y cambiar a la otra después?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Sí. Si empiezas con Hágalo por mí y después quieres aprender a construir tus propias herramientas, ese es el paso natural siguiente. Y al revés también: si empezaste aprendiendo y en algún momento prefieres que simplemente te resuelvan algo, está la opción.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="faqToggle(this)">¿Mis datos y los de mi empresa son confidenciales?<span class="faq-icon">+</span></button>
@@ -580,6 +592,10 @@ footer a{color:rgba(245,244,239,.5)}
       <div class="faq-item">
         <button class="faq-q" onclick="faqToggle(this)">¿Y si la herramienta no termina siendo lo que necesitaba?<span class="faq-icon">+</span></button>
         <div class="faq-a"><p>Por eso el proceso incluye una ronda de revisión y ajuste antes de cerrar. La herramienta no está lista hasta que funcione en tu trabajo real, no en papel.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">¿Necesito reagendar una sesión?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Sin problema. Te pido avisarme con al menos 24 horas de anticipación para poder reorganizar mi agenda.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="faqToggle(this)">¿Puedo ver ejemplos antes de decidir?<span class="faq-icon">+</span></button>
