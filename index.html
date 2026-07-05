@@ -215,6 +215,36 @@ nav{position:sticky;top:0;z-index:50;background:rgba(245,244,239,.88);backdrop-f
 .stats-msg strong{color:var(--accent-hi)}
 .stats-msg .stat-src{margin-top:.4rem}
 
+/* CALCULADORA */
+.calc-wrap{display:grid;grid-template-columns:1fr 380px;gap:2.4rem;align-items:start}
+.calc-sliders{display:flex;flex-direction:column;gap:1.8rem}
+.csl{}
+.csl-head{display:flex;justify-content:space-between;align-items:baseline;gap:.8rem;margin-bottom:.6rem}
+.csl-label{font-size:.9rem;font-weight:600;color:var(--ink)}
+.csl-val{font-family:'Fraunces',serif;font-weight:600;font-size:1rem;color:var(--accent);flex-shrink:0}
+.csl-range{width:100%;height:4px;-webkit-appearance:none;appearance:none;background:var(--line);border-radius:2px;outline:none;cursor:pointer;margin-bottom:.5rem}
+.csl-range::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;border:2px solid var(--paper);box-shadow:0 1px 4px rgba(30,90,82,.3);transition:transform .15s}
+.csl-range::-webkit-slider-thumb:hover{transform:scale(1.2)}
+.csl-range::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;border:2px solid var(--paper)}
+.csl-range::-webkit-slider-runnable-track{height:4px;border-radius:2px}
+.csl-eg{font-size:.75rem;color:var(--ink-mute);line-height:1.5}
+
+.calc-result{background:var(--ink);color:var(--paper);padding:2rem 1.8rem;position:sticky;top:90px}
+.cr-top{margin-bottom:1.2rem}
+.cr-label{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(245,244,239,.5);margin-bottom:.4rem}
+.cr-total{font-family:'Fraunces',serif;font-weight:500;font-size:2rem;color:var(--paper);line-height:1}
+.cr-divider{height:1px;background:rgba(245,244,239,.12);margin:1.2rem 0}
+.cr-rec{margin-bottom:1.2rem}
+.cr-rec-label{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(245,244,239,.5);margin-bottom:.4rem}
+.cr-num{font-family:'Fraunces',serif;font-weight:600;font-size:2.8rem;color:var(--accent-hi);line-height:1;transition:all .4s cubic-bezier(.22,1,.36,1)}
+.cr-sub{font-size:.78rem;color:rgba(245,244,239,.5);margin-top:.3rem;margin-bottom:1rem;transition:all .3s}
+.cr-bar-wrap{height:6px;background:rgba(245,244,239,.1);border-radius:3px;overflow:hidden}
+.cr-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-hi));border-radius:3px;width:0%;transition:width .6s cubic-bezier(.22,1,.36,1)}
+.cr-note{font-size:.7rem;color:rgba(245,244,239,.3);line-height:1.5;margin-top:1.2rem;font-style:italic}
+.cr-impact{min-height:2.2rem;margin-top:.8rem;font-size:.85rem;color:var(--warm);font-weight:600;line-height:1.4;transition:all .3s}
+.cr-cta{display:inline-block;margin-top:1.4rem;font-weight:600;font-size:.9rem;color:var(--paper);text-decoration:none;border-bottom:2px solid var(--accent-hi);padding-bottom:2px;transition:color .2s}
+.cr-cta:hover{color:var(--accent-hi)}
+
 /* CONTACTO */
 .form-wrap{max-width:560px;margin:0 auto}
 .form-head{text-align:center;margin-bottom:2.6rem}
@@ -251,6 +281,8 @@ footer a{color:rgba(245,244,239,.5)}
   .about-photo{max-width:240px}
   .ways-tl{grid-template-columns:1fr}
   .wtl-foot{flex-direction:column;align-items:flex-start}
+  .calc-wrap{grid-template-columns:1fr}
+  .calc-result{position:static}
   .steps{grid-template-columns:1fr}
   .step{border-right:none;border-bottom:1px solid var(--line)}
   .step:last-child{border-bottom:none}
@@ -605,11 +637,62 @@ footer a{color:rgba(245,244,239,.5)}
   </div>
 </section>
 
+<!-- CALCULADORA -->
+<section class="sec" id="calculadora">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">06 · Calcula tu tiempo</span>
+      <h2 class="sec-title">¿Cuánto tiempo podrías recuperar cada semana?</h2>
+      <p class="sec-sub">Dinos cuántas horas dedicas a estas tareas. Calculamos una estimación basada en los resultados reales de quienes ya usan IA en su gestión.</p>
+    </div>
+    <div class="calc-wrap rv">
+      <div class="calc-sliders">
+        <div class="csl">
+          <div class="csl-head"><span class="csl-label">Reportes y preparación de información</span><span class="csl-val" id="v0">5 hrs/sem</span></div>
+          <input type="range" min="0" max="20" value="5" step="1" class="csl-range" id="r0" oninput="calcUpdate()">
+          <div class="csl-eg">Armar el reporte semanal, consolidar datos de distintas fuentes, preparar presentaciones</div>
+        </div>
+        <div class="csl">
+          <div class="csl-head"><span class="csl-label">Seguimiento y coordinación de equipos</span><span class="csl-val" id="v1">4 hrs/sem</span></div>
+          <input type="range" min="0" max="20" value="4" step="1" class="csl-range" id="r1" oninput="calcUpdate()">
+          <div class="csl-eg">Revisar avances, hacer seguimiento de tareas, actualizar planillas de control</div>
+        </div>
+        <div class="csl">
+          <div class="csl-head"><span class="csl-label">Redacción de documentos y comunicaciones</span><span class="csl-val" id="v2">3 hrs/sem</span></div>
+          <input type="range" min="0" max="20" value="3" step="1" class="csl-range" id="r2" oninput="calcUpdate()">
+          <div class="csl-eg">Informes, propuestas, correos importantes, actas de reunión</div>
+        </div>
+        <div class="csl">
+          <div class="csl-head"><span class="csl-label">Búsqueda y procesamiento de información</span><span class="csl-val" id="v3">2 hrs/sem</span></div>
+          <input type="range" min="0" max="20" value="2" step="1" class="csl-range" id="r3" oninput="calcUpdate()">
+          <div class="csl-eg">Buscar datos en correos y carpetas, revisar documentos para extraer lo importante</div>
+        </div>
+      </div>
+      <div class="calc-result" id="calc-result">
+        <div class="cr-top">
+          <div class="cr-label">Tu tiempo total en tareas repetitivas</div>
+          <div class="cr-total" id="cr-total">14 hrs/sem</div>
+        </div>
+        <div class="cr-divider"></div>
+        <div class="cr-rec">
+          <div class="cr-rec-label">Tiempo estimado que podrías recuperar</div>
+          <div class="cr-num" id="cr-num">~5 hrs/sem</div>
+          <div class="cr-sub" id="cr-sub">equivale a ~240 horas al año</div>
+          <div class="cr-bar-wrap"><div class="cr-bar" id="cr-bar"></div></div>
+        </div>
+        <div class="cr-note">Basado en el ahorro promedio de un tercio del tiempo en tareas repetitivas, según Federal Reserve Bank, Stanford y Harvard (2024).</div>
+        <div class="cr-impact" id="cr-impact"></div>
+        <a href="#contacto" class="cr-cta">Conversemos sobre tu caso →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACTO -->
 <section class="sec" id="contacto">
   <div class="wrap form-wrap">
     <div class="form-head rv">
-      <span class="sec-num">06 · Conversemos</span>
+      <span class="sec-num">07 · Conversemos</span>
       <h2 class="sec-title">¿Te interesa? Cuéntame sobre tu trabajo.</h2>
       <p class="sec-sub">Completa los datos y te respondo dentro de 48 horas para coordinar una conversación de 30 minutos, sin costo y sin compromiso.</p>
     </div>
@@ -635,6 +718,32 @@ footer a{color:rgba(245,244,239,.5)}
 </footer>
 
 <script>
+/* CALCULADORA */
+function calcUpdate(){
+  const vals=[0,1,2,3].map(i=>parseInt(document.getElementById('r'+i).value));
+  [0,1,2,3].forEach(i=>{
+    const u=vals[i];
+    document.getElementById('v'+i).textContent=u===0?'0 hrs/sem':u===1?'1 hr/sem':u+' hrs/sem';
+  });
+  const total=vals.reduce((a,b)=>a+b,0);
+  const rec=Math.round(total/3);
+  const anual=rec*52;
+  const pct=total>0?Math.round((rec/total)*100):0;
+
+  document.getElementById('cr-total').textContent=total===0?'0 hrs/sem':total+' hrs/sem';
+  document.getElementById('cr-num').textContent=total===0?'0 hrs/sem':'~'+rec+' hrs/sem';
+  document.getElementById('cr-sub').textContent=total===0?'mueve los controles para calcular':'equivale a ~'+anual.toLocaleString('es-CL')+' horas al año';
+  document.getElementById('cr-bar').style.width=Math.min(pct*3,100)+'%';
+
+  const impact=document.getElementById('cr-impact');
+  if(total===0){impact.textContent='';return;}
+  if(rec<=2)impact.textContent='Un tiempo valioso para pensar con más calma.';
+  else if(rec<=5)impact.textContent='Tiempo suficiente para recuperar el espacio estratégico que te falta.';
+  else if(rec<=8)impact.textContent='Con ese tiempo recuperado, podrías liderar en vez de administrar urgencias.';
+  else impact.textContent='Más de un día laboral completo cada semana. Eso cambia cómo lideras.';
+}
+calcUpdate();
+
 /* timelines */
 function wtlToggle(item){
   const card=item.closest('.wtl-card');
