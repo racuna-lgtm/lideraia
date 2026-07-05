@@ -215,35 +215,48 @@ nav{position:sticky;top:0;z-index:50;background:rgba(245,244,239,.88);backdrop-f
 .stats-msg strong{color:var(--accent-hi)}
 .stats-msg .stat-src{margin-top:.4rem}
 
-/* CALCULADORA */
-.calc-wrap{display:grid;grid-template-columns:1fr 380px;gap:2.4rem;align-items:start}
-.calc-sliders{display:flex;flex-direction:column;gap:1.8rem}
-.csl{}
-.csl-head{display:flex;justify-content:space-between;align-items:baseline;gap:.8rem;margin-bottom:.6rem}
-.csl-label{font-size:.9rem;font-weight:600;color:var(--ink)}
-.csl-val{font-family:'Fraunces',serif;font-weight:600;font-size:1rem;color:var(--accent);flex-shrink:0}
-.csl-range{width:100%;height:4px;-webkit-appearance:none;appearance:none;background:var(--line);border-radius:2px;outline:none;cursor:pointer;margin-bottom:.5rem}
-.csl-range::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;border:2px solid var(--paper);box-shadow:0 1px 4px rgba(30,90,82,.3);transition:transform .15s}
+/* CALCULADORA / SIMULADOR */
+.calc-wrap{display:grid;grid-template-columns:1fr 400px;gap:2.4rem;align-items:start}
+.calc-inputs{display:flex;flex-direction:column;gap:2rem}
+.ci-block{}
+.ci-q{font-family:'Fraunces',serif;font-weight:600;font-size:1.08rem;margin-bottom:.9rem}
+.ci-chips{display:flex;flex-wrap:wrap;gap:.6rem}
+.ci-chip{background:var(--card);border:1px solid var(--line);color:var(--ink-soft);font-family:'Inter',sans-serif;font-size:.86rem;font-weight:500;padding:.65rem 1.1rem;border-radius:2px;cursor:pointer;transition:all .2s;text-align:left}
+.ci-chip:hover{border-color:var(--accent);color:var(--accent)}
+.ci-chip.sel{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.ci-chip-sub{display:block;font-size:.7rem;color:var(--ink-mute);font-weight:400;margin-top:.15rem}
+.ci-chip.sel .ci-chip-sub{color:rgba(245,244,239,.55)}
+.ci-slider-row{display:flex;align-items:center;gap:1.2rem}
+.ci-slider-val{font-family:'Fraunces',serif;font-weight:600;font-size:1.3rem;color:var(--accent);min-width:4.5rem;text-align:right;flex-shrink:0}
+.csl-range{width:100%;height:4px;-webkit-appearance:none;appearance:none;background:var(--line);border-radius:2px;outline:none;cursor:pointer}
+.csl-range::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--accent);cursor:pointer;border:2px solid var(--paper);box-shadow:0 1px 4px rgba(30,90,82,.3);transition:transform .15s}
 .csl-range::-webkit-slider-thumb:hover{transform:scale(1.2)}
-.csl-range::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;border:2px solid var(--paper)}
-.csl-range::-webkit-slider-runnable-track{height:4px;border-radius:2px}
-.csl-eg{font-size:.75rem;color:var(--ink-mute);line-height:1.5}
+.csl-range::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--accent);cursor:pointer;border:2px solid var(--paper)}
+.calc-btn{background:var(--ink);color:var(--paper);padding:1rem 2rem;border:none;border-radius:2px;font-size:.95rem;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all .3s;align-self:flex-start}
+.calc-btn:hover{background:var(--accent);transform:translateY(-2px)}
 
-.calc-result{background:var(--ink);color:var(--paper);padding:2rem 1.8rem;position:sticky;top:90px}
-.cr-top{margin-bottom:1.2rem}
-.cr-label{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(245,244,239,.5);margin-bottom:.4rem}
-.cr-total{font-family:'Fraunces',serif;font-weight:500;font-size:2rem;color:var(--paper);line-height:1}
+.calc-result{background:var(--ink);color:var(--paper);padding:2rem 1.8rem;position:sticky;top:90px;min-height:340px;display:flex;flex-direction:column;justify-content:center}
+.cp-empty{text-align:center;padding:2rem 1rem}
+.cp-empty-t{font-size:.9rem;color:rgba(245,244,239,.45);line-height:1.6}
+.cp-full{animation:cpIn .5s cubic-bezier(.22,1,.36,1)}
+@keyframes cpIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.cp-plabel{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:rgba(245,244,239,.45);display:block;margin-bottom:.35rem}
+.cp-pname{font-family:'Fraunces',serif;font-weight:600;font-size:1.3rem;color:var(--accent-hi);display:block;line-height:1.2}
+.cp-pdesc{font-size:.82rem;color:rgba(245,244,239,.65);line-height:1.55;margin-top:.5rem}
 .cr-divider{height:1px;background:rgba(245,244,239,.12);margin:1.2rem 0}
-.cr-rec{margin-bottom:1.2rem}
-.cr-rec-label{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(245,244,239,.5);margin-bottom:.4rem}
-.cr-num{font-family:'Fraunces',serif;font-weight:600;font-size:2.8rem;color:var(--accent-hi);line-height:1;transition:all .4s cubic-bezier(.22,1,.36,1)}
-.cr-sub{font-size:.78rem;color:rgba(245,244,239,.5);margin-top:.3rem;margin-bottom:1rem;transition:all .3s}
-.cr-bar-wrap{height:6px;background:rgba(245,244,239,.1);border-radius:3px;overflow:hidden}
-.cr-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-hi));border-radius:3px;width:0%;transition:width .6s cubic-bezier(.22,1,.36,1)}
-.cr-note{font-size:.7rem;color:rgba(245,244,239,.3);line-height:1.5;margin-top:1.2rem;font-style:italic}
-.cr-impact{min-height:2.2rem;margin-top:.8rem;font-size:.85rem;color:var(--warm);font-weight:600;line-height:1.4;transition:all .3s}
-.cr-cta{display:inline-block;margin-top:1.4rem;font-weight:600;font-size:.9rem;color:var(--paper);text-decoration:none;border-bottom:2px solid var(--accent-hi);padding-bottom:2px;transition:color .2s}
+.cp-money{font-family:'Fraunces',serif;font-weight:600;font-size:2.3rem;color:var(--paper);line-height:1;font-feature-settings:"tnum"}
+.cp-money-rec{color:var(--accent-hi);font-size:2.6rem}
+.cp-money-sub{font-size:.78rem;color:rgba(245,244,239,.5);margin-top:.35rem}
+.cp-anual{font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;color:var(--warm);margin-top:.7rem}
+.cp-payback{}
+.cp-pb-text{font-size:.88rem;color:rgba(245,244,239,.75);line-height:1.6;margin:.5rem 0 .7rem}
+.cp-pb-text strong{color:var(--paper)}
+.cp-pb-num{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;color:var(--accent-hi)}
+.cp-tool{font-size:.85rem;color:rgba(245,244,239,.65);line-height:1.6;margin-top:1rem;padding:0.9rem 1rem;border:1px dashed rgba(245,244,239,.2)}
+.cp-tool strong{color:var(--paper)}
+.cr-cta{display:inline-block;margin-top:1.3rem;font-weight:600;font-size:.9rem;color:var(--paper);text-decoration:none;border-bottom:2px solid var(--accent-hi);padding-bottom:2px;transition:color .2s}
 .cr-cta:hover{color:var(--accent-hi)}
+.cr-note{font-size:.68rem;color:rgba(245,244,239,.3);line-height:1.5;margin-top:1.2rem;font-style:italic}
 
 /* CONTACTO */
 .form-wrap{max-width:560px;margin:0 auto}
@@ -513,7 +526,7 @@ footer a{color:rgba(245,244,239,.5)}
 <section class="sec" id="resultados">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="sec-num">04 · Lo que ya está funcionando</span>
+      <span class="sec-num">03 · Lo que ya está funcionando</span>
       <h2 class="sec-title">Esto no es teoría. Son herramientas reales, hoy en uso.</h2>
       <p class="sec-sub">Cada una nació de un problema concreto de gestión. Ninguna necesitó saber programar. Estas son algunas, y son la prueba directa de lo que vas a poder hacer con tu propio trabajo.</p>
     </div>
@@ -567,7 +580,7 @@ footer a{color:rgba(245,244,239,.5)}
 <section class="sec sec-dark" id="datos">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="sec-num">05 · La realidad en Chile</span>
+      <span class="sec-num">04 · La realidad en Chile</span>
       <h2 class="sec-title" style="color:var(--paper)">La oportunidad está ahí. La mayoría todavía no la aprovecha.</h2>
       <p class="sec-sub">Datos que explican por qué este momento importa.</p>
     </div>
@@ -593,11 +606,114 @@ footer a{color:rgba(245,244,239,.5)}
   </div>
 </section>
 
+<!-- CALCULADORA -->
+<section class="sec" id="calculadora">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">05 · Tu impacto</span>
+      <h2 class="sec-title">¿Cuánto te está costando no usar IA?</h2>
+      <p class="sec-sub">Tres respuestas y te mostramos tu cuello de botella, lo que te cuesta al año y en cuánto tiempo recuperas la inversión.</p>
+    </div>
+    <div class="calc-wrap rv">
+      <div class="calc-inputs">
+
+        <div class="ci-block">
+          <p class="ci-q">1 · ¿Dónde se te va más tiempo?</p>
+          <div class="ci-chips" id="chips-tipo">
+            <button class="ci-chip sel" data-v="visibilidad" onclick="calcChip(this,'chips-tipo')">Preparar reportes e información</button>
+            <button class="ci-chip" data-v="coordinacion" onclick="calcChip(this,'chips-tipo')">Seguimiento y coordinación de equipos</button>
+            <button class="ci-chip" data-v="documentacion" onclick="calcChip(this,'chips-tipo')">Redactar documentos y propuestas</button>
+            <button class="ci-chip" data-v="acceso" onclick="calcChip(this,'chips-tipo')">Buscar datos dispersos en correos y carpetas</button>
+          </div>
+        </div>
+
+        <div class="ci-block">
+          <p class="ci-q">2 · ¿Cuántas horas semanales se van en tareas de ese tipo?</p>
+          <div class="ci-slider-row">
+            <input type="range" min="2" max="25" value="10" step="1" class="csl-range" id="calc-horas" oninput="calcSlider()">
+            <span class="ci-slider-val" id="calc-horas-val">10 hrs</span>
+          </div>
+        </div>
+
+        <div class="ci-block">
+          <p class="ci-q">3 · ¿Cuál es tu nivel de responsabilidad?</p>
+          <div class="ci-chips" id="chips-nivel">
+            <button class="ci-chip" data-v="2150000" onclick="calcChip(this,'chips-nivel')">Jefatura<span class="ci-chip-sub">$1,8 – $2,5 millones</span></button>
+            <button class="ci-chip sel" data-v="3850000" onclick="calcChip(this,'chips-nivel')">Subgerencia<span class="ci-chip-sub">$3,2 – $4,5 millones</span></button>
+            <button class="ci-chip" data-v="6000000" onclick="calcChip(this,'chips-nivel')">Gerencia o dirección<span class="ci-chip-sub">$5,0 – $7,0 millones</span></button>
+          </div>
+        </div>
+
+        <button class="calc-btn" onclick="calcImpacto()">Calcular mi impacto →</button>
+      </div>
+
+      <div class="calc-result" id="calc-panel">
+        <div class="cp-empty" id="cp-empty">
+          <svg viewBox="0 0 80 80" fill="none" style="width:56px;height:56px;margin-bottom:1rem;opacity:.4">
+            <circle cx="40" cy="40" r="36" stroke="rgba(245,244,239,.3)" stroke-width="1.5"/>
+            <circle cx="40" cy="40" r="22" stroke="rgba(245,244,239,.3)" stroke-width="1.5"/>
+            <circle cx="40" cy="40" r="5" fill="rgba(245,244,239,.3)"/>
+          </svg>
+          <p class="cp-empty-t">Responde las tres preguntas y presiona calcular.</p>
+        </div>
+        <div class="cp-full" id="cp-full" style="display:none">
+          <div class="cp-profile">
+            <span class="cp-plabel">Tu cuello de botella</span>
+            <span class="cp-pname" id="cp-pname">Visibilidad de información</span>
+            <p class="cp-pdesc" id="cp-pdesc"></p>
+          </div>
+          <div class="cr-divider"></div>
+          <span class="cp-plabel">Lo que ese tiempo te cuesta</span>
+          <div class="cp-money" id="cp-mes">$0</div>
+          <div class="cp-money-sub">al mes de tu tiempo en esas tareas</div>
+          <div class="cr-divider"></div>
+          <span class="cp-plabel">Lo que la IA podría devolverte</span>
+          <div class="cp-money cp-money-rec" id="cp-rec">$0</div>
+          <div class="cp-money-sub">al mes, recuperando un tercio de ese tiempo</div>
+          <div class="cp-anual" id="cp-anual">$0 al año</div>
+          <div class="cr-divider"></div>
+          <div class="cp-payback">
+            <span class="cp-plabel">La comparación que importa</span>
+            <p class="cp-pb-text">Una herramienta que ataca exactamente esto cuesta <strong>$490.000, una sola vez.</strong></p>
+            <div class="cp-pb-num" id="cp-payback">Recuperas la inversión en ~4 semanas</div>
+          </div>
+          <div class="cp-tool" id="cp-tool"></div>
+          <a href="#contacto" class="cr-cta">Conversemos sobre tu caso →</a>
+          <p class="cr-note">Estimación referencial: valor hora = renta mensual ÷ 160 horas de trabajo en Chile, usando el punto medio del rango indicado. Costo mensual = horas semanales × valor hora × 4 semanas. La IA permite recuperar en promedio un tercio del tiempo en tareas repetitivas (Federal Reserve Bank, Stanford y Harvard, 2024). Rangos de renta referenciales según guías salariales del mercado chileno (Robert Half, Guía Salarial 2026).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="sec" id="contacto">
+  <div class="wrap form-wrap">
+    <div class="form-head rv">
+      <span class="sec-num">06 · Conversemos</span>
+      <h2 class="sec-title">¿Te interesa? Cuéntame sobre tu trabajo.</h2>
+      <p class="sec-sub">Completa los datos y te respondo dentro de 48 horas para coordinar una conversación de 30 minutos, sin costo y sin compromiso.</p>
+    </div>
+    <form id="lideraia-form" action="https://formspree.io/f/xkokykwe" method="POST" class="rv">
+      <div class="frow">
+        <div class="fg"><label class="fl">Nombre completo <span class="req">*</span></label><input type="text" name="nombre" required placeholder="Tu nombre"></div>
+        <div class="fg"><label class="fl">Correo electrónico <span class="req">*</span></label><input type="email" name="email" required placeholder="tu@correo.com"></div>
+      </div>
+      <div class="fg"><label class="fl">¿Cuál es tu cargo actual? <span class="req">*</span></label><input type="text" name="cargo" required placeholder="Ej: Director/a de operaciones, Gerente comercial…"></div>
+      <div class="fg"><label class="fl">¿Hay algo en particular que te motivó a llegar hasta aquí?</label><textarea name="motivacion" placeholder="Cuéntame libremente. ¿Qué te llamó la atención? ¿Hay algo que te gustaría resolver con IA?"></textarea></div>
+      <input type="hidden" name="origen" value="formulario-contacto">
+      <div class="consent"><label><input type="checkbox" name="consentimiento" value="Autorizo" required style="margin-top:4px"><span>Autorizo el uso de mis datos personales (nombre, correo, cargo e información laboral) exclusivamente para evaluar mi participación en LideraIA. Mis datos no serán compartidos con terceros. Puedo solicitar su eliminación en cualquier momento escribiendo a <a href="mailto:natalia@lideraia.cl">natalia@lideraia.cl</a>.</span></label></div>
+      <button type="submit" class="form-btn">Enviar →</button>
+    </form>
+    <div class="form-alt rv"><p>¿Todavía no tienes claro si esto es para ti?</p><a href="diagnostico.html">Haz el diagnóstico gratuito →</a></div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="sec" id="faq">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="sec-num">05 · Preguntas frecuentes</span>
+      <span class="sec-num">07 · Preguntas frecuentes</span>
       <h2 class="sec-title">Lo que suelen preguntar antes de escribirme.</h2>
     </div>
     <div class="faq-list rv">
@@ -637,80 +753,6 @@ footer a{color:rgba(245,244,239,.5)}
   </div>
 </section>
 
-<!-- CALCULADORA -->
-<section class="sec" id="calculadora">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="sec-num">06 · Calcula tu tiempo</span>
-      <h2 class="sec-title">¿Cuánto tiempo podrías recuperar cada semana?</h2>
-      <p class="sec-sub">Dinos cuántas horas dedicas a estas tareas. Calculamos una estimación basada en los resultados reales de quienes ya usan IA en su gestión.</p>
-    </div>
-    <div class="calc-wrap rv">
-      <div class="calc-sliders">
-        <div class="csl">
-          <div class="csl-head"><span class="csl-label">Reportes y preparación de información</span><span class="csl-val" id="v0">5 hrs/sem</span></div>
-          <input type="range" min="0" max="20" value="5" step="1" class="csl-range" id="r0" oninput="calcUpdate()">
-          <div class="csl-eg">Armar el reporte semanal, consolidar datos de distintas fuentes, preparar presentaciones</div>
-        </div>
-        <div class="csl">
-          <div class="csl-head"><span class="csl-label">Seguimiento y coordinación de equipos</span><span class="csl-val" id="v1">4 hrs/sem</span></div>
-          <input type="range" min="0" max="20" value="4" step="1" class="csl-range" id="r1" oninput="calcUpdate()">
-          <div class="csl-eg">Revisar avances, hacer seguimiento de tareas, actualizar planillas de control</div>
-        </div>
-        <div class="csl">
-          <div class="csl-head"><span class="csl-label">Redacción de documentos y comunicaciones</span><span class="csl-val" id="v2">3 hrs/sem</span></div>
-          <input type="range" min="0" max="20" value="3" step="1" class="csl-range" id="r2" oninput="calcUpdate()">
-          <div class="csl-eg">Informes, propuestas, correos importantes, actas de reunión</div>
-        </div>
-        <div class="csl">
-          <div class="csl-head"><span class="csl-label">Búsqueda y procesamiento de información</span><span class="csl-val" id="v3">2 hrs/sem</span></div>
-          <input type="range" min="0" max="20" value="2" step="1" class="csl-range" id="r3" oninput="calcUpdate()">
-          <div class="csl-eg">Buscar datos en correos y carpetas, revisar documentos para extraer lo importante</div>
-        </div>
-      </div>
-      <div class="calc-result" id="calc-result">
-        <div class="cr-top">
-          <div class="cr-label">Tu tiempo total en tareas repetitivas</div>
-          <div class="cr-total" id="cr-total">14 hrs/sem</div>
-        </div>
-        <div class="cr-divider"></div>
-        <div class="cr-rec">
-          <div class="cr-rec-label">Tiempo estimado que podrías recuperar</div>
-          <div class="cr-num" id="cr-num">~5 hrs/sem</div>
-          <div class="cr-sub" id="cr-sub">equivale a ~240 horas al año</div>
-          <div class="cr-bar-wrap"><div class="cr-bar" id="cr-bar"></div></div>
-        </div>
-        <div class="cr-note">Basado en el ahorro promedio de un tercio del tiempo en tareas repetitivas, según Federal Reserve Bank, Stanford y Harvard (2024).</div>
-        <div class="cr-impact" id="cr-impact"></div>
-        <a href="#contacto" class="cr-cta">Conversemos sobre tu caso →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACTO -->
-<section class="sec" id="contacto">
-  <div class="wrap form-wrap">
-    <div class="form-head rv">
-      <span class="sec-num">07 · Conversemos</span>
-      <h2 class="sec-title">¿Te interesa? Cuéntame sobre tu trabajo.</h2>
-      <p class="sec-sub">Completa los datos y te respondo dentro de 48 horas para coordinar una conversación de 30 minutos, sin costo y sin compromiso.</p>
-    </div>
-    <form id="lideraia-form" action="https://formspree.io/f/xkokykwe" method="POST" class="rv">
-      <div class="frow">
-        <div class="fg"><label class="fl">Nombre completo <span class="req">*</span></label><input type="text" name="nombre" required placeholder="Tu nombre"></div>
-        <div class="fg"><label class="fl">Correo electrónico <span class="req">*</span></label><input type="email" name="email" required placeholder="tu@correo.com"></div>
-      </div>
-      <div class="fg"><label class="fl">¿Cuál es tu cargo actual? <span class="req">*</span></label><input type="text" name="cargo" required placeholder="Ej: Director/a de operaciones, Gerente comercial…"></div>
-      <div class="fg"><label class="fl">¿Hay algo en particular que te motivó a llegar hasta aquí?</label><textarea name="motivacion" placeholder="Cuéntame libremente. ¿Qué te llamó la atención? ¿Hay algo que te gustaría resolver con IA?"></textarea></div>
-      <input type="hidden" name="origen" value="formulario-contacto">
-      <div class="consent"><label><input type="checkbox" name="consentimiento" value="Autorizo" required style="margin-top:4px"><span>Autorizo el uso de mis datos personales (nombre, correo, cargo e información laboral) exclusivamente para evaluar mi participación en LideraIA. Mis datos no serán compartidos con terceros. Puedo solicitar su eliminación en cualquier momento escribiendo a <a href="mailto:natalia@lideraia.cl">natalia@lideraia.cl</a>.</span></label></div>
-      <button type="submit" class="form-btn">Enviar →</button>
-    </form>
-    <div class="form-alt rv"><p>¿Todavía no tienes claro si esto es para ti?</p><a href="diagnostico.html">Haz el diagnóstico gratuito →</a></div>
-  </div>
-</section>
-
 <footer>
   <div class="fl2">Lidera<span>IA</span></div>
   <p style="margin-bottom:.3rem">natalia@lideraia.cl</p>
@@ -718,31 +760,70 @@ footer a{color:rgba(245,244,239,.5)}
 </footer>
 
 <script>
-/* CALCULADORA */
-function calcUpdate(){
-  const vals=[0,1,2,3].map(i=>parseInt(document.getElementById('r'+i).value));
-  [0,1,2,3].forEach(i=>{
-    const u=vals[i];
-    document.getElementById('v'+i).textContent=u===0?'0 hrs/sem':u===1?'1 hr/sem':u+' hrs/sem';
-  });
-  const total=vals.reduce((a,b)=>a+b,0);
-  const rec=Math.round(total/3);
-  const anual=rec*52;
-  const pct=total>0?Math.round((rec/total)*100):0;
+/* SIMULADOR DE IMPACTO */
+const CALC_PERFILES={
+visibilidad:{n:"Visibilidad de información",d:"Pasas más tiempo armando el panorama que decidiendo con él. La información existe, pero llega tarde y desordenada.",t:"Para esto construyo <strong>dashboards que se arman solos</strong>: tu Excel de siempre entra, los gráficos y alertas salen. Como el que hoy usa una fundación para controlar sus cursos en tiempo real."},
+coordinacion:{n:"Coordinación de equipos",d:"Tu equipo depende de ti para saber qué hacer y en qué orden. Eres el cuello de botella aunque no quieras serlo.",t:"Para esto construyo <strong>paneles de seguimiento compartidos</strong>: cada persona ve su avance y sus prioridades sin preguntarte. Como el que coordina 16 asignaturas y un equipo completo en tiempo real."},
+documentacion:{n:"Producción de documentos",d:"Tienes el conocimiento en la cabeza, pero convertirlo en informes y propuestas te consume horas que no están presupuestadas.",t:"Para esto construyo <strong>asistentes que redactan por ti</strong>: le das los datos, te devuelve el documento listo. Como el que genera reglamentos de 100 páginas en minutos, o cotizaciones corporativas en segundos."},
+acceso:{n:"Acceso a información dispersa",d:"Sabes que el dato existe, en algún correo, en alguna planilla. Encontrarlo cuesta más tiempo del que vale.",t:"Para esto construyo <strong>herramientas que consolidan y responden</strong>: tú preguntas, ellas buscan en tus propios archivos y te entregan la respuesta."}
+};
 
-  document.getElementById('cr-total').textContent=total===0?'0 hrs/sem':total+' hrs/sem';
-  document.getElementById('cr-num').textContent=total===0?'0 hrs/sem':'~'+rec+' hrs/sem';
-  document.getElementById('cr-sub').textContent=total===0?'mueve los controles para calcular':'equivale a ~'+anual.toLocaleString('es-CL')+' horas al año';
-  document.getElementById('cr-bar').style.width=Math.min(pct*3,100)+'%';
-
-  const impact=document.getElementById('cr-impact');
-  if(total===0){impact.textContent='';return;}
-  if(rec<=2)impact.textContent='Un tiempo valioso para pensar con más calma.';
-  else if(rec<=5)impact.textContent='Tiempo suficiente para recuperar el espacio estratégico que te falta.';
-  else if(rec<=8)impact.textContent='Con ese tiempo recuperado, podrías liderar en vez de administrar urgencias.';
-  else impact.textContent='Más de un día laboral completo cada semana. Eso cambia cómo lideras.';
+function calcChip(btn,groupId){
+  document.querySelectorAll('#'+groupId+' .ci-chip').forEach(c=>c.classList.remove('sel'));
+  btn.classList.add('sel');
 }
-calcUpdate();
+function calcSlider(){
+  const v=document.getElementById('calc-horas').value;
+  document.getElementById('calc-horas-val').textContent=v+' hrs';
+}
+
+function calcCountMoney(el,end,dur){
+  let st=null;
+  const step=ts=>{
+    if(!st)st=ts;
+    const p=Math.min((ts-st)/dur,1);
+    const val=Math.round(end*(1-Math.pow(1-p,3)));
+    el.textContent='$'+(Math.round(val/10000)*10000).toLocaleString('es-CL');
+    if(p<1)requestAnimationFrame(step);
+    else el.textContent='$'+(Math.round(end/10000)*10000).toLocaleString('es-CL');
+  };
+  requestAnimationFrame(step);
+}
+
+function calcImpacto(){
+  const tipo=document.querySelector('#chips-tipo .ci-chip.sel').dataset.v;
+  const horas=parseInt(document.getElementById('calc-horas').value);
+  const renta=parseInt(document.querySelector('#chips-nivel .ci-chip.sel').dataset.v);
+
+  const valorHora=renta/160;
+  const costoMensual=horas*valorHora*4;
+  const recMensual=costoMensual/3;
+  const recAnual=recMensual*12;
+  const semanasPayback=Math.max(1,Math.round(490000/(recMensual/4)));
+
+  const p=CALC_PERFILES[tipo];
+  document.getElementById('cp-pname').textContent=p.n;
+  document.getElementById('cp-pdesc').textContent=p.d;
+  document.getElementById('cp-tool').innerHTML=p.t;
+
+  document.getElementById('cp-anual').textContent='$'+(Math.round(recAnual/100000)*100000).toLocaleString('es-CL')+' al año';
+
+  let pbText;
+  if(semanasPayback<=6)pbText='Recuperas la inversión en ~'+semanasPayback+(semanasPayback===1?' semana':' semanas')+'.';
+  else pbText='Recuperas la inversión en ~'+Math.max(2,Math.round(semanasPayback/4))+' meses.';
+  document.getElementById('cp-payback').textContent=pbText;
+
+  document.getElementById('cp-empty').style.display='none';
+  const full=document.getElementById('cp-full');
+  full.style.display='none';
+  void full.offsetWidth;
+  full.style.display='block';
+
+  calcCountMoney(document.getElementById('cp-mes'),costoMensual,1000);
+  calcCountMoney(document.getElementById('cp-rec'),recMensual,1400);
+
+  document.getElementById('calc-panel').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
 
 /* timelines */
 function wtlToggle(item){
