@@ -189,18 +189,18 @@ footer a{color:rgba(245,244,239,.5)}
 <div class="port-tools">
   <div class="type-strip rv">
     <div class="type-cell">
-      <h4>Herramientas listas</h4>
-      <p>Se alimentan de los archivos que ya usas (un Excel, tus documentos). Procesan lo que les das y te devuelven el resultado al instante.</p>
+      <h4>Herramienta de escritorio</h4>
+      <p>Se alimentan de los archivos que ya usas (un Excel, un PDF). Le das la información y te devuelve el resultado al instante. No guarda nada por su cuenta.</p>
     </div>
     <div class="type-cell">
-      <h4>Aplicaciones con su propio espacio</h4>
-      <p>Viven en internet, van guardando información en el tiempo, entran varias personas y permiten adjuntar archivos o evidencias.</p>
+      <h4>Herramienta en línea</h4>
+      <p>Viven en internet con su propia dirección. Van guardando información en el tiempo, pueden entrar varias personas y permiten adjuntar archivos o evidencias.</p>
     </div>
   </div>
   <div class="filters rv">
     <button class="fchip active" data-filter="all">Todos</button>
-    <button class="fchip" data-filter="tool">Herramientas listas</button>
-    <button class="fchip" data-filter="app">Aplicaciones</button>
+    <button class="fchip" data-filter="tool">De escritorio</button>
+    <button class="fchip" data-filter="app">En línea</button>
     <button class="fchip" data-filter="personal">Personales</button>
   </div>
 </div>
@@ -227,7 +227,7 @@ footer a{color:rgba(245,244,239,.5)}
         <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
         <div class="gallery-count">1 / 6</div>
         <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span></div>
-        <span class="card-type type-tool">Herramienta lista</span>
+        <span class="card-type type-tool">De escritorio</span>
       </div>
       <div class="card-body">
         <h3>Kit de Herramientas Hackea</h3>
@@ -257,7 +257,7 @@ footer a{color:rgba(245,244,239,.5)}
         <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
         <div class="gallery-count">1 / 3</div>
         <div class="gallery-dots"><span class="active"></span><span></span><span></span></div>
-        <span class="card-type type-app">Aplicación</span>
+        <span class="card-type type-app">En línea</span>
       </div>
       <div class="card-body">
         <h3>Planificador de Asignaturas</h3>
@@ -288,7 +288,7 @@ footer a{color:rgba(245,244,239,.5)}
         <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
         <div class="gallery-count">1 / 4</div>
         <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span></div>
-        <span class="card-type type-tool">Herramienta lista</span>
+        <span class="card-type type-tool">De escritorio</span>
       </div>
       <div class="card-body">
         <h3>Cotizador de Formación Sincrónica</h3>
@@ -322,7 +322,7 @@ footer a{color:rgba(245,244,239,.5)}
         <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
         <div class="gallery-count">1 / 7</div>
         <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-        <span class="card-type type-app">Aplicación</span>
+        <span class="card-type type-app">En línea</span>
       </div>
       <div class="card-body">
         <h3>Observatorio SSOMA · Más Prevención</h3>
@@ -354,7 +354,7 @@ footer a{color:rgba(245,244,239,.5)}
         <button class="gallery-nav gallery-next" onclick="galleryNav(this,1)">›</button>
         <div class="gallery-count">1 / 5</div>
         <div class="gallery-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
-        <span class="card-type type-app">Aplicación</span>
+        <span class="card-type type-app">En línea</span>
       </div>
       <div class="card-body">
         <h3>Generador de RIOHS con IA</h3>
@@ -414,7 +414,7 @@ footer a{color:rgba(245,244,239,.5)}
     <div class="compact-grid">
 
       <div class="compact-card rv" data-cat="personal">
-        <div class="compact-img"><img src="img/martin-inicio.jpg" alt="Organizador académico"></div>
+        <div class="compact-img" onclick="openCompactLb(this)"><img src="img/martin-inicio.jpg" alt="Organizador académico" style="cursor:pointer"></div>
         <div class="compact-body">
           <h3>Organizador Académico</h3>
           <div class="card-tagline">Organización escolar para mi hijo adolescente</div>
@@ -423,7 +423,7 @@ footer a{color:rgba(245,244,239,.5)}
       </div>
 
       <div class="compact-card rv" data-cat="personal">
-        <div class="compact-img"><img src="img/cuentas-voz.jpg" alt="Cuentas Claras"></div>
+        <div class="compact-img" onclick="openCompactLb(this)"><img src="img/cuentas-voz.jpg" alt="Cuentas Claras" style="cursor:pointer"></div>
         <div class="compact-body">
           <h3>Cuentas Claras</h3>
           <div class="card-tagline">Gastos familiares registrados por voz</div>
@@ -432,7 +432,7 @@ footer a{color:rgba(245,244,239,.5)}
       </div>
 
       <div class="compact-card rv" data-cat="personal">
-        <div class="compact-img"><img src="img/misalud-checkin1.jpg" alt="MiSalud"></div>
+        <div class="compact-img" onclick="openCompactLb(this)"><img src="img/misalud-checkin1.jpg" alt="MiSalud" style="cursor:pointer"></div>
         <div class="compact-body">
           <h3>MiSalud</h3>
           <div class="card-tagline">Seguimiento de salud por voz para adultos mayores</div>
@@ -441,7 +441,7 @@ footer a{color:rgba(245,244,239,.5)}
       </div>
 
       <div class="compact-card rv" data-cat="personal">
-        <div class="compact-img"><img src="img/bienestar-checkin.jpg" alt="Naty Bienestar"></div>
+        <div class="compact-img" onclick="openCompactLb(this)"><img src="img/bienestar-checkin.jpg" alt="Naty Bienestar" style="cursor:pointer"></div>
         <div class="compact-body">
           <h3>Naty Bienestar</h3>
           <div class="card-tagline">Registro personal de salud femenina</div>
@@ -450,7 +450,7 @@ footer a{color:rgba(245,244,239,.5)}
       </div>
 
       <div class="compact-card rv" data-cat="personal">
-        <div class="compact-img"><img src="img/levelup-inicio.jpg" alt="LevelUp!"></div>
+        <div class="compact-img" onclick="openCompactLb(this)"><img src="img/levelup-inicio.jpg" alt="LevelUp!" style="cursor:pointer"></div>
         <div class="compact-body">
           <h3>LevelUp!</h3>
           <div class="card-tagline">App educativa gamificada para mi hija de primaria</div>
@@ -459,7 +459,7 @@ footer a{color:rgba(245,244,239,.5)}
       </div>
 
       <div class="compact-card rv" data-cat="personal">
-        <div class="compact-img"><img src="img/lucapp-dashboard.jpg" alt="Emprendimiento escolar"></div>
+        <div class="compact-img" onclick="openCompactLb(this)"><img src="img/lucapp-dashboard.jpg" alt="Emprendimiento escolar" style="cursor:pointer"></div>
         <div class="compact-body">
           <h3>Mi Primer Negocio</h3>
           <div class="card-tagline">Emprendimiento escolar administrado con IA</div>
@@ -558,6 +558,10 @@ lbIndex=lbImages.indexOf(img.src);
 openLightbox();
 });
 });
+function openCompactLb(div){
+const img=div.querySelector('img');
+lbImages=[img.src];lbIndex=0;openLightbox();
+}
 function openLightbox(){
 document.getElementById('lightbox-img').src=lbImages[lbIndex];
 document.getElementById('lightbox').classList.add('active');
